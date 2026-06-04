@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio Digital - Parciales</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .portafolio-container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 24px;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        /* Estructura de los acordeones */
+        .parcial-item {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        /* Botón del encabezado de cada parcial */
+        .parcial-header {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            width: 100%;
+            padding: 18px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        .parcial-header:hover {
+            background-color: #eef2f7;
+        }
+        
+        /* Icono de flecha que rota */
+        .flecha {
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Contenido ocultable por defecto */
+        .parcial-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #ffffff;
+        }
+        
+        /* Lista de trabajos interna */
+        .lista-trabajos {
+            padding: 20px;
+            margin: 0;
+            list-style-type: none;
+        }
+        .lista-trabajos li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            color: #555;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .lista-trabajos li:last-child {
+            border-bottom: none;
+        }
+        .lista-trabajos li::before {
+            content: "📄";
+            margin-right: 10px;
+        }
+        
+        /* Enlaces para los trabajos si quieres ligarlos a un Drive o PDF */
+        .lista-trabajos a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .lista-trabajos a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Clases activas controladas por JS */
+        .activo .flecha {
+            transform: rotate(90deg);
+        }
+        .activo .parcial-header {
+            background-color: #e8f4fd;
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="portafolio-container">
+    <h2>5. Portafolio Digital</h2>
+    
+    <div class="parcial-item">
+        <button class="parcial-header" onclick="toggleParcial(this)">
+            Sección para el Primer Parcial <span class="flecha">&#10148;</span>
+        </button>
+        <div class="parcial-content">
+            <ul class="lista-trabajos">
+                <li>Trabajo 1: Práctica de Cableado Estructurado</li>
+                <li>Trabajo 2: Resumen de Topologías de Red</li>
+                <li>Trabajo 3: <a href="#" target="_blank">Enlace a Reporte de Evaluación (.pdf)</a></li>
+                </ul>
+        </div>
+    </div>
+
+    <div class="parcial-item">
+        <button class="parcial-header" onclick="toggleParcial(this)">
+            Sección para el Segundo Parcial <span class="flecha">&#10148;</span>
+        </button>
+        <div class="parcial-content">
+            <ul class="lista-trabajos">
+                <li>Trabajo 1: Configuración de subredes e IPs</li>
+                <li>Trabajo 2: Práctica en Simulador Packet Tracer</li>
+                <li>Trabajo 3: Cuestionario de Protocolos de Red</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="parcial-item">
+        <button class="parcial-header" onclick="toggleParcial(this)">
+            Sección para el Tercer Parcial <span class="flecha">&#10148;</span>
+        </button>
+        <div class="parcial-content">
+            <ul class="lista-trabajos">
+                <li>Trabajo 1: Demostración en vivo de Red WAN</li>
+                <li>Trabajo 2: Configuración de Servidor Local Linux</li>
+                <li>Trabajo 3: <a href="#" target="_blank">Proyecto Final - Servidor PufferPanel</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleParcial(elementoHeader) {
+        const itemPadre = elementoHeader.parentElement;
+        const contenido = itemPadre.querySelector('.parcial-content');
+        
+        // Alternar clase activa para cambiar el color y rotar la flecha
+        itemPadre.classList.toggle('activo');
+        
+        // Si está abierto lo cerramos, si está cerrado calculamos su altura real para desplegarlo
+        if (itemPadre.classList.contains('activo')) {
+            contenido.style.maxHeight = contenido.scrollHeight + "px";
+        } else {
+            contenido.style.maxHeight = "0px";
+        }
+    }
+</script>
+
+</body>
+</html>
