@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Portafolio Digital - Parciales</title>
+    <title>Portafolio Digital - Redes</title>
     <style>
         body {
             margin: 0;
@@ -20,7 +20,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border-radius: 10px;
             padding: 25px;
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -49,7 +49,7 @@
             width: 100%;
             padding: 18px;
             text-align: left;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
             border: none;
             cursor: pointer;
@@ -78,34 +78,39 @@
         
         /* Lista de trabajos interna */
         .lista-trabajos {
-            padding: 20px;
+            padding: 15px 20px;
             margin: 0;
             list-style-type: none;
         }
         .lista-trabajos li {
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px dashed #e0e0e0;
             color: #555;
-            font-size: 15px;
+            font-size: 14px;
             display: flex;
             align-items: center;
         }
         .lista-trabajos li:last-child {
             border-bottom: none;
         }
-        .lista-trabajos li::before {
-            content: "📄";
-            margin-right: 10px;
-        }
         
-        /* Enlaces para los trabajos si quieres ligarlos a un Drive o PDF */
+        /* Iconos de documento e hipervínculos */
         .lista-trabajos a {
-            color: #3498db;
+            color: #2980b9;
             text-decoration: none;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            transition: color 0.2s;
         }
         .lista-trabajos a:hover {
+            color: #3498db;
             text-decoration: underline;
+        }
+        .lista-trabajos a::before {
+            content: "📄";
+            margin-right: 12px;
+            font-size: 16px;
         }
         
         /* Clases activas controladas por JS */
@@ -123,41 +128,56 @@
 <div class="portafolio-container">
     <h2>5. Portafolio Digital</h2>
     
+    <!-- SECCIÓN PRIMER PARCIAL -->
     <div class="parcial-item">
         <button class="parcial-header" onclick="toggleParcial(this)">
-            Sección para el Primer Parcial <span class="flecha">&#10148;</span>
+            1ER PARCIAL <span class="flecha">&#10148;</span>
         </button>
         <div class="parcial-content">
             <ul class="lista-trabajos">
-                <li>Trabajo 1: Práctica de Cableado Estructurado</li>
-                <li>Trabajo 2: Resumen de Topologías de Red</li>
-                <li>Trabajo 3: <a href="#" target="_blank">Enlace a Reporte de Evaluación (.pdf)</a></li>
-                </ul>
-        </div>
-    </div>
-
-    <div class="parcial-item">
-        <button class="parcial-header" onclick="toggleParcial(this)">
-            Sección para el Segundo Parcial <span class="flecha">&#10148;</span>
-        </button>
-        <div class="parcial-content">
-            <ul class="lista-trabajos">
-                <li>Trabajo 1: Configuración de subredes e IPs</li>
-                <li>Trabajo 2: Práctica en Simulador Packet Tracer</li>
-                <li>Trabajo 3: Cuestionario de Protocolos de Red</li>
+                <li><a href="#" target="_blank">Evaluacion Diagnostica</a></li>
+                <li><a href="#" target="_blank">A3 - Mapa Conceptual - Redes de Computadoras</a></li>
+                <li><a href="#" target="_blank">A4 - Línea de Tiempo - Evolución de las Redes</a></li>
+                <li><a href="#" target="_blank">Lectura - Componentes de una Red</a></li>
+                <li><a href="#" target="_blank">Instrumento de Evaluacion para Exposición</a></li>
+                <li><a href="#" target="_blank">A5 - Tabla Informativa - Medios Guiados</a></li>
+                <li><a href="#" target="_blank">A6 - Tabla - Medios No Guiados</a></li>
             </ul>
         </div>
     </div>
 
+    <!-- SECCIÓN SEGUNDO PARCIAL -->
     <div class="parcial-item">
         <button class="parcial-header" onclick="toggleParcial(this)">
-            Sección para el Tercer Parcial <span class="flecha">&#10148;</span>
+            2DO PARCIAL <span class="flecha">&#10148;</span>
         </button>
         <div class="parcial-content">
             <ul class="lista-trabajos">
-                <li>Trabajo 1: Demostración en vivo de Red WAN</li>
-                <li>Trabajo 2: Configuración de Servidor Local Linux</li>
-                <li>Trabajo 3: <a href="#" target="_blank">Proyecto Final - Servidor PufferPanel</a></li>
+                <li><a href="#" target="_blank">A7 - Ejercicios de Identificación de Clasificaciones...</a></li>
+                <li><a href="#" target="_blank">A8 - Topologías de Red</a></li>
+                <li><a href="#" target="_blank">A9 - Manual de Cables de Red (RECTO y CRUZADO)</a></li>
+                <li><a href="#" target="_blank">A10 - Infografia - Cables de Red</a></li>
+                <li><a href="#" target="_blank">A11 - Mapa Conceptual - Cableado Estructurado</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECCIÓN TERCER PARCIAL -->
+    <div class="parcial-item">
+        <button class="parcial-header" onclick="toggleParcial(this)">
+            3ER PARCIAL <span class="flecha">&#10148;</span>
+        </button>
+        <div class="parcial-content">
+            <ul class="lista-trabajos">
+                <li><a href="#" target="_blank">Practica - Dirección IP y MAC</a></li>
+                <li><a href="#" target="_blank">A12 - Infografia - Direccion IP y Direccion MAC</a></li>
+                <li><a href="#" target="_blank">Practica - Conexión PC a PC</a></li>
+                <li><a href="#" target="_blank">Practica - Compartir Carpeta en Red</a></li>
+                <li><a href="#" target="_blank">Lectura - Grupo de Trabajo y Dominio de Red</a></li>
+                <li><a href="#" target="_blank">PRACTICA - Compartir Disco Duro en Red</a></li>
+                <li><a href="#" target="_blank">VIDEO TUTORIAL - Configuracion del Modem</a></li>
+                <li><a href="#" target="_blank">TEMA - Configuracion de un MODEM</a></li>
+                <li><a href="#" target="_blank">PRACTICA - Escritorio Remoto</a></li>
             </ul>
         </div>
     </div>
@@ -169,10 +189,8 @@
         const itemPadre = elementoHeader.parentElement;
         const contenido = itemPadre.querySelector('.parcial-content');
         
-        // Alternar clase activa para cambiar el color y rotar la flecha
         itemPadre.classList.toggle('activo');
         
-        // Si está abierto lo cerramos, si está cerrado calculamos su altura real para desplegarlo
         if (itemPadre.classList.contains('activo')) {
             contenido.style.maxHeight = contenido.scrollHeight + "px";
         } else {
