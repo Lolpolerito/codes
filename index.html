@@ -1,155 +1,148 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Galería de Videos</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .galeria-container {
-      background: #ffffff;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 900px;
-      width: 100%;
-      box-sizing: border-box;
-      text-align: center;
-    }
-    h1 {
-      margin-top: 0;
-      margin-bottom: 15px;
-    }
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      overflow: hidden;
-      border-radius: 10px;
-      background: #000;
-    }
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    .indicador {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #555;
-    }
-    .pistas {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #777;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Galería de Vídeos de YouTube</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .galeria-container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 900px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        /* Contenedor del video y los botones */
+        .navegacion-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        /* Contenedor responsivo para el video de YouTube */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            padding-bottom: 39.375%; /* Proporción 16:9 ajustada */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #000;
+            flex-grow: 1;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* Estilo de los botones Izquierda/Derecha */
+        .btn-nav {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+            user-select: none;
+        }
+        .btn-nav:hover {
+            background-color: #ff0000; /* Color rojo estilo YouTube */
+        }
+        /* Contador de videos debajo */
+        .contador {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-  <div class="galeria-container">
-    <h1>Galería de Videos</h1>
-    <div id="videoArea" class="video-wrapper"></div>
-    <div class="indicador">
-      Video <span id="indiceActual">1</span> de <span id="totalVideos">0</span>
-    </div>
-    <div class="pistas">
-      • Toca para reproducir/pausar<br>
-      • Mantén presionado y desliza a la izquierda para siguiente video<br>
-      • Mantén presionado y desliza a la derecha para video anterior
-    </div>
-  </div>
 
-  <script>
-    // IDs de tus videos de YouTube
-    const videos = [
-      "_JNPvSxG6oM",
-      "GqIFy_0di_Q",
-      "szaoYQ-yZjc",
-      "SHbBso63X38",
-      "R6NGSRZ5Dpw",
-      "uNmbkXbfviI"
+<div class="galeria-container">
+    <h1 id="titulo-galeria">Galería de Vídeos</h1>
+    
+    <div class="navegacion-wrapper">
+        <!-- Botón Izquierda (Anterior) -->
+        <button class="btn-nav" id="btn-anterior" onclick="cambiarVideo(-1)">&#10094;</button>
+        
+        <!-- El contenedor del reproductor de YouTube -->
+        <div class="video-container">
+            <iframe id="reproductor-youtube" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <!-- Botón @Derecha (Siguiente) -->
+        <button class="btn-nav" id="btn-siguiente" onclick="cambiarVideo(1)">&#10095;</button>
+    </div>
+
+    <!-- Contador de posición -->
+    <div class="contador" id="contador-texto">Video 1 de 6</div>
+</div>
+
+<script>
+    // Lista con los IDs de tus 6 videos de YouTube en orden
+    const listaVideos = [
+        "_JNPvSxG6oM",
+        "GqIFy_0di_Q",
+        "szaoYQ-yZjc",
+        "SHbBso63X38",
+        "R6NGSRZ5Dpw",
+        "uNmbkXbfviI"
     ];
 
-    let indice = 0;
-    const videoArea = document.getElementById("videoArea");
-    const indiceActual = document.getElementById("indiceActual");
-    const totalVideos = document.getElementById("totalVideos");
-    totalVideos.textContent = videos.length;
+    let indiceActual = 0;
+    const iframeReproductor = document.getElementById('reproductor-youtube');
+    const contadorTexto = document.getElementById('contador-texto');
 
-    function cargarVideo(i) {
-      const id = videos[i];
-      videoArea.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${id}?rel=0&showinfo=0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      `;
-      indiceActual.textContent = i + 1;
+    // Función para actualizar el iframe con el video correspondiente
+    function cargarVideo(indice) {
+        // Usamos la URL de incrustación (embed) oficial de YouTube
+        iframeReproductor.src = "https://www.youtube.com/embed/" + listaVideos[indice];
+        // Actualiza el texto de abajo (ej: Video 3 de 6)
+        contadorTexto.innerText = `Vídeo ${indice + 1} de ${listaVideos.length}`;
     }
 
-    cargarVideo(indice);
-
-    // Lógica de toque + swipe
-    let presionando = false;
-    let xInicio = 0;
-    let tiempoInicio = 0;
-
-    function inicioPresion(e) {
-      presionando = true;
-      tiempoInicio = Date.now();
-      xInicio = (e.touches ? e.touches[0].clientX : e.clientX);
-    }
-
-    function finPresion(e) {
-      if (!presionando) return;
-      presionando = false;
-
-      const tiempoFin = Date.now();
-      const xFin = (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
-      const deltaX = xFin - xInicio;
-      const duracion = tiempoFin - tiempoInicio;
-
-      const UMBRAL_TIEMPO = 250;   // ms para considerar "mantener"
-      const UMBRAL_DESPLAZ = 60;   // px para considerar swipe
-
-      if (duracion < UMBRAL_TIEMPO || Math.abs(deltaX) < UMBRAL_DESPLAZ) {
-        return;
-      }
-
-      // Swipe izquierda -> siguiente
-      if (deltaX < -UMBRAL_DESPLAZ) {
-        if (indice < videos.length - 1) {
-          indice++;
-          cargarVideo(indice);
+    // Función para avanzar o retroceder
+    function cambiarVideo(direccion) {
+        indiceActual += direccion;
+        
+        // Si pasa del último, vuelve al primero
+        if (indiceActual >= listaVideos.length) {
+            indiceActual = 0;
         }
-      }
-
-      // Swipe derecha -> anterior
-      if (deltaX > UMBRAL_DESPLAZ) {
-        if (indice > 0) {
-          indice--;
-          cargarVideo(indice);
+        // Si va antes del primero, salta al último
+        if (indiceActual < 0) {
+            indiceActual = listaVideos.length - 1;
         }
-      }
+        
+        cargarVideo(indiceActual);
     }
 
-    videoArea.addEventListener("mousedown", inicioPresion);
-    videoArea.addEventListener("mouseup", finPresion);
-    videoArea.addEventListener("mouseleave", () => presionando = false);
+    // Arrancar la galería con el primer video de la lista
+    cargarVideo(indiceActual);
+</script>
 
-    videoArea.addEventListener("touchstart", inicioPresion, {passive: true});
-    videoArea.addEventListener("touchend", finPresion);
-  </script>
 </body>
 </html>
