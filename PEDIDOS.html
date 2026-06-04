@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pedidos Interactivos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #f0f8ff, #d6eaf8);
+    }
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #2c3e50;
+    }
+    /* Carrito flotante */
+    #carrito {
+      width: 70px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      animation: bounce 2s infinite;
+    }
+    #carrito:hover {
+      transform: scale(1.2);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    /* Panel lateral */
+    #panelPedidos {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background: #ffffff;
+      box-shadow: -4px 0 10px rgba(0,0,0,0.2);
+      transition: right 0.5s;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    #panelPedidos.active {
+      right: 0;
+    }
+    #panelPedidos h2 {
+      margin-top: 0;
+      color: #2980b9;
+    }
+    #panelPedidos ul {
+      list-style: none;
+      padding: 0;
+    }
+    #panelPedidos li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+    }
+    #panelPedidos p {
+      font-weight: bold;
+      text-align: right;
+      color: #27ae60;
+    }
+    .btnCerrar {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      float: right;
+    }
+    .btnCerrar:hover {
+      background: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mi Tienda Online</h1>
+
+  <!-- Carrito flotante -->
+  <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" 
+       alt="Carrito" 
+       id="carrito">
+
+  <!-- Panel lateral de pedidos -->
+  <div id="panelPedidos">
+    <button class="btnCerrar" onclick="togglePanel()">Cerrar ✖</button>
+    <h2>🛒 Tus Pedidos</h2>
+    <ul id="listaPedidos">
+      <li><span>📦 Producto 1</span><span>$10</span></li>
+      <li><span>📦 Producto 2</span><span>$15</span></li>
+      <li><span>📦 Producto 3</span><span>$20</span></li>
+    </ul>
+    <p>Total: $45</p>
+  </div>
+
+  <script>
+    const carrito = document.getElementById("carrito");
+    const panel = document.getElementById("panelPedidos");
+
+    // Abrir/Cerrar panel
+    function togglePanel() {
+      panel.classList.toggle("active");
+    }
+
+    carrito.addEventListener("click", togglePanel);
+
+    // Ejemplo: añadir pedidos dinámicamente
+    function agregarPedido(nombre, precio) {
+      const lista = document.getElementById("listaPedidos");
+      const item = document.createElement("li");
+      item.innerHTML = `<span>📦 ${nombre}</span><span>$${precio}</span>`;
+      lista.appendChild(item);
+    }
+
+    // Puedes probar agregando un pedido dinámico:
+    // agregarPedido("Producto 4", 30);
+  </script>
+</body>
+</html>
