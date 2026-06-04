@@ -1,37 +1,56 @@
 <div style="text-align:center; font-family:Arial, sans-serif;">
   <style>
     .bunuelo {
-      width:200px;
-      cursor:pointer;
-      transition:transform 0.1s ease;
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+      transition: transform 0.1s ease, filter 0.2s;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
     .bunuelo:active {
-      transform:scale(1.05);
-      filter:brightness(1.2);
+      transform: scale(1.05);
+      filter: brightness(1.2);
     }
     #ingredientes {
-      display:none;
-      margin-top:10px;
-      text-align:left;
-      max-width:300px;
-      margin-inline:auto;
-      animation:fadeIn 0.5s ease;
+      display: none;
+      margin-top: 15px;
+      text-align: left;
+      max-width: 300px;
+      margin-inline: auto;
+      background-color: #fdfaf4;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #d35400;
+      animation: fadeIn 0.5s ease;
     }
     @keyframes fadeIn {
-      from {opacity:0;}
-      to {opacity:1;}
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    li {
+      margin-bottom: 5px;
+      color: #333;
     }
   </style>
 
-  <!-- URL ABSOLUTA DESDE TU GITHUB PAGES -->
-  <img src="https://lolpolerito.github.io/codes/bunuelo.png" alt="Buñuelo crujiente" class="bunuelo" onclick="document.getElementById('ingredientes').style.display='block'">
+  <!-- IMAGEN ENCRUSTADA EN BASE64 (No necesita archivos externos) -->
+  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23e67e22'/><circle cx='50' cy='50' r='30' fill='%23d35400'/><circle cx='50' cy='50' r='20' fill='%23e67e22'/><circle cx='45' cy='45' r='3' fill='%23f1c40f'/><circle cx='55' cy='60' r='2' fill='%23f1c40f'/><circle cx='60' cy='40' r='3' fill='%23f1c40f'/><circle cx='35' cy='55' r='2' fill='%23f1c40f'/></svg>" 
+       alt="Buñuelo crujiente" 
+       class="bunuelo" 
+       onclick="document.getElementById('ingredientes').style.display='block'">
 
-  <p style="margin-top:10px; font-weight:bold;">
+  <p style="margin-top:15px; font-weight:bold; color: #d35400;">
     Haz clic en el buñuelo para ver los ingredientes 🍯
   </p>
 
   <div id="ingredientes">
-    <h3>Ingredientes del buñuelo</h3>
+    <h3 style="margin-top:0; color: #d35400;">Ingredientes del buñuelo</h3>
     <ul>
       <li>Harina de trigo</li>
       <li>Huevo</li>
