@@ -99,4 +99,56 @@
     /* Botón de Acción Inferior */
     .btn-action {
       margin-top: 40px;
-      background: linear-gradient(135deg, #e67e22 0%, #d35400 10
+      background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(211, 84, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-action:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(211, 84, 0, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>✨ Tradición Hecha Crujiente ✨</h1>
+    <p>Descubre el snack que está rompiendo esquemas</p>
+  </header>
+
+  <div class="grid-interactivo">
+
+    <div class="card">
+      <div class="icon-wrapper">🥞</div>
+      <h2>¿Qué son los Buñuelos?</h2>
+      <p>Es el postre definitivo: una masa ultra delgada y crujiente, frita a la perfección dorada y espolvoreada con una lluvia de azúcar y canela fina. Un crunch que se escucha a kilómetros.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrapper">🌍</div>
+      <h2>Su Origen</h2>
+      <p>Nacieron hace siglos en la cultura árabe y viajaron por el mundo hasta convertirse en el alma de las fiestas y ferias de México. Un clásico histórico que nunca pasa de moda.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrapper">🔥</div>
+      <h2>¿Por qué los nuestros?</h2>
+      <p>Porque no son comerciales ni acartonados. Los hacemos al momento, con la receta secreta de la casa, cero conservadores y con un toque extra crujiente que ninguna marca de tienda te va a dar.</p>
+    </div>
+
+  </div>
+
+  <button class="btn-action" onclick="alert('¡Pronto podrás armar tu pedido desde aquí! 🍯')">
+    ¡Quiero mis Buñuelos! 🍯
+  </button>
+
+</body>
+</html>
