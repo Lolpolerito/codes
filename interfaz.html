@@ -221,10 +221,14 @@
   </div>
 
 <script>
+  // Variable global para rastrear qué sección está abierta actualmente
+  let seccionActiva = null;
+
   const secciones = {
     'que-son': {
       titulo: "🥞 El Arte del Auténtico Buñuelo",
-      texto: "Nuestros buñuelos se caracterizan por una textura tan ligera y crujiente que se deshace en tu boca. Aquí puedes ver el resultado final de nuestra dedicada preparación artesanal:",
+      // NUEVO TEXTO MODIFICADO AQUÍ
+      texto: "Un buñuelo siempre viene bien, son redondos y crujientes, si quieres el tuyo haz un pedido.",
       elemento: '<img class="img-display" src="producto.png" alt="Buñuelo Crujiente Real">'
     },
     'origen': {
@@ -273,19 +277,31 @@
     const panel = document.getElementById('panel-desplegable');
     const contenido = document.getElementById('contenido-panel');
     
+    // CASO DE TOGGLE: Si la tarjeta clickeada ya estaba abierta, la cerramos
+    if (seccionActiva === llave) {
+      panel.style.display = 'none';
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('activa'));
+      seccionActiva = null; // Reiniciamos el estado
+      return;
+    }
+
+    // Si es una sección nueva, limpiamos los estados activos anteriores
     document.querySelectorAll('.card').forEach(c => c.classList.remove('activa'));
     
+    // Añadimos la clase activa a la tarjeta correspondiente
     if(llave === 'que-son') document.getElementById('card-que-son').classList.add('activa');
     if(llave === 'origen') document.getElementById('card-origen').classList.add('activa');
     if(llave === 'comprarnos') document.getElementById('card-comprarnos').classList.add('activa');
 
+    // Insertamos el contenido dinámico de forma normal
     const datos = secciones[llave];
-    
     contenido.innerHTML = `<h3>${datos.titulo}</h3>
                            <p>${datos.texto}</p>
                            ${datos.elemento}`;
 
+    // Mostramos el panel y actualizamos la sección activa
     panel.style.display = 'block';
+    seccionActiva = llave;
   }
 
   function cambiarTextoRuta(punto) {
