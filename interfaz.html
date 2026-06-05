@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buñuelos Crujientes - El Antojo Perfecto</title>
+  <title>Buñuelos Crujientes - Interactivo</title>
   <style>
-    /* Estilos Generales basados en fondo cafe.png */
+    /* Estilos Generales con tu fondo café exacto */
     body {
       margin: 0;
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      /* Aplicamos el color exacto de tu imagen fondo cafe.png */
       background-color: #6f432a; 
-      color: #fdfaf6; /* Texto claro para alto contraste */
+      color: #fdfaf6;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,7 +19,6 @@
       box-sizing: border-box;
     }
 
-    /* Encabezado */
     header {
       text-align: center;
       margin-bottom: 40px;
@@ -29,28 +27,29 @@
     header h1 {
       font-size: 2.5rem;
       margin: 0;
-      color: #fff3e0; /* Crema brillante */
+      color: #fff3e0;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
     }
 
     header p {
       font-size: 1.1rem;
-      color: #e0d4c8; /* Beige suave */
+      color: #e0d4c8;
       margin-top: 5px;
     }
 
-    /* Contenedor Grid para las Tarjetas */
+    /* Grid de las Tarjetas */
     .grid-interactivo {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
       width: 100%;
       max-width: 1000px;
+      margin-bottom: 30px;
     }
 
-    /* Estilo de las Tarjetas (Efecto cristal oscuro sobre el fondo café) */
+    /* Estilo de Tarjetas Interactiva */
     .card {
-      background: rgba(0, 0, 0, 0.25); /* Capa oscura translúcida */
+      background: rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -62,15 +61,20 @@
       cursor: pointer;
     }
 
-    /* Efecto Hover interactivo para adolescentes */
     .card:hover {
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.1); /* Se ilumina sutilmente */
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      border-color: #ffab40; /* Destello naranja/dorado en el borde */
+      border-color: #ffab40;
     }
 
-    /* Animación de iconos */
+    /* Estado cuando una tarjeta está seleccionada activa */
+    .card.activa {
+      border-color: #ffab40;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 20px rgba(255, 171, 64, 0.4);
+    }
+
     .icon-wrapper {
       font-size: 3rem;
       margin-bottom: 15px;
@@ -85,34 +89,97 @@
     .card h2 {
       font-size: 1.5rem;
       margin: 0 0 15px 0;
-      color: #ffab40; /* Dorado sutil que resalta en la oscuridad */
+      color: #ffab40;
     }
 
     .card p {
       font-size: 1rem;
       line-height: 1.6;
-      color: #f5ece4; /* Texto crema muy legible */
+      color: #f5ece4;
       margin: 0;
     }
 
-    /* Botón de Acción Brillante */
-    .btn-action {
-      margin-top: 40px;
-      background: linear-gradient(135deg, #ff9100 0%, #ff6d00 100%);
-      color: white;
-      border: none;
-      padding: 15px 40px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
+    /* Contenedor del Despliegue de Información Inferior */
+    .seccion-desplegable {
+      width: 100%;
+      max-width: 1000px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #3e2723;
+      border-radius: 25px;
+      padding: 30px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      display: none; /* Oculto por defecto */
+      animation: desplazarAbajo 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     }
 
-    .btn-action:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(255, 109, 0, 0.5);
+    @keyframes desplazarAbajo {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contenido-dinamico {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contenido-dinamico h3 {
+      margin: 0;
+      color: #d35400;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .contenido-dinamico p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 0;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    /* Estilos del Mapa SVG */
+    .map-wrapper {
+      width: 100%;
+      background: #eef2f7;
+      border-radius: 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      border: 2px solid #e0d4c8;
+    }
+
+    .pais { fill: #bcaaa4; transition: all 0.3s; cursor: pointer; }
+    .clave:hover { fill: #ff7043; filter: drop-shadow(0px 0px 8px rgba(255,112,67,0.6)); }
+    .ruta-linea { stroke: #d35400; stroke-width: 2; stroke-dasharray: 5; animation: fluirRuta 2s linear infinite; }
+    @keyframes fluirRuta { to { stroke-dashoffset: -20; } }
+
+    .mini-tooltip {
+      background: #3e2723;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      text-align: center;
+      border-left: 4px solid #ffab40;
+    }
+
+    /* Contenedor de la imagen real del buñuelo */
+    .img-display {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .grafico-wrapper {
+      max-width: 260px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.15));
     }
   </style>
 </head>
@@ -120,38 +187,106 @@
 
   <header>
     <h1>✨ Tradición Hecha Crujiente ✨</h1>
-    <p>Descubre el snack que está rompiendo esquemas</p>
+    <p>Haz clic en cualquier tarjeta para ver la magia en acción</p>
   </header>
 
   <div class="grid-interactivo">
-
-    <!-- TARJETA 1: QUÉ SON -->
-    <div class="card">
+    <div class="card" id="card-que-son" onclick="mostrarSeccion('que-son')">
       <div class="icon-wrapper">🥞</div>
       <h2>¿Qué son los Buñuelos?</h2>
-      <p>Es el postre definitivo: una masa ultra delgada y crujiente, frita a la perfección dorada y espolvoreada con una lluvia de azúcar y canela fina. Un crunch que se escucha a kilómetros.</p>
+      <p>Una masa ultra delgada, frita a la perfección dorada y espolvoreada con azúcar y canela fina.</p>
     </div>
 
-    <!-- TARJETA 2: EL ORIGEN -->
-    <div class="card">
+    <div class="card" id="card-origen" onclick="mostrarSeccion('origen')">
       <div class="icon-wrapper">🌍</div>
       <h2>Su Origen</h2>
-      <p>Nacieron hace siglos en la cultura árabe y viajaron por el mundo hasta convertirse en el alma de las fiestas y ferias de México. Un clásico histórico que nunca pasa de moda.</p>
+      <p>Nacieron en la cultura árabe medieval y viajaron por el mundo hasta llegar al corazón de México.</p>
     </div>
 
-    <!-- TARJETA 3: POR QUÉ COMPRARNOS -->
-    <div class="card">
+    <div class="card" id="card-comprarnos" onclick="mostrarSeccion('comprarnos')">
       <div class="icon-wrapper">🔥</div>
       <h2>¿Por qué los nuestros?</h2>
-      <p>Porque no son comerciales ni acartonados. Los hacemos al momento, con la receta secreta de la casa, cero conservadores y con un toque extra crujiente que ninguna marca de tienda te va a dar.</p>
+      <p>Los hacemos al momento, crujientes, con receta secreta de la casa y sin conservadores comerciales.</p>
     </div>
-
   </div>
 
-  <!-- Botón interactivo -->
-  <button class="btn-action" onclick="alert('¡Pronto podrás armar tu pedido desde aquí! 🍯')">
-    ¡Quiero mis Buñuelos! 🍯
-  </button>
+  <div class="seccion-desplegable" id="panel-desplegable">
+    <div class="contenido-dinamico" id="contenido-panel">
+      </div>
+  </div>
+
+<script>
+  const secciones = {
+    'que-son': {
+      titulo: "🥞 El Arte del Auténtico Buñuelo",
+      texto: "Nuestros buñuelos se caracterizan por una textura tan ligera y crujiente que se deshace en tu boca. Aquí puedes ver el resultado final de nuestra dedicada preparación artesanal:",
+      elemento: '<img class="img-display" src="producto.png" alt="Buñuelo Crujiente Real">'
+    },
+    'origen': {
+      titulo: "🌍 La Ruta Histórica del Sabor",
+      texto: "Da clic sobre los círculos naranjas en el mapa para descubrir las 3 paradas clave en la historia del buñuelo antes de llegar a tu mesa.",
+      elemento: '<div class="map-wrapper">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">' +
+                '<rect width="800" height="320" fill="#eef2f7" rx="10"/>' +
+                '<path class="pais clave" onclick="cambiarTextoRuta(\'oriente\')" d="M500,130 L540,120 L550,140 L520,170 Z" />' +
+                '<path class="pais clave" onclick="cambiarTextoRuta(\'espana\')" d="M420,100 L450,100 L455,120 L430,135 Z" />' +
+                '<path class="pais clave" onclick="cambiarTextoRuta(\'mexico\')" d="M120,140 L150,150 L165,170 L140,200 L110,155 Z" />' +
+                '<path d="M510,140 Q465,110 435,120" fill="none" class="ruta-linea" />' +
+                '<path d="M420,125 Q280,120 150,165" fill="none" class="ruta-linea" />' +
+                '<circle cx="510" cy="140" r="7" fill="#e67e22" style="cursor:pointer;" onclick="cambiarTextoRuta(\'oriente\')" />' +
+                '<circle cx="435" cy="120" r="7" fill="#e67e22" style="cursor:pointer;" onclick="cambiarTextoRuta(\'espana\')" />' +
+                '<circle cx="150" cy="165" r="7" fill="#e67e22" style="cursor:pointer;" onclick="cambiarTextoRuta(\'mexico\')" />' +
+                '<text x="510" y="125" font-family="sans-serif" font-size="12" font-weight="bold" fill="#3e2723" text-anchor="middle">1. Origen Árabe</text>' +
+                '<text x="435" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#3e2723" text-anchor="middle">2. España</text>' +
+                '<text x="150" y="150" font-family="sans-serif" font-size="12" font-weight="bold" fill="#3e2723" text-anchor="middle">3. México</text>' +
+                '</svg>' +
+                '</div>' +
+                '<div class="mini-tooltip" id="texto-mapa">💡 Da clic a cualquiera de los 3 puntos del mapa para leer su historia.</div>'
+    },
+    'comprarnos': {
+      titulo: "🔥 Calidad de la Casa vs Lo Comercial",
+      texto: "Nuestros buñuelos se preparan bajo pedido diario, garantizando que te lleves un producto crujiente, calientito y con ese inigualable sabor familiar que las marcas de bolsa nunca podrán replicar.",
+      elemento: '<div class="grafico-wrapper">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+                '<rect x="20" y="20" width="60" height="60" rx="12" fill="#ff9100"/>' +
+                '<circle cx="40" cy="48" r="6" fill="#fff"/><circle cx="60" cy="48" r="6" fill="#fff"/>' +
+                '<circle cx="40" cy="48" r="2.5" fill="#3e2723"/><circle cx="60" cy="48" r="2.5" fill="#3e2723"/>' +
+                '<path d="M35,62 Q50,74 65,62" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>' +
+                '<path d="M25,14 L35,22 L45,14 L55,22 L65,14 L75,22 L85,14" fill="none" stroke="#d35400" stroke-width="3"/>' +
+                '</svg>' +
+                '</div>'
+    }
+  };
+
+  const infoRutas = {
+    oriente: "🐪 <b>Medio Oriente:</b> Comenzó como masas fritas sumergidas en miel en el mundo árabe medieval, enfocadas puramente en aportar energía sabrosa.",
+    espana: "🏰 <b>España:</b> La receta adoptó el uso de sartenes y se popularizó masivamente en ferias españolas, integrándose a las tradiciones de Europa.",
+    mexico: "🇲🇽 <b>México:</b> Al fusionarse con la canela y el piloncillo americano, tomó su emblemática forma gigante, ultra fina y crujiente de feria tradicional."
+  };
+
+  function mostrarSeccion(llave) {
+    const panel = document.getElementById('panel-desplegable');
+    const contenido = document.getElementById('contenido-panel');
+    
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('activa'));
+    
+    if(llave === 'que-son') document.getElementById('card-que-son').classList.add('activa');
+    if(llave === 'origen') document.getElementById('card-origen').classList.add('activa');
+    if(llave === 'comprarnos') document.getElementById('card-comprarnos').classList.add('activa');
+
+    const datos = secciones[llave];
+    
+    contenido.innerHTML = `<h3>${datos.titulo}</h3>
+                           <p>${datos.texto}</p>
+                           ${datos.elemento}`;
+
+    panel.style.display = 'block';
+  }
+
+  function cambiarTextoRuta(punto) {
+    document.getElementById('texto-mapa').innerHTML = infoRutas[punto];
+  }
+</script>
 
 </body>
 </html>
