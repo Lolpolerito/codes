@@ -1,0 +1,182 @@
+<div class="network-animation-container">
+    
+    <div class="network-node client">
+        <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <span class="node-label">Cliente 1</span>
+    </div>
+
+    <div class="network-line">
+        <div class="data-packet packet-mp4">🎥 mp4</div>
+        <div class="data-packet packet-png">🖼️ png</div>
+    </div>
+
+    <div class="network-node server">
+        <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="6" rx="2"></rect>
+            <rect x="2" y="9" width="20" height="6" rx="2"></rect>
+            <rect x="2" y="16" width="20" height="6" rx="2"></rect>
+            <line x1="6" y1="5" x2="6.01" y2="5"></line>
+            <line x1="6" y1="12" x2="6.01" y2="12"></line>
+            <line x1="6" y1="19" x2="6.01" y2="19"></line>
+        </svg>
+        <span class="node-label server-label">Servidor</span>
+    </div>
+
+    <div class="network-line">
+        <div class="data-packet packet-mp3">🎵 mp3</div>
+        <div class="data-packet packet-generic">📦 data</div>
+    </div>
+
+    <div class="network-node client">
+        <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <span class="node-label">Cliente 2</span>
+    </div>
+
+</div>
+
+<style>
+    /* Contenedor adaptativo y transparente */
+    .network-animation-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 40px 20px;
+        background: transparent; /* Removido cualquier fondo */
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Estructura de las Computadoras/Servidores */
+    .network-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        z-index: 2;
+    }
+
+    /* Animación sutil de pulso en los equipos */
+    .network-node svg {
+        animation: nodePulse 3s infinite ease-in-out;
+    }
+
+    .node-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #007bff;
+    }
+
+    .server-label {
+        color: #2ecc71;
+    }
+
+    /* Líneas de red (Cables de comunicación) */
+    .network-line {
+        position: relative;
+        flex-grow: 1;
+        height: 4px;
+        background: #cbd5e1;
+        border-radius: 2px;
+        min-width: 80px;
+    }
+
+    /* Estilo base de los paquetes de datos fluyendo */
+    .data-packet {
+        position: absolute;
+        top: -12px;
+        padding: 3px 8px;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: bold;
+        border-radius: 20px;
+        white-space: nowrap;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+    }
+
+    /* Colores personalizados por tipo de archivo y asignación de tiempos de viaje */
+    .packet-mp4 {
+        background-color: #e74c3c; /* Rojo */
+        animation: flowRight 3.2s infinite linear;
+    }
+
+    .packet-png {
+        background-color: #f1c40f; /* Amarillo */
+        color: #333;
+        animation: flowLeft 4s infinite linear 1.2s;
+    }
+
+    .packet-mp3 {
+        background-color: #9b59b6; /* Morado */
+        animation: flowRight 3.6s infinite linear 0.4s;
+    }
+
+    .packet-generic {
+        background-color: #34495e; /* Gris Oscuro */
+        animation: flowLeft 3s infinite linear 2s;
+    }
+
+    /* --- KEYFRAMES (Lógica del movimiento cíclico) --- */
+    
+    /* Movimiento de izquierda a derecha */
+    @keyframes flowRight {
+        0% {
+            left: 0%;
+            opacity: 0;
+            transform: translateX(-50%) scale(0.8);
+        }
+        12% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        88% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        100% {
+            left: 100%;
+            opacity: 0;
+            transform: translateX(-50%) scale(0.8);
+        }
+    }
+
+    /* Movimiento de derecha a izquierda */
+    @keyframes flowLeft {
+        0% {
+            left: 100%;
+            opacity: 0;
+            transform: translateX(-50%) scale(0.8);
+        }
+        12% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        88% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        100% {
+            left: 0%;
+            opacity: 0;
+            transform: translateX(-50%) scale(0.8);
+        }
+    }
+
+    /* Latido de actividad en los dispositivos */
+    @keyframes nodePulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.06); }
+    }
+</style>
