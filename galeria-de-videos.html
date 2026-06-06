@@ -12,7 +12,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #f4f4f9; /* Puedes cambiar este color si toda tu web usa otro fondo */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,18 +20,16 @@
             margin: 0;
         }
 
+        /* Removido el contenedor blanco, sombras y bordes */
         .gallery-container {
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 850px;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
         }
 
         .gallery-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 20px;
@@ -63,11 +61,11 @@
         .video-container {
             width: 100%;
             overflow: hidden;
-            margin: 0 10px;
-            border-radius: 4px;
+            margin: 0 15px;
+            border-radius: 6px;
         }
 
-        /* Contenedores de los vídeos (Se ocultan/muestran con la clase .active) */
+        /* Control de transiciones de los vídeos */
         .video-slide {
             display: none;
             width: 100%;
@@ -77,10 +75,10 @@
             display: block;
         }
 
-        /* Proporción 16:9 para los videos de YouTube */
+        /* Formato panorámico 16:9 responsivo */
         .responsive-iframe {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
         }
@@ -94,8 +92,17 @@
             border: 0;
         }
 
-        .gallery-footer {
+        /* Contenedor del título dinámico del vídeo */
+        .video-title-dinamico {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #222;
             margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        /* Contador inferior */
+        .gallery-footer {
             font-size: 0.9rem;
             color: #666;
             font-weight: 600;
@@ -108,72 +115,84 @@
     <div class="gallery-title">Galería de Vídeos</div>
 
     <div class="slider-wrapper">
+        <!-- Botón Izquierdo -->
         <button class="slider-btn" onclick="cambiarVideo(-1)">&#10094;</button>
 
         <div class="video-container">
             
-            <div class="video-slide active">
+            <!-- VÍDEO 1: Conceptos Básicos -->
+            <div class="video-slide active" data-titulo="1. Conceptos Básicos de Redes">
                 <div class="responsive-iframe">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="1. Conceptos Básicos de Redes" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/9Xf_K63M8XU" title="Conceptos Básicos" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="video-slide">
+            <!-- VÍDEO 2: Topologías -->
+            <div class="video-slide" data-titulo="2. Topologías de Red (Estrella, Malla, Árbol)">
                 <div class="responsive-iframe">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="2. Topologías de Red" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/a8L6e77p8Aw" title="Topologías de Red" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="video-slide">
+            <!-- VÍDEO 3: Tipos de Redes -->
+            <div class="video-slide" data-titulo="3. Tipos de Redes (LAN, MAN, WAN)">
                 <div class="responsive-iframe">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="3. Tipos de Redes (LAN, WAN)" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/S_mS_G63y6k" title="Tipos de Redes" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="video-slide">
+            <!-- VÍDEO 4: Cableado y Estándares -->
+            <div class="video-slide" data-titulo="4. Medios de Transmisión y Cableado Estructurado">
                 <div class="responsive-iframe">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" title="4. Medios de Transmisión" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/4b4_8hX_77k" title="Medios de Transmisión" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="video-slide">
+            <!-- VÍDEO 5: Dispositivos de Red -->
+            <div class="video-slide" data-titulo="5. Dispositivos de Red (Switch, Router, AP)">
                 <div class="responsive-iframe">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_5" title="5. Dispositivos de Interconexión" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/1v0U_G-fFwY" title="Dispositivos de Red" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="video-slide">
+            <!-- VÍDEO 6: Práctica / Dirección IP -->
+            <div class="video-slide" data-titulo="6. Introducción a Direcciones IP y Subredes">
                 <div class="responsive-iframe">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" title="6. Configuración y Monitoreo" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/4_2Z9Zl6X6k" title="Direcciones IP" allowfullscreen></iframe>
                 </div>
             </div>
 
         </div>
 
+        <!-- Botón Derecho -->
         <button class="slider-btn" onclick="cambiarVideo(1)">&#10095;</button>
     </div>
 
+    <!-- Título del vídeo actual -->
+    <div class="video-title-dinamico" id="video-titulo">1. Conceptos Básicos de Redes</div>
+    
+    <!-- Indicador de avance -->
     <div class="gallery-footer" id="video-indicador">Vídeo 1 de 6</div>
 </div>
 
 <script>
     let indexActual = 0;
     const slides = document.querySelectorAll('.video-slide');
+    const tituloDinamico = document.getElementById('video-titulo');
     const indicador = document.getElementById('video-indicador');
 
     function cambiarVideo(direccion) {
-        // Ocultar el vídeo actual
+        // 1. Ocultar el vídeo actual
         slides[indexActual].classList.remove('active');
         
-        // Pausar el vídeo que se está ocultando (recargando el src para evitar que siga sonando)
+        // Pausar el vídeo que se oculta para que no siga sonando de fondo
         const iframe = slides[indexActual].querySelector('iframe');
         const srcActual = iframe.src;
         iframe.src = srcActual;
 
-        // Calcular el nuevo índice
+        // 2. Calcular el nuevo índice
         indexActual += direccion;
 
-        // Ciclar el carrusel si llega al inicio o al final
         if (indexActual >= slides.length) {
             indexActual = 0;
         }
@@ -181,10 +200,12 @@
             indexActual = slides.length - 1;
         }
 
-        // Mostrar el nuevo vídeo
+        // 3. Mostrar el nuevo vídeo
         slides[indexActual].classList.add('active');
         
-        // Actualizar el texto del pie de página
+        // 4. Actualizar el título del vídeo y el pie de página dinámicamente
+        const nuevoTitulo = slides[indexActual].getAttribute('data-titulo');
+        tituloDinamico.textContent = nuevoTitulo;
         indicador.textContent = `Vídeo ${indexActual + 1} de ${slides.length}`;
     }
 </script>
