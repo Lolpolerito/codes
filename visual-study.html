@@ -1,10 +1,10 @@
 <div class="visual-container">
-    <div class="canvas-container">
+    <div class="visual-box">
         <div class="global-orbit orbit-1"></div>
         <div class="global-orbit orbit-2"></div>
         <div class="global-orbit orbit-3"></div>
         <div class="global-globe">
-            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.5">
+            <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.5">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
                 <path d="M2 12h20"></path>
@@ -18,33 +18,33 @@
 </div>
 
 <div class="visual-container">
-    <div class="canvas-container office-network">
+    <div class="visual-box">
         <div class="office-switch">
             <div class="led-bar"><span class="led blink-fast"></span><span class="led blink-slow"></span></div>
             <span>SWITCH</span>
         </div>
-        <div class="office-line line-1"><div class="office-packet"></div></div>
-        <div class="office-line line-2"><div class="office-packet"></div></div>
-        <div class="office-line line-3"><div class="office-packet"></div></div>
+        <div class="office-line line-to-pc1"><div class="office-packet"></div></div>
+        <div class="office-line line-to-pc2"><div class="office-packet animation-delay-1"></div></div>
+        <div class="office-line line-to-print"><div class="office-packet animation-delay-2"></div></div>
         
-        <div class="office-pc pc-1">💻<small>PC 01</small></div>
-        <div class="office-pc pc-2">💻<small>PC 02</small></div>
-        <div class="office-pc pc-3">🖨️<small>Print</small></div>
+        <div class="office-device pc-1">💻<small>PC 01</small></div>
+        <div class="office-device pc-2">💻<small>PC 02</small></div>
+        <div class="office-device printer">🖨️<small>Print</small></div>
     </div>
 </div>
 
 <div class="visual-container">
-    <div class="canvas-container netflix-flow">
+    <div class="visual-box">
         <div class="netflix-server">
             <div class="server-brand">NETFLIX</div>
             <div class="server-slot"><span class="led red-led"></span></div>
-            <div class="server-slot"><span class="led red-led delayed"></span></div>
-            <div class="server-slot"><span class="led red-led"></span></div>
+            <div class="server-slot"><span class="led red-led blink-slow"></span></div>
+            <div class="server-slot"><span class="led red-led blink-fast"></span></div>
         </div>
         
-        <div class="stream-line s-line-1"><div class="movie-packet">🎬 Moana</div></div>
-        <div class="stream-line s-line-2"><div class="movie-packet">🍿 ST_S5</div></div>
-        <div class="stream-line s-line-3"><div class="movie-packet">🎥 Merlina</div></div>
+        <div class="stream-line s-to-tv"><div class="movie-packet">🎬 Moana</div></div>
+        <div class="stream-line s-to-phone"><div class="movie-packet animation-delay-1">🍿 ST_S5</div></div>
+        <div class="stream-line s-to-laptop"><div class="movie-packet animation-delay-2">🎥 Merlina</div></div>
         
         <div class="netflix-client tv">📺</div>
         <div class="netflix-client phone">📱</div>
@@ -53,7 +53,7 @@
 </div>
 
 <div class="visual-container">
-    <div class="canvas-container transmission-media">
+    <div class="visual-box">
         <div class="infinitum-modem">
             <div class="infinitum-logo">infinitum</div>
             <div class="modem-leds">
@@ -62,12 +62,10 @@
         </div>
         
         <div class="ethernet-cable">
-            <div class="ethernet-plug plug-left"></div>
             <div class="ethernet-wire">
                 <div class="bit-pulse"></div>
                 <div class="bit-pulse p-2"></div>
             </div>
-            <div class="ethernet-plug plug-right"></div>
         </div>
         
         <div class="desktop-pc">
@@ -81,43 +79,47 @@
 
 
 <style>
-    /* Estructura contenedora adaptativa */
+    /* Contenedor externo flexible (se adapta a tu columna) */
     .visual-container {
         width: 100%;
-        height: 250px;
+        height: 240px;
         display: flex;
         align-items: center;
         justify-content: center;
         background: transparent;
-        position: relative;
-        overflow: hidden;
         box-sizing: border-box;
         font-family: 'Segoe UI', system-ui, sans-serif;
     }
-    
-    .canvas-container {
+
+    /* Caja de trabajo fija: Evita que los cables se separen al cambiar de pantalla */
+    .visual-box {
         position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 340px;
+        height: 200px;
+        background: transparent;
+        overflow: hidden;
     }
 
-    /* --- ESTILOS 1: INTERNET GLOBAL --- */
+    /* --- TÓPICO 1: INTERNET GLOBAL --- */
     .global-globe {
+        position: absolute;
+        top: 67px;
+        left: 137px;
         z-index: 3;
         animation: floatGlobe 4s infinite ease-in-out;
     }
     .global-orbit {
         position: absolute;
+        top: 50%;
+        left: 50%;
         border: 1px dashed rgba(0, 210, 255, 0.3);
         border-radius: 50%;
+        transform: translate(-50%, -50%);
         animation: spinOrbit linear infinite;
     }
-    .orbit-1 { width: 100px; height: 100px; animation-duration: 8s; }
-    .orbit-2 { width: 160px; height: 160px; animation-duration: 12s; animation-direction: reverse; }
-    .orbit-3 { width: 220px; height: 220px; animation-duration: 16s; }
+    .orbit-1 { width: 90px; height: 90px; animation-duration: 7s; }
+    .orbit-2 { width: 140px; height: 140px; animation-duration: 11s; animation-direction: reverse; }
+    .orbit-3 { width: 190px; height: 190px; animation-duration: 15s; }
     
     .global-node {
         position: absolute;
@@ -128,20 +130,24 @@
         box-shadow: 0 0 10px #00d2ff;
         animation: pulseGlow 2s infinite ease-in-out;
     }
-    .node-na { top: 55px; left: 25%; }
-    .node-eu { top: 45px; right: 28%; animation-delay: 0.5s; }
-    .node-as { bottom: 65px; right: 22%; animation-delay: 1s; }
-    .node-sa { bottom: 55px; left: 32%; animation-delay: 1.5s; }
+    .node-na { top: 45px; left: 90px; }
+    .node-eu { top: 35px; right: 95px; animation-delay: 0.5s; }
+    .node-as { bottom: 55px; right: 80px; animation-delay: 1s; }
+    .node-sa { bottom: 45px; left: 110px; animation-delay: 1.5s; }
 
-    /* --- ESTILOS 2: RED DE OFICINA --- */
+
+    /* --- TÓPICO 2: RED DE OFICINA --- */
     .office-switch {
+        position: absolute;
+        top: 85px;
+        left: 130px;
         background: #1e293b;
         color: #fff;
-        padding: 8px 14px;
+        padding: 6px 10px;
         border-radius: 4px;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         font-weight: bold;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         z-index: 5;
     }
@@ -151,25 +157,22 @@
         background: rgba(30, 41, 59, 0.2);
         transform-origin: left center;
         z-index: 1;
-        left: 50%;
-        top: 50%;
     }
-    .line-1 { width: 110px; transform: translate(-40px, -6px) rotate(-35deg); }
-    .line-2 { width: 110px; transform: translate(-40px, -6px) rotate(35deg); }
-    .line-3 { width: 110px; transform: translate(-40px, -6px) rotate(180deg); }
+    .line-to-pc1   { width: 95px;  top: 100px; left: 190px; transform: rotate(-30deg); }
+    .line-to-pc2   { width: 95px;  top: 100px; left: 190px; transform: rotate(30deg); }
+    .line-to-print { width: 85px; top: 100px; left: 135px; transform: rotate(180deg); }
     
-    .office-pc {
+    .office-device {
         position: absolute;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        color: #475569;
     }
-    .office-pc small { font-size: 0.6rem; margin-top: 2px; font-weight: 600; color: #64748b;}
-    .pc-1 { top: 40px; right: 20%; }
-    .pc-2 { bottom: 40px; right: 20%; }
-    .pc-3 { top: 105px; left: 18%; }
+    .office-device small { font-size: 0.55rem; margin-top: 1px; font-weight: 600; color: #64748b; }
+    .pc-1 { top: 25px; right: 45px; }
+    .pc-2 { bottom: 25px; right: 45px; }
+    .printer { top: 78px; left: 25px; }
     
     .office-packet {
         position: absolute;
@@ -177,14 +180,17 @@
         height: 6px;
         background: #22c55e;
         border-radius: 50%;
+        top: -2px;
         animation: deliverPacket 2.5s infinite linear;
     }
 
-    /* --- ESTILOS 3: NETFLIX STREAMING --- */
+
+    /* --- TÓPICO 3: NETFLIX STREAMING --- */
     .netflix-server {
         position: absolute;
-        left: 15%;
-        width: 80px;
+        left: 20px;
+        top: 35px;
+        width: 75px;
         height: 130px;
         background: #111;
         border-radius: 6px;
@@ -192,15 +198,15 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        padding: 10px 5px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        padding: 8px 5px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        box-sizing: border-box;
     }
     .server-brand {
         color: #e50914;
-        font-size: 0.6rem;
+        font-size: 0.55rem;
         font-weight: 900;
         text-align: center;
-        letter-spacing: 0.5px;
     }
     .server-slot {
         height: 14px;
@@ -208,27 +214,25 @@
         border-radius: 2px;
         display: flex;
         align-items: center;
-        padding-left: 8px;
+        padding-left: 6px;
     }
     .red-led {
-        width: 5px;
-        height: 5px;
+        width: 4px;
+        height: 4px;
         background: #e50914;
         border-radius: 50%;
-        box-shadow: 0 0 6px #e50914;
-        animation: pulseGlow 1s infinite;
+        box-shadow: 0 0 5px #e50914;
     }
     .stream-line {
         position: absolute;
-        left: calc(15% + 82px);
+        left: 95px;
         height: 2px;
         background: rgba(229, 9, 20, 0.15);
         transform-origin: left center;
-        top: 50%;
     }
-    .s-line-1 { width: 140px; transform: translateY(-6px) rotate(-25deg); }
-    .s-line-2 { width: 140px; transform: translateY(-6px) rotate(0deg); }
-    .s-line-3 { width: 140px; transform: translateY(-6px) rotate(25deg); }
+    .s-to-tv     { width: 175px; top: 100px; transform: rotate(-22deg); }
+    .s-to-phone  { width: 170px; top: 100px; transform: rotate(0deg); }
+    .s-to-laptop { width: 175px; top: 100px; transform: rotate(22deg); }
     
     .movie-packet {
         position: absolute;
@@ -236,85 +240,89 @@
         color: white;
         font-size: 0.55rem;
         font-weight: bold;
-        padding: 2px 6px;
-        border-radius: 8px;
+        padding: 2px 5px;
+        border-radius: 6px;
         white-space: nowrap;
-        transform: translateY(-50%);
+        top: -9px;
         animation: deliverPacket 3s infinite linear;
     }
-    .s-line-1 .movie-packet { animation-delay: 0s; }
-    .s-line-2 .movie-packet { animation-delay: 1s; background: #222; }
-    .s-line-3 .movie-packet { animation-delay: 2s; }
 
-    .netflix-client { position: absolute; font-size: 1.6rem; }
-    .tv { right: 22%; top: 35px; }
-    .phone { right: 25%; top: 110px; }
-    .laptop { right: 20%; bottom: 35px; }
+    .netflix-client { position: absolute; font-size: 1.5rem; }
+    .tv { right: 45px; top: 30px; }
+    .phone { right: 55px; top: 88px; }
+    .laptop { right: 40px; bottom: 30px; }
 
-    /* --- ESTILOS 4: INFINITUM MÓDEM --- */
+
+    /* --- TÓPICO 4: INFINITUM MÓDEM --- */
     .infinitum-modem {
         position: absolute;
-        left: 15%;
-        width: 45px;
+        left: 25px;
+        top: 40px;
+        width: 42px;
         height: 120px;
         background: #f8fafc;
         border: 2px solid #e2e8f0;
-        border-radius: 12px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.05);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 0;
+        padding: 10px 0;
+        box-sizing: border-box;
     }
     .infinitum-logo {
         font-size: 0.5rem;
         color: #0072ce;
         font-weight: bold;
         transform: rotate(-90deg);
-        margin-top: 20px;
+        margin-top: 15px;
     }
-    .modem-leds { display: flex; gap: 3px; }
+    .modem-leds { display: flex; gap: 2px; }
     .m-led { width: 4px; height: 4px; background: #22c55e; border-radius: 50%; }
     
     .ethernet-cable {
         position: absolute;
-        left: calc(15% + 47px);
-        right: calc(20% + 92px);
-        height: 20px;
+        left: 69px;
+        top: 98px;
+        width: 148px;
+        height: 6px;
         display: flex;
         align-items: center;
     }
     .ethernet-wire {
         width: 100%;
-        height: 5px;
+        height: 4px;
         background: #0051ff;
         position: relative;
+        border-radius: 2px;
     }
     .bit-pulse {
         position: absolute;
-        width: 12px;
-        height: 5px;
+        width: 14px;
+        height: 4px;
         background: #fff;
-        box-shadow: 0 0 8px #fff;
-        animation: wireFlow 2s infinite linear;
+        box-shadow: 0 0 6px #fff;
+        animation: wireFlow 1.8s infinite linear;
     }
-    .p-2 { animation-delay: 1s; }
+    .p-2 { animation-delay: 0.9s; }
 
     .desktop-pc {
         position: absolute;
-        right: 20%;
+        right: 25px;
+        top: 65px;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
     .pc-monitor {
-        width: 90px;
-        height: 60px;
+        width: 85px;
+        height: 55px;
         background: #334155;
         border-radius: 4px;
         padding: 4px;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        box-sizing: border-box;
     }
     .pc-screen {
         width: 100%;
@@ -328,25 +336,28 @@
         justify-content: center;
     }
     .pc-base {
-        width: 30px;
-        height: 15px;
+        width: 26px;
+        height: 14px;
         background: #1e293b;
         clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
     }
 
-    /* --- ANIMACIONES COMUNES (KEYFRAMES) --- */
-    @keyframes spinOrbit { 100% { transform: rotate(360deg); } }
-    @keyframes floatGlobe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-    @keyframes pulseGlow { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
+
+    /* --- LOGICAS GLOBALES DE ANIMACIÓN (KEYFRAMES) --- */
+    @keyframes spinOrbit { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+    @keyframes floatGlobe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes pulseGlow { 0%, 100% { opacity: 0.3; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
     @keyframes wireFlow { 0% { left: 0%; } 100% { left: 100%; } }
     @keyframes deliverPacket {
         0% { left: 0%; opacity: 0; }
-        15% { opacity: 1; }
-        85% { opacity: 1; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
         100% { left: 100%; opacity: 0; }
     }
     
-    .blink-fast { animation: pulseGlow 0.4s infinite linear; }
-    .blink-slow { animation: pulseGlow 1.2s infinite linear; }
-    .delayed { animation-delay: 0.5s; }
+    /* Modificadores de velocidad rápidos */
+    .blink-fast { animation: pulseGlow 0.3s infinite linear; }
+    .blink-slow { animation: pulseGlow 1s infinite linear; }
+    .animation-delay-1 { animation-delay: 0.8s; }
+    .animation-delay-2 { animation-delay: 1.6s; }
 </style>
