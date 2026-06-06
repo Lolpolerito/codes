@@ -1,298 +1,355 @@
-<div class="dynamic-canvas">
+<div class="quantum-canvas" id="quantumCanvas">
     
-    <button class="action-trigger-btn" id="startAnimationBtn">Click aqui</button>
+    <button class="quantum-btn btn-start" id="btnStart">Click aqui</button>
 
-    <div class="space-simulation-zone" id="simulationZone">
-        
-        <div class="dynamic-node node-gold" id="nodeGold">
-            <div class="node-content">Configura conexiones de red</div>
-        </div>
+    <svg class="flux-overlay" viewBox="0 0 600 400">
+        <path class="flux-line line-top" d="M 150,110 C 300,110 250,200 300,200" />
+        <path class="flux-line line-bottom" d="M 450,110 C 300,110 350,200 300,200" />
+    </svg>
 
-        <div class="math-operator" id="operatorPlus">+</div>
-
-        <div class="dynamic-node node-light-green" id="nodeLightGreen">
-            <div class="node-content">Configura y comparte recursos de red</div>
-        </div>
-
-        <div class="dynamic-node-final node-big-green" id="nodeBigGreen">
-            <div class="node-content-final">Gestiona recursos mediante el uso de redes de computadoras</div>
-            <div class="energy-pulse"></div>
-        </div>
-
+    <div class="tech-module mod-gold" id="modGold">
+        <div class="module-tag">CONEXIÓN</div>
+        <p>Configura conexiones de red</p>
     </div>
+
+    <div class="tech-glow-core" id="glowCore"></div>
+
+    <div class="tech-module mod-green" id="modGreen">
+        <div class="module-tag">COMPARTICIÓN</div>
+        <p>Configura y comparte recursos de red</p>
+    </div>
+
+    <div class="master-panel" id="masterPanel">
+        <div class="matrix-bg"></div>
+        <div class="panel-header">
+            <span class="status-dot"></span>
+            CORE SYSTEM ACTIVATED
+        </div>
+        <p class="panel-text">Gestiona recursos mediante el uso de redes de computadoras</p>
+    </div>
+
+    <button class="quantum-btn btn-rewind" id="btnRewind">Rebobinar ↺</button>
+
 </div>
 
 <style>
-    /* Base del contenedor general */
-    .dynamic-canvas {
+    /* Lienzo principal */
+    .quantum-canvas {
         position: relative;
         width: 100%;
-        max-width: 750px;
-        height: 520px;
+        max-width: 700px;
+        height: 450px;
         margin: 0 auto;
         background: transparent;
-        font-family: 'Segoe UI', system-ui, sans-serif;
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         box-sizing: border-box;
     }
 
-    /* Botón estilo moderno interactivo */
-    .action-trigger-btn {
+    /* Botones de Control */
+    .quantum-btn {
         position: absolute;
+        padding: 12px 26px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 100;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .btn-start {
         top: 20px;
         left: 20px;
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        color: white;
-        border: none;
-        padding: 10px 22px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        border-radius: 8px;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        transition: transform 0.2s, background 0.2s, opacity 0.3s;
-        z-index: 10;
+        background: #0f172a;
+        color: #38bdf8;
+        box-shadow: 0 4px 20px rgba(56, 189, 248, 0.15), inset 0 1px 1px rgba(255,255,255,0.1);
     }
-    .action-trigger-btn:hover {
-        transform: scale(1.04);
-        background: linear-gradient(135deg, #1d4ed8, #1e40af);
-    }
-    .action-trigger-btn:active {
-        transform: scale(0.98);
-    }
-    /* Ocultar botón suavemente cuando se activa */
-    .action-trigger-btn.hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    /* Escenario central */
-    .space-simulation-zone {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Estilos Comunes de los Nodos Iniciales */
-    .dynamic-node {
-        position: absolute;
-        width: 160px;
-        height: 120px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        box-sizing: border-box;
-        text-align: center;
-        color: #1e293b;
-        font-size: 0.85rem;
-        font-weight: 600;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        opacity: 0;
-        transform: scale(0);
-        transition: opacity 0.4s ease;
-    }
-    .node-content {
-        line-height: 1.3;
-    }
-
-    /* Variantes específicas de color y posición iniciales */
-    .node-gold {
-        background-color: #cbd5e1; /* Respaldo */
-        background: radial-gradient(circle at 30% 30%, #ebd894, #bca860);
-        left: 120px;
-        top: 80px;
-    }
-    .node-light-green {
-        background: radial-gradient(circle at 30% 30%, #9ae289, #6eb75d);
-        left: 120px;
-        bottom: 80px;
-    }
-
-    /* Operador matemático (+) */
-    .math-operator {
-        position: absolute;
-        left: 188px;
-        top: 236px;
-        font-size: 2.2rem;
-        font-weight: bold;
-        color: #85a37e;
-        opacity: 0;
-        transform: scale(0);
-        transition: all 0.4s ease;
-    }
-
-    /* --- ESTADOS DE LA ANIMACIÓN (CONTROLADOS POR JS) --- */
-
-    /* 1. Efecto POP inicial (Dura los primeros 9 segundos estático) */
-    .dynamic-canvas.state-pop #nodeGold,
-    .dynamic-canvas.state-pop #nodeLightGreen {
-        opacity: 1;
-        transform: scale(1);
-        animation: floatGentle 4s infinite ease-in-out;
-    }
-    .dynamic-canvas.state-pop #nodeLightGreen {
-        animation-delay: 0.5s; /* Desfase de flotación */
-    }
-    .dynamic-canvas.state-pop #operatorPlus {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    /* 2. Acercamiento y Choque Orbital de Galaxias (Inicia tras 9s) */
-    .dynamic-canvas.state-galaxy #operatorPlus {
-        opacity: 0;
-        transform: scale(0);
-    }
-    .dynamic-canvas.state-galaxy #nodeGold {
-        animation: orbitGalaxyGold 2.8s forwards cubic-bezier(0.55, 0.05, 0.675, 0.19);
-    }
-    .dynamic-canvas.state-galaxy #nodeLightGreen {
-        animation: orbitGalaxyGreen 2.8s forwards cubic-bezier(0.55, 0.05, 0.675, 0.19);
-    }
-
-    /* 3. El Gran Círculo Verde de Fusión (Resultado final) */
-    .dynamic-node-final {
-        position: absolute;
-        width: 290px;
-        height: 290px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #62ca93, #3b9463);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 35px;
-        box-sizing: border-box;
-        text-align: center;
+    .btn-start:hover {
+        background: #38bdf8;
         color: #0f172a;
-        font-size: 1.15rem;
-        font-weight: 600;
-        box-shadow: 0 15px 35px rgba(59, 148, 99, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-rewind {
+        bottom: 25px;
+        background: rgba(15, 23, 42, 0.8);
+        color: #94a3b8;
         opacity: 0;
-        transform: scale(0);
-        z-index: 6;
+        transform: translateY(15px) scale(0.9);
+        pointer-events: none;
+        backdrop-filter: blur(8px);
     }
-    .node-content-final {
+    .btn-rewind.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+    }
+    .btn-rewind:hover {
+        color: #fff;
+        background: #1e293b;
+        border-color: rgba(255,255,255,0.2);
+    }
+
+    .quantum-btn.hidden {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: scale(0.8) translateY(-10px);
+    }
+
+    /* Módulos Tecnológicos Iniciales (Sleek Glassmorphism) */
+    .tech-module {
+        position: absolute;
+        width: 220px;
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 14px;
+        color: #f1f5f9;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-sizing: border-box;
+    }
+    .tech-module p {
+        margin: 0;
+        font-size: 0.85rem;
         line-height: 1.4;
+        font-weight: 500;
+    }
+    .module-tag {
+        font-size: 0.6rem;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
     }
 
-    .dynamic-canvas.state-fusion #nodeBigGreen {
-        animation: burstImpact 0.6s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Posicionamiento y colores personalizados de los módulos */
+    .mod-gold {
+        left: 80px;
+        top: 140px;
+        border-left: 4px solid #f59e0b;
     }
-    .dynamic-canvas.state-fusion #nodeBigGreen .energy-pulse {
-        animation: waveExpand 0.8s ease-out;
+    .mod-gold .module-tag { color: #f59e0b; }
+
+    .mod-green {
+        right: 80px;
+        top: 140px;
+        border-left: 4px solid #10b981;
+    }
+    .mod-green .module-tag { color: #10b981; }
+
+    /* Núcleo de energía oculto */
+    .tech-glow-core {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #34d399;
+        border-radius: 50%;
+        filter: blur(20px);
+        opacity: 0;
+        transition: all 1s ease;
     }
 
-    /* --- KEYFRAMES DE ANIMACIONES --- */
-    
-    /* Flotación natural inicial mientras pasan los 9 segundos */
-    @keyframes floatGentle {
-        0%, 100% { transform: translateY(0) scale(1); }
-        50% { transform: translateY(-8px) scale(1.02); }
-    }
-
-    /* Trayectoria Espiral/Galáctica Nodo Dorado (Hacia el centro) */
-    @keyframes orbitGalaxyGold {
-        0% {
-            left: 120px; top: 80px;
-            transform: rotate(0deg) scale(1);
-        }
-        30% {
-            left: 200px; top: 120px;
-            transform: rotate(120deg) scale(0.9);
-        }
-        60% {
-            left: 260px; top: 170px;
-            transform: rotate(360deg) scale(0.7);
-        }
-        85% {
-            left: 290px; top: 195px;
-            transform: rotate(720deg) scale(0.4);
-            opacity: 0.9;
-        }
-        100% {
-            left: 295px; top: 200px;
-            transform: rotate(1080deg) scale(0);
-            opacity: 0;
-        }
-    }
-
-    /* Trayectoria Espiral/Galáctica Nodo Verde Claro (Hacia el centro simétrico) */
-    @keyframes orbitGalaxyGreen {
-        0% {
-            left: 120px; bottom: 80px;
-            transform: rotate(0deg) scale(1);
-        }
-        30% {
-            left: 200px; bottom: 120px;
-            transform: rotate(-120deg) scale(0.9);
-        }
-        60% {
-            left: 260px; bottom: 170px;
-            transform: rotate(-360deg) scale(0.7);
-        }
-        85% {
-            left: 290px; bottom: 195px;
-            transform: rotate(-720deg) scale(0.4);
-            opacity: 0.9;
-        }
-        100% {
-            left: 295px; bottom: 200px;
-            transform: rotate(-1080deg) scale(0);
-            opacity: 0;
-        }
-    }
-
-    /* Impacto de aparición del círculo final */
-    @keyframes burstImpact {
-        0% { transform: scale(0); opacity: 0; filter: brightness(2); }
-        70% { transform: scale(1.08); opacity: 1; filter: brightness(1.2); }
-        100% { transform: scale(1); opacity: 1; filter: brightness(1); }
-    }
-
-    /* Onda expansiva de energía */
-    .energy-pulse {
+    /* Capa de vectores/líneas de flujo fluido */
+    .flux-overlay {
         position: absolute;
         width: 100%;
         height: 100%;
-        border-radius: 50%;
-        border: 4px solid #62ca93;
-        top: 0; left: 0;
-        box-sizing: border-box;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+    }
+    .flux-line {
+        fill: none;
+        stroke-width: 2px;
+        stroke-dasharray: 150;
+        stroke-dashoffset: 150;
         opacity: 0;
+    }
+    .line-top { stroke: url(#gradientGold); }
+    .line-bottom { stroke: url(#gradientGreen); }
+
+    /* Panel Maestro Final (Efecto Cyber-Dashboard) */
+    .master-panel {
+        position: relative;
+        width: 380px;
+        padding: 30px;
+        background: linear-gradient(135deg, #064e3b, #022c22);
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(2, 44, 34, 0.4), 0 0 40px rgba(52, 211, 153, 0.1);
+        opacity: 0;
+        transform: scale(0.6);
+        transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 5;
+        overflow: hidden;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .panel-header {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: #34d399;
+        margin-bottom: 15px;
+    }
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        background: #34d399;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #34d399;
+        animation: pulseDot 1s infinite alternate;
+    }
+    .panel-text {
+        margin: 0;
+        color: #e6f4ea;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    /* --- DISPARADORES DE ANIMACIÓN POR CLASES DE JS --- */
+    
+    /* Fase Inicial: Aparecen los paneles limpios flotando */
+    .run-pop .tech-module {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        animation: floatA 5s infinite ease-in-out alternate;
+    }
+    .run-pop .mod-green {
+        animation-name: floatB;
+    }
+
+    /* Fase de Disolución y Flujo Fluido (A los 9 segundos) */
+    .run-flow .tech-module {
+        opacity: 0;
+        transform: scale(0.5) filter(blur(10px));
         pointer-events: none;
     }
-    @keyframes waveExpand {
-        0% { transform: scale(1); opacity: 1; }
-        100% { transform: scale(1.4); opacity: 0; }
+    .run-flow .flux-line {
+        opacity: 1;
+        animation: drawFlux 1.8s forwards ease-in-out;
+    }
+    .run-flow .tech-glow-core {
+        opacity: 1;
+        transform: scale(8);
+    }
+
+    /* Fase de Fusión Exitosa */
+    .run-fusion .flux-line {
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .run-fusion .tech-glow-core {
+        opacity: 0;
+        transform: scale(0);
+    }
+    .run-fusion .master-panel {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Keyframes */
+    @keyframes floatA {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(-10px) rotate(1deg); }
+    }
+    @keyframes floatB {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(-10px) rotate(-1deg); }
+    }
+    @keyframes drawFlux {
+        0% { stroke-dashoffset: 150; }
+        100% { stroke-dashoffset: 0; }
+    }
+    @keyframes pulseDot {
+        0% { opacity: 0.4; }
+        100% { opacity: 1; }
     }
 </style>
 
+<svg width="0" height="0">
+    <defs>
+        <linearGradient id="gradientGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b" />
+            <stop offset="100%" stop-color="#34d399" />
+        </linearGradient>
+        <linearGradient id="gradientGreen" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#10b981" />
+            <stop offset="100%" stop-color="#34d399" />
+        </linearGradient>
+    </defs>
+</svg>
+
 <script>
-    document.getElementById('startAnimationBtn').addEventListener('click', function() {
-        const canvas = document.querySelector('.dynamic-canvas');
-        const btn = this;
+    (function() {
+        const canvas = document.getElementById('quantumCanvas');
+        const btnStart = document.getElementById('btnStart');
+        const btnRewind = document.getElementById('btnRewind');
 
-        // 1. Desvanecer botón para limpiar la interfaz
-        btn.classList.add('hidden');
+        let sequenceTimers = [];
 
-        // 2. PASO 1: Efecto POP inmediato de los dos círculos y el símbolo "+"
-        canvas.classList.add('state-pop');
+        // Función para limpiar hilos de tiempo activos
+        function clearAllTimers() {
+            sequenceTimers.forEach(timer => clearTimeout(timer));
+            sequenceTimers = [];
+        }
 
-        // 3. PASO 2: Mantener estático por exactamente 9 segundos, luego iniciar choque galáctico masivo
-        setTimeout(() => {
-            canvas.classList.remove('state-pop');
-            canvas.classList.add('state-galaxy');
-        }, 9000); // 9000 milisegundos = 9 segundos exactos
+        // CONTROLADOR DE INICIO ANIMACIÓN
+        btnStart.addEventListener('click', () => {
+            btnStart.classList.add('hidden');
+            
+            // 1. Mostrar módulos iniciales de inmediato con pop elástico
+            canvas.classList.add('run-pop');
 
-        // 4. PASO 3: Al completarse el recorrido e impacto de la espiral (2.8 segundos de traslación), detonar fusión
-        setTimeout(() => {
-            canvas.classList.remove('state-galaxy');
-            canvas.classList.add('state-fusion');
-        }, 9000 + 2800); // Espera los 9s iniciales + los 2.8s de la animación de choque
-    });
+            // 2. Esperar exactamente 9 segundos flotando de forma limpia
+            const morphTimer = setTimeout(() => {
+                canvas.classList.remove('run-pop');
+                canvas.classList.add('run-flow'); // Comienza disolución y flujo de líneas
+            }, 9000);
+            sequenceTimers.push(morphTimer);
+
+            // 3. Tras 1.6 segundos de flujo líquido de datos, detonar panel de fusión central
+            const fusionTimer = setTimeout(() => {
+                canvas.classList.remove('run-flow');
+                canvas.classList.add('run-fusion');
+                
+                // Hacer aparecer suavemente el botón de rebobinado
+                btnRewind.classList.add('visible');
+            }, 9000 + 1600);
+            sequenceTimers.push(fusionTimer);
+        });
+
+        // CONTROLADOR DE REBOBINADO (RESET COMPLETO)
+        btnRewind.addEventListener('click', () => {
+            // Ocultar botón de rebobinado instantáneamente
+            btnRewind.classList.remove('visible');
+            
+            // Apagar todas las clases de animación del lienzo de golpe
+            canvas.classList.remove('run-pop', 'run-flow', 'run-fusion');
+            clearAllTimers();
+
+            // Pequeña pausa táctica de estabilidad visual antes de restaurar el botón inicial
+            setTimeout(() => {
+                btnStart.classList.remove('hidden');
+            }, 350);
+        });
+    })();
+</script>
 </script>
