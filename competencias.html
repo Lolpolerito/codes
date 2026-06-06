@@ -1,0 +1,298 @@
+<div class="dynamic-canvas">
+    
+    <button class="action-trigger-btn" id="startAnimationBtn">Click aqui</button>
+
+    <div class="space-simulation-zone" id="simulationZone">
+        
+        <div class="dynamic-node node-gold" id="nodeGold">
+            <div class="node-content">Configura conexiones de red</div>
+        </div>
+
+        <div class="math-operator" id="operatorPlus">+</div>
+
+        <div class="dynamic-node node-light-green" id="nodeLightGreen">
+            <div class="node-content">Configura y comparte recursos de red</div>
+        </div>
+
+        <div class="dynamic-node-final node-big-green" id="nodeBigGreen">
+            <div class="node-content-final">Gestiona recursos mediante el uso de redes de computadoras</div>
+            <div class="energy-pulse"></div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    /* Base del contenedor general */
+    .dynamic-canvas {
+        position: relative;
+        width: 100%;
+        max-width: 750px;
+        height: 520px;
+        margin: 0 auto;
+        background: transparent;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    /* Botón estilo moderno interactivo */
+    .action-trigger-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+        border: none;
+        padding: 10px 22px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        transition: transform 0.2s, background 0.2s, opacity 0.3s;
+        z-index: 10;
+    }
+    .action-trigger-btn:hover {
+        transform: scale(1.04);
+        background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    }
+    .action-trigger-btn:active {
+        transform: scale(0.98);
+    }
+    /* Ocultar botón suavemente cuando se activa */
+    .action-trigger-btn.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Escenario central */
+    .space-simulation-zone {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Estilos Comunes de los Nodos Iniciales */
+    .dynamic-node {
+        position: absolute;
+        width: 160px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: center;
+        color: #1e293b;
+        font-size: 0.85rem;
+        font-weight: 600;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: scale(0);
+        transition: opacity 0.4s ease;
+    }
+    .node-content {
+        line-height: 1.3;
+    }
+
+    /* Variantes específicas de color y posición iniciales */
+    .node-gold {
+        background-color: #cbd5e1; /* Respaldo */
+        background: radial-gradient(circle at 30% 30%, #ebd894, #bca860);
+        left: 120px;
+        top: 80px;
+    }
+    .node-light-green {
+        background: radial-gradient(circle at 30% 30%, #9ae289, #6eb75d);
+        left: 120px;
+        bottom: 80px;
+    }
+
+    /* Operador matemático (+) */
+    .math-operator {
+        position: absolute;
+        left: 188px;
+        top: 236px;
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #85a37e;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.4s ease;
+    }
+
+    /* --- ESTADOS DE LA ANIMACIÓN (CONTROLADOS POR JS) --- */
+
+    /* 1. Efecto POP inicial (Dura los primeros 9 segundos estático) */
+    .dynamic-canvas.state-pop #nodeGold,
+    .dynamic-canvas.state-pop #nodeLightGreen {
+        opacity: 1;
+        transform: scale(1);
+        animation: floatGentle 4s infinite ease-in-out;
+    }
+    .dynamic-canvas.state-pop #nodeLightGreen {
+        animation-delay: 0.5s; /* Desfase de flotación */
+    }
+    .dynamic-canvas.state-pop #operatorPlus {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* 2. Acercamiento y Choque Orbital de Galaxias (Inicia tras 9s) */
+    .dynamic-canvas.state-galaxy #operatorPlus {
+        opacity: 0;
+        transform: scale(0);
+    }
+    .dynamic-canvas.state-galaxy #nodeGold {
+        animation: orbitGalaxyGold 2.8s forwards cubic-bezier(0.55, 0.05, 0.675, 0.19);
+    }
+    .dynamic-canvas.state-galaxy #nodeLightGreen {
+        animation: orbitGalaxyGreen 2.8s forwards cubic-bezier(0.55, 0.05, 0.675, 0.19);
+    }
+
+    /* 3. El Gran Círculo Verde de Fusión (Resultado final) */
+    .dynamic-node-final {
+        position: absolute;
+        width: 290px;
+        height: 290px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #62ca93, #3b9463);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 35px;
+        box-sizing: border-box;
+        text-align: center;
+        color: #0f172a;
+        font-size: 1.15rem;
+        font-weight: 600;
+        box-shadow: 0 15px 35px rgba(59, 148, 99, 0.3);
+        opacity: 0;
+        transform: scale(0);
+        z-index: 6;
+    }
+    .node-content-final {
+        line-height: 1.4;
+    }
+
+    .dynamic-canvas.state-fusion #nodeBigGreen {
+        animation: burstImpact 0.6s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .dynamic-canvas.state-fusion #nodeBigGreen .energy-pulse {
+        animation: waveExpand 0.8s ease-out;
+    }
+
+    /* --- KEYFRAMES DE ANIMACIONES --- */
+    
+    /* Flotación natural inicial mientras pasan los 9 segundos */
+    @keyframes floatGentle {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-8px) scale(1.02); }
+    }
+
+    /* Trayectoria Espiral/Galáctica Nodo Dorado (Hacia el centro) */
+    @keyframes orbitGalaxyGold {
+        0% {
+            left: 120px; top: 80px;
+            transform: rotate(0deg) scale(1);
+        }
+        30% {
+            left: 200px; top: 120px;
+            transform: rotate(120deg) scale(0.9);
+        }
+        60% {
+            left: 260px; top: 170px;
+            transform: rotate(360deg) scale(0.7);
+        }
+        85% {
+            left: 290px; top: 195px;
+            transform: rotate(720deg) scale(0.4);
+            opacity: 0.9;
+        }
+        100% {
+            left: 295px; top: 200px;
+            transform: rotate(1080deg) scale(0);
+            opacity: 0;
+        }
+    }
+
+    /* Trayectoria Espiral/Galáctica Nodo Verde Claro (Hacia el centro simétrico) */
+    @keyframes orbitGalaxyGreen {
+        0% {
+            left: 120px; bottom: 80px;
+            transform: rotate(0deg) scale(1);
+        }
+        30% {
+            left: 200px; bottom: 120px;
+            transform: rotate(-120deg) scale(0.9);
+        }
+        60% {
+            left: 260px; bottom: 170px;
+            transform: rotate(-360deg) scale(0.7);
+        }
+        85% {
+            left: 290px; bottom: 195px;
+            transform: rotate(-720deg) scale(0.4);
+            opacity: 0.9;
+        }
+        100% {
+            left: 295px; bottom: 200px;
+            transform: rotate(-1080deg) scale(0);
+            opacity: 0;
+        }
+    }
+
+    /* Impacto de aparición del círculo final */
+    @keyframes burstImpact {
+        0% { transform: scale(0); opacity: 0; filter: brightness(2); }
+        70% { transform: scale(1.08); opacity: 1; filter: brightness(1.2); }
+        100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+    }
+
+    /* Onda expansiva de energía */
+    .energy-pulse {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 4px solid #62ca93;
+        top: 0; left: 0;
+        box-sizing: border-box;
+        opacity: 0;
+        pointer-events: none;
+    }
+    @keyframes waveExpand {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(1.4); opacity: 0; }
+    }
+</style>
+
+<script>
+    document.getElementById('startAnimationBtn').addEventListener('click', function() {
+        const canvas = document.querySelector('.dynamic-canvas');
+        const btn = this;
+
+        // 1. Desvanecer botón para limpiar la interfaz
+        btn.classList.add('hidden');
+
+        // 2. PASO 1: Efecto POP inmediato de los dos círculos y el símbolo "+"
+        canvas.classList.add('state-pop');
+
+        // 3. PASO 2: Mantener estático por exactamente 9 segundos, luego iniciar choque galáctico masivo
+        setTimeout(() => {
+            canvas.classList.remove('state-pop');
+            canvas.classList.add('state-galaxy');
+        }, 9000); // 9000 milisegundos = 9 segundos exactos
+
+        // 4. PASO 3: Al completarse el recorrido e impacto de la espiral (2.8 segundos de traslación), detonar fusión
+        setTimeout(() => {
+            canvas.classList.remove('state-galaxy');
+            canvas.classList.add('state-fusion');
+        }, 9000 + 2800); // Espera los 9s iniciales + los 2.8s de la animación de choque
+    });
+</script>
