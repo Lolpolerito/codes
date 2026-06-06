@@ -1,355 +1,289 @@
-<div class="quantum-canvas" id="quantumCanvas">
+<div class="network-hardware-canvas" id="networkCanvas">
     
-    <button class="quantum-btn btn-start" id="btnStart">Click aqui</button>
-
-    <svg class="flux-overlay" viewBox="0 0 600 400">
-        <path class="flux-line line-top" d="M 150,110 C 300,110 250,200 300,200" />
-        <path class="flux-line line-bottom" d="M 450,110 C 300,110 350,200 300,200" />
+    <svg class="ethernet-cables-overlay" viewBox="0 0 650 490">
+        <path class="ethernet-wire wire-orange" id="leftCable" d="M 145,95 L 215,160" />
+        <path class="ethernet-wire wire-green" id="rightCable" d="M 505,95 L 435,160" />
     </svg>
 
-    <div class="tech-module mod-gold" id="modGold">
-        <div class="module-tag">CONEXIÓN</div>
+    <div class="static-competence-card tech-border-orange" id="cardLeft">
         <p>Configura conexiones de red</p>
     </div>
 
-    <div class="tech-glow-core" id="glowCore"></div>
-
-    <div class="tech-module mod-green" id="modGreen">
-        <div class="module-tag">COMPARTICIÓN</div>
+    <div class="static-competence-card tech-border-green" id="cardRight">
         <p>Configura y comparte recursos de red</p>
     </div>
 
-    <div class="master-panel" id="masterPanel">
-        <div class="matrix-bg"></div>
-        <div class="panel-header">
-            <span class="status-dot"></span>
-            CORE SYSTEM ACTIVATED
+    <div class="hardware-monitor-station">
+        <div class="monitor-bezel">
+            <div class="display-glass">
+                
+                <div class="screen-layout layout-off">
+                    <div class="hardware-power-icon">⏽</div>
+                </div>
+
+                <div class="screen-layout layout-loading">
+                    <div class="loading-container">
+                        <span class="loading-headline">CARGANDO SISTEMA...</span>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-layout layout-active">
+                    <div class="system-status-badge">✔ CONEXIÓN EXITOSA</div>
+                    <p class="system-main-text">Gestiona recursos mediante el uso de redes de computadoras</p>
+                </div>
+
+            </div>
         </div>
-        <p class="panel-text">Gestiona recursos mediante el uso de redes de computadoras</p>
+        <div class="monitor-neck"></div>
+        <div class="monitor-foot"></div>
     </div>
 
-    <button class="quantum-btn btn-rewind" id="btnRewind">Rebobinar ↺</button>
+    <button class="hardware-panel-btn btn-action-toggle" id="controlToggle">Pausa</button>
 
 </div>
 
 <style>
-    /* Lienzo principal */
-    .quantum-canvas {
+    /* Lienzo e Interfaz General (Altura ampliada para acomodar el botón abajo) */
+    .network-hardware-canvas {
         position: relative;
         width: 100%;
-        max-width: 700px;
-        height: 450px;
+        max-width: 650px;
+        height: 490px;
         margin: 0 auto;
         background: transparent;
         font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         box-sizing: border-box;
     }
 
-    /* Botones de Control */
-    .quantum-btn {
+    /* Botón de Control reubicado abajo de la TV y centrado */
+    .btn-action-toggle {
         position: absolute;
-        padding: 12px 26px;
-        font-size: 0.85rem;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 11px 24px;
+        font-size: 0.8rem;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
-        border-radius: 30px;
+        border-radius: 6px;
         cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: 100;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .btn-start {
-        top: 20px;
-        left: 20px;
+        transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.12);
         background: #0f172a;
         color: #38bdf8;
-        box-shadow: 0 4px 20px rgba(56, 189, 248, 0.15), inset 0 1px 1px rgba(255,255,255,0.1);
+        box-shadow: 0 4px 14px rgba(56, 189, 248, 0.15);
     }
-    .btn-start:hover {
+    .btn-action-toggle:hover {
         background: #38bdf8;
         color: #0f172a;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+        box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
     }
 
-    .btn-rewind {
-        bottom: 25px;
-        background: rgba(15, 23, 42, 0.8);
-        color: #94a3b8;
-        opacity: 0;
-        transform: translateY(15px) scale(0.9);
-        pointer-events: none;
-        backdrop-filter: blur(8px);
-    }
-    .btn-rewind.visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-    }
-    .btn-rewind:hover {
-        color: #fff;
-        background: #1e293b;
-        border-color: rgba(255,255,255,0.2);
-    }
-
-    .quantum-btn.hidden {
-        opacity: 0 !important;
-        pointer-events: none !important;
-        transform: scale(0.8) translateY(-10px);
-    }
-
-    /* Módulos Tecnológicos Iniciales (Sleek Glassmorphism) */
-    .tech-module {
+    /* Tarjetas Superiores Estables */
+    .static-competence-card {
         position: absolute;
-        width: 220px;
-        padding: 20px;
-        background: rgba(15, 23, 42, 0.6);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-radius: 14px;
-        color: #f1f5f9;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        opacity: 0;
-        transform: scale(0.8) translateY(30px);
-        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        top: 20px;
+        width: 210px;
+        height: 75px;
+        padding: 15px;
+        background: #1e293b;
+        border-radius: 10px;
+        color: #f8fafc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
+        z-index: 10;
     }
-    .tech-module p {
+    .static-competence-card p {
         margin: 0;
-        font-size: 0.85rem;
-        line-height: 1.4;
+        font-size: 0.82rem;
+        line-height: 1.35;
         font-weight: 500;
     }
-    .module-tag {
-        font-size: 0.6rem;
-        font-weight: 800;
-        letter-spacing: 1.5px;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-    }
 
-    /* Posicionamiento y colores personalizados de los módulos */
-    .mod-gold {
-        left: 80px;
-        top: 140px;
-        border-left: 4px solid #f59e0b;
-    }
-    .mod-gold .module-tag { color: #f59e0b; }
+    .tech-border-orange { left: 40px; border-bottom: 4px solid #f59e0b; }
+    .tech-border-green { right: 40px; border-bottom: 4px solid #10b981; }
 
-    .mod-green {
-        right: 80px;
-        top: 140px;
-        border-left: 4px solid #10b981;
-    }
-    .mod-green .module-tag { color: #10b981; }
-
-    /* Núcleo de energía oculto */
-    .tech-glow-core {
+    /* Estación del Monitor Físico (Desplazado hacia arriba para dar espacio inferior) */
+    .hardware-monitor-station {
         position: absolute;
-        width: 10px;
-        height: 10px;
-        background: #34d399;
-        border-radius: 50%;
-        filter: blur(20px);
+        top: 160px;
+        left: 155px;
+        width: 340px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 5;
+    }
+    .monitor-bezel {
+        width: 340px;
+        height: 190px;
+        background: #0f172a;
+        border: 4px solid #1e293b;
+        border-radius: 8px 8px 0 0;
+        padding: 6px;
+        box-sizing: border-box;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .display-glass {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #475569;
+    }
+    
+    .monitor-neck { width: 32px; height: 32px; background: #1e293b; }
+    .monitor-foot { width: 120px; height: 8px; background: #0f172a; border-radius: 4px 4px 0 0; }
+
+    /* Vistas de las Pantallas */
+    .screen-layout {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
         opacity: 0;
-        transition: all 1s ease;
     }
 
-    /* Capa de vectores/líneas de flujo fluido */
-    .flux-overlay {
+    .layout-off { 
+        background: #475569; 
+        animation: cycleViewOff 10s infinite linear;
+    }
+    .hardware-power-icon { font-size: 1.6rem; color: rgba(255,255,255,0.2); }
+
+    .layout-loading { 
+        background: #020617;
+        box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.2);
+        animation: cycleViewLoading 10s infinite linear;
+    }
+    .loading-container { width: 85%; text-align: center; }
+    .loading-headline {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: #38bdf8;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 12px;
+    }
+    .progress-bar-track { width: 100%; height: 6px; background: #1e293b; border-radius: 10px; overflow: hidden; }
+    .progress-bar-fill {
+        width: 0%;
+        height: 100%;
+        background: #38bdf8;
+        box-shadow: 0 0 8px #38bdf8;
+        animation: cycleBarFill 10s infinite linear;
+    }
+
+    .layout-active { 
+        background: linear-gradient(135deg, #022c22, #064e3b);
+        border: 1px solid #10b981;
+        box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.2);
+        animation: cycleViewActive 10s infinite linear;
+    }
+    .system-status-badge {
+        font-size: 0.6rem;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        color: #34d399;
+        margin-bottom: 12px;
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        padding: 3px 10px;
+        border-radius: 4px;
+        background: rgba(0,0,0,0.2);
+    }
+    .system-main-text {
+        margin: 0;
+        color: #f0fdf4;
+        font-size: 0.95rem;
+        font-weight: 600;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    /* Capa de Cables SVG */
+    .ethernet-cables-overlay {
         position: absolute;
         width: 100%;
         height: 100%;
         top: 0;
         left: 0;
         pointer-events: none;
-        z-index: 1;
+        z-index: 2;
     }
-    .flux-line {
+    .ethernet-wire {
         fill: none;
-        stroke-width: 2px;
-        stroke-dasharray: 150;
-        stroke-dashoffset: 150;
-        opacity: 0;
+        stroke-width: 3.5px;
+        stroke-linecap: round;
+        stroke-dasharray: 250;
+        stroke-dashoffset: 250;
+        animation: cycleCables 10s infinite linear;
     }
-    .line-top { stroke: url(#gradientGold); }
-    .line-bottom { stroke: url(#gradientGreen); }
+    .wire-orange { stroke: #f59e0b; }
+    .wire-green { stroke: #10b981; }
 
-    /* Panel Maestro Final (Efecto Cyber-Dashboard) */
-    .master-panel {
-        position: relative;
-        width: 380px;
-        padding: 30px;
-        background: linear-gradient(135deg, #064e3b, #022c22);
-        border: 1px solid rgba(52, 211, 153, 0.3);
-        border-radius: 20px;
-        box-shadow: 0 20px 50px rgba(2, 44, 34, 0.4), 0 0 40px rgba(52, 211, 153, 0.1);
-        opacity: 0;
-        transform: scale(0.6);
-        transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        z-index: 5;
-        overflow: hidden;
-        text-align: center;
-        box-sizing: border-box;
-    }
-    .panel-header {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.65rem;
-        font-weight: 800;
-        letter-spacing: 2px;
-        color: #34d399;
-        margin-bottom: 15px;
-    }
-    .status-dot {
-        width: 6px;
-        height: 6px;
-        background: #34d399;
-        border-radius: 50%;
-        box-shadow: 0 0 8px #34d399;
-        animation: pulseDot 1s infinite alternate;
-    }
-    .panel-text {
-        margin: 0;
-        color: #e6f4ea;
-        font-size: 1.1rem;
-        line-height: 1.4;
-        font-weight: 600;
+    /* =========================================================================
+       CRONOGRAMA DE KEYFRAMES (CICLO TOTAL DE 10 SEGUNDOS)
+       ========================================================================= */
+    @keyframes cycleCables {
+        0%, 10% { stroke-dashoffset: 250; }
+        22%, 90% { stroke-dashoffset: 0; }
+        95%, 100% { stroke-dashoffset: 250; }
     }
 
-    /* --- DISPARADORES DE ANIMACIÓN POR CLASES DE JS --- */
-    
-    /* Fase Inicial: Aparecen los paneles limpios flotando */
-    .run-pop .tech-module {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-        animation: floatA 5s infinite ease-in-out alternate;
-    }
-    .run-pop .mod-green {
-        animation-name: floatB;
+    @keyframes cycleViewOff {
+        0%, 21% { opacity: 1; z-index: 3; }
+        22%, 100% { opacity: 0; z-index: 1; }
     }
 
-    /* Fase de Disolución y Flujo Fluido (A los 9 segundos) */
-    .run-flow .tech-module {
-        opacity: 0;
-        transform: scale(0.5) filter(blur(10px));
-        pointer-events: none;
-    }
-    .run-flow .flux-line {
-        opacity: 1;
-        animation: drawFlux 1.8s forwards ease-in-out;
-    }
-    .run-flow .tech-glow-core {
-        opacity: 1;
-        transform: scale(8);
+    @keyframes cycleViewLoading {
+        0%, 21% { opacity: 0; z-index: 1; }
+        22%, 52% { opacity: 1; z-index: 3; }
+        53%, 100% { opacity: 0; z-index: 1; }
     }
 
-    /* Fase de Fusión Exitosa */
-    .run-fusion .flux-line {
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    .run-fusion .tech-glow-core {
-        opacity: 0;
-        transform: scale(0);
-    }
-    .run-fusion .master-panel {
-        opacity: 1;
-        transform: scale(1);
+    @keyframes cycleBarFill {
+        0%, 22% { width: 0%; }
+        50%, 90% { width: 100%; }
+        95%, 100% { width: 0%; }
     }
 
-    /* Keyframes */
-    @keyframes floatA {
-        0% { transform: translateY(0) rotate(0deg); }
-        100% { transform: translateY(-10px) rotate(1deg); }
+    @keyframes cycleViewActive {
+        0%, 52% { opacity: 0; z-index: 1; }
+        53%, 90% { opacity: 1; z-index: 3; }
+        91%, 100% { opacity: 0; z-index: 1; }
     }
-    @keyframes floatB {
-        0% { transform: translateY(0) rotate(0deg); }
-        100% { transform: translateY(-10px) rotate(-1deg); }
-    }
-    @keyframes drawFlux {
-        0% { stroke-dashoffset: 150; }
-        100% { stroke-dashoffset: 0; }
-    }
-    @keyframes pulseDot {
-        0% { opacity: 0.4; }
-        100% { opacity: 1; }
+
+    /* Congelador global de fotogramas CSS al pausar */
+    .is-paused * {
+        animation-play-state: paused !important;
     }
 </style>
 
-<svg width="0" height="0">
-    <defs>
-        <linearGradient id="gradientGold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f59e0b" />
-            <stop offset="100%" stop-color="#34d399" />
-        </linearGradient>
-        <linearGradient id="gradientGreen" x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#10b981" />
-            <stop offset="100%" stop-color="#34d399" />
-        </linearGradient>
-    </defs>
-</svg>
-
 <script>
     (function() {
-        const canvas = document.getElementById('quantumCanvas');
-        const btnStart = document.getElementById('btnStart');
-        const btnRewind = document.getElementById('btnRewind');
+        const toggleBtn = document.getElementById('controlToggle');
+        const canvas = document.getElementById('networkCanvas');
 
-        let sequenceTimers = [];
-
-        // Función para limpiar hilos de tiempo activos
-        function clearAllTimers() {
-            sequenceTimers.forEach(timer => clearTimeout(timer));
-            sequenceTimers = [];
-        }
-
-        // CONTROLADOR DE INICIO ANIMACIÓN
-        btnStart.addEventListener('click', () => {
-            btnStart.classList.add('hidden');
-            
-            // 1. Mostrar módulos iniciales de inmediato con pop elástico
-            canvas.classList.add('run-pop');
-
-            // 2. Esperar exactamente 9 segundos flotando de forma limpia
-            const morphTimer = setTimeout(() => {
-                canvas.classList.remove('run-pop');
-                canvas.classList.add('run-flow'); // Comienza disolución y flujo de líneas
-            }, 9000);
-            sequenceTimers.push(morphTimer);
-
-            // 3. Tras 1.6 segundos de flujo líquido de datos, detonar panel de fusión central
-            const fusionTimer = setTimeout(() => {
-                canvas.classList.remove('run-flow');
-                canvas.classList.add('run-fusion');
-                
-                // Hacer aparecer suavemente el botón de rebobinado
-                btnRewind.classList.add('visible');
-            }, 9000 + 1600);
-            sequenceTimers.push(fusionTimer);
-        });
-
-        // CONTROLADOR DE REBOBINADO (RESET COMPLETO)
-        btnRewind.addEventListener('click', () => {
-            // Ocultar botón de rebobinado instantáneamente
-            btnRewind.classList.remove('visible');
-            
-            // Apagar todas las clases de animación del lienzo de golpe
-            canvas.classList.remove('run-pop', 'run-flow', 'run-fusion');
-            clearAllTimers();
-
-            // Pequeña pausa táctica de estabilidad visual antes de restaurar el botón inicial
-            setTimeout(() => {
-                btnStart.classList.remove('hidden');
-            }, 350);
+        toggleBtn.addEventListener('click', () => {
+            const isPaused = canvas.classList.toggle('is-paused');
+            toggleBtn.textContent = isPaused ? 'Play' : 'Pausa';
         });
     })();
-</script>
 </script>
