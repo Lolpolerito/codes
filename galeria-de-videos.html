@@ -2,150 +2,191 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Galería de Vídeos con Barras Laterales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Vídeos de Redes</title>
     <style>
+        :root {
+            --primary-color: #333;
+            --bg-slider: #4d4d4d;
+        }
+
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 10px;
-            box-sizing: border-box;
+            margin: 0;
         }
-        .galeria-container {
-            background-color: #ffffff;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border-radius: 12px;
+
+        .gallery-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 850px;
             padding: 20px;
-            max-width: 950px;
-            width: 100%;
-            box-sizing: border-box;
             text-align: center;
         }
-        h1 {
-            margin-top: 0;
+
+        .gallery-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
             margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
         }
-        
-        /* Contenedor principal que alinea las barras y el video en una sola fila */
-        .reproductor-wrapper {
+
+        /* Estructura del Slider */
+        .slider-wrapper {
             display: flex;
-            align-items: stretch; /* Hace que las barras tengan la misma altura que el video */
-            justify-content: center;
-            gap: 10px; /* Separación pequeña entre barras y video */
+            align-items: center;
+            position: relative;
+        }
+
+        .slider-btn {
+            background-color: var(--bg-slider);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 15px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background-color: #1a1a1a;
+        }
+
+        .video-container {
+            width: 100%;
+            overflow: hidden;
+            margin: 0 10px;
+            border-radius: 4px;
+        }
+
+        /* Contenedores de los vídeos (Se ocultan/muestran con la clase .active) */
+        .video-slide {
+            display: none;
             width: 100%;
         }
 
-        /* Las Barras Laterales Dinámicas */
-        .btn-barra {
-            background-color: #444444;
-            color: #ffffff;
-            border: none;
-            width: 50px; /* Ancho de la barra lateral */
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            user-select: none;
+        .video-slide.active {
+            display: block;
         }
 
-        /* Iluminación dinámica al pasar el mouse (Efecto Glow/Resplandor) */
-        .btn-barra:hover {
-            background-color: #00bcd4; /* Color cyan de fondo */
-            color: #ffffff;
-            box-shadow: 0 0 15px #00bcd4, 0 0 25px #00bcd4; /* Resplandor exterior */
-        }
-
-        /* Contenedor del iframe de YouTube */
-        .video-container {
+        /* Proporción 16:9 para los videos de YouTube */
+        .responsive-iframe {
             position: relative;
-            flex-grow: 1; /* Ocupa todo el espacio restante entre las barras */
-            padding-bottom: 56.25%; /* Relación de aspecto 16:9 estándar */
+            padding-bottom: 56.25%; /* 16:9 */
             height: 0;
             overflow: hidden;
-            border-radius: 6px;
-            background-color: #000000;
         }
-        .video-container iframe {
+
+        .responsive-iframe iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            border: 0;
         }
 
-        /* Contador inferior */
-        .contador {
-            margin-top: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #555555;
+        .gallery-footer {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-<div class="galeria-container">
-    <h1>Galería de Vídeos</h1>
-    
-    <div class="reproductor-wrapper">
-        <button class="btn-barra" id="btn-anterior" onclick="cambiarVideo(-1)">&#10094;</button>
-        
+<div class="gallery-container">
+    <div class="gallery-title">Galería de Vídeos</div>
+
+    <div class="slider-wrapper">
+        <button class="slider-btn" onclick="cambiarVideo(-1)">&#10094;</button>
+
         <div class="video-container">
-            <iframe id="reproductor-youtube" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+            <div class="video-slide active">
+                <div class="responsive-iframe">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="1. Conceptos Básicos de Redes" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-slide">
+                <div class="responsive-iframe">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="2. Topologías de Red" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-slide">
+                <div class="responsive-iframe">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="3. Tipos de Redes (LAN, WAN)" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-slide">
+                <div class="responsive-iframe">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" title="4. Medios de Transmisión" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-slide">
+                <div class="responsive-iframe">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_5" title="5. Dispositivos de Interconexión" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-slide">
+                <div class="responsive-iframe">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" title="6. Configuración y Monitoreo" allowfullscreen></iframe>
+                </div>
+            </div>
+
         </div>
-        
-        <button class="btn-barra" id="btn-siguiente" onclick="cambiarVideo(1)">&#10095;</button>
+
+        <button class="slider-btn" onclick="cambiarVideo(1)">&#10095;</button>
     </div>
 
-    <div class="contador" id="contador-texto">Vídeo 1 de 6</div>
+    <div class="gallery-footer" id="video-indicador">Vídeo 1 de 6</div>
 </div>
 
 <script>
-    // IDs de tus 6 vídeos de YouTube originales
-    const listaVideos = [
-        "_JNPvSxG6oM",
-        "GqIFy_0di_Q",
-        "szaoYQ-yZjc",
-        "SHbBso63X38",
-        "R6NGSRZ5Dpw",
-        "uNmbkXbfviI"
-    ];
+    let indexActual = 0;
+    const slides = document.querySelectorAll('.video-slide');
+    const indicador = document.getElementById('video-indicador');
 
-    let indiceActual = 0;
-    const iframeReproductor = document.getElementById('reproductor-youtube');
-    const contadorTexto = document.getElementById('contador-texto');
-
-    // Carga el vídeo actual en el iframe
-    function cargarVideo(indice) {
-        iframeReproductor.src = "https://www.youtube.com/embed/" + listaVideos[indice];
-        contadorTexto.innerText = `Vídeo ${indice + 1} de ${listaVideos.length}`;
-    }
-
-    // Lógica para avanzar o retroceder de manera infinita
     function cambiarVideo(direccion) {
-        indiceActual += direccion;
-        if (indiceActual >= listaVideos.length) {
-            indiceActual = 0;
-        }
-        if (indiceActual < 0) {
-            indiceActual = listaVideos.length - 1;
-        }
-        cargarVideo(indiceActual);
-    }
+        // Ocultar el vídeo actual
+        slides[indexActual].classList.remove('active');
+        
+        // Pausar el vídeo que se está ocultando (recargando el src para evitar que siga sonando)
+        const iframe = slides[indexActual].querySelector('iframe');
+        const srcActual = iframe.src;
+        iframe.src = srcActual;
 
-    // Ejecución inicial al cargar la web
-    cargarVideo(indiceActual);
+        // Calcular el nuevo índice
+        indexActual += direccion;
+
+        // Ciclar el carrusel si llega al inicio o al final
+        if (indexActual >= slides.length) {
+            indexActual = 0;
+        }
+        if (indexActual < 0) {
+            indexActual = slides.length - 1;
+        }
+
+        // Mostrar el nuevo vídeo
+        slides[indexActual].classList.add('active');
+        
+        // Actualizar el texto del pie de página
+        indicador.textContent = `Vídeo ${indexActual + 1} de ${slides.length}`;
+    }
 </script>
 
 </body>
