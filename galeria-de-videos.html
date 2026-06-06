@@ -1,218 +1,260 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería Temática de Redes e Informática</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9; /* Cambia esto según el fondo de tu web */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        /* Contenedor sin fondo blanco ni sombras */
-        .gallery-container {
-            background: transparent;
-            width: 100%;
-            max-width: 850px;
-            padding: 10px;
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        .gallery-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Estructura del Slider */
-        .slider-wrapper {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Botones que se iluminan al pasar el cursor */
-        .slider-btn {
-            background-color: #2a2a2e;
-            color: #e1e1e6;
-            border: 2px solid #3a3a3e;
-            font-size: 1.8rem;
-            padding: 0;
-            cursor: pointer;
-            border-radius: 50%;
-            width: 54px;
-            height: 54px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 10;
-            user-select: none;
-        }
-
-        /* Efecto de iluminación brillante */
-        .slider-btn:hover {
-            background-color: #007bff;
-            color: #ffffff;
-            border-color: #00a2ff;
-            transform: scale(1.12);
-            box-shadow: 0 0 18px rgba(0, 123, 255, 0.85), 0 0 8px rgba(0, 123, 255, 0.4);
-        }
-
-        .slider-btn:active {
-            transform: scale(0.92);
-        }
-
-        /* Ventana de recorte para el desplazamiento fluido */
-        .video-window {
-            width: 100%;
-            overflow: hidden;
-            margin: 0 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra elegante solo al video */
-        }
-
-        /* Riel horizontal animado */
-        .video-track {
-            display: flex;
-            width: 100%;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .video-slide {
-            flex: 0 0 100%;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Formato panorámico 16:9 responsivo */
-        .responsive-iframe {
-            position: relative;
-            padding-bottom: 56.25%; 
-            height: 0;
-            overflow: hidden;
-            background-color: #000;
-        }
-
-        .responsive-iframe iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Título dinámico abajo del video */
-        .video-title-dinamico {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #111;
-            margin-top: 20px;
-            margin-bottom: 6px;
-        }
-
-        /* Contador inferior */
-        .gallery-footer {
-            font-size: 0.95rem;
-            color: #666;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-
-<div class="gallery-container">
-    <div class="gallery-title">Ruta de Aprendizaje: Redes Informáticas</div>
-
-    <div class="slider-wrapper">
-        <button class="slider-btn" onclick="cambiarVideo(-1)">&#10094;</button>
-
-        <div class="video-window">
-            <div class="video-track" id="video-track">
-                
-                <div class="video-slide" data-titulo="1. ¿Qué es una Red? Descubre la Conexión Ideal">
-                    <div class="responsive-iframe">
-                        <iframe src="https://www.youtube.com/embed/szaoYQ-yZjc" title="¿Qué es una Red?" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div class="video-slide" data-titulo="2. Conceptos Básicos de Redes y Protocolo IP">
-                    <div class="responsive-iframe">
-                        <iframe src="https://www.youtube.com/embed/_JNPvSxG6oM" title="Fundamentos de Redes" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div class="video-slide" data-titulo="3. ¿Qué es LAN y WAN? - Modelos de Red Corporativos">
-                    <div class="responsive-iframe">
-                        <iframe src="https://www.youtube.com/embed/uNmbkXbfviI" title="LAN y WAN" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div class="video-slide" data-titulo="4. Redes WAN Avanzadas, Mensajes y Paquetes de Datos">
-                    <div class="responsive-iframe">
-                        <iframe src="https://www.youtube.com/embed/R6NGSRZ5Dpw" title="Redes WAN" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div class="video-slide" data-titulo="5. Direccionamiento IPv4, Máscaras de Red y Subredes">
-                    <div class="responsive-iframe">
-                        <iframe src="https://www.youtube.com/embed/SHbBso63X38" title="Subredes IPv4" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-            </div>
+<div class="video-gallery-wrapper">
+    
+    <div class="main-video-container">
+        <div class="video-ratio-keeper">
+            <iframe 
+                id="mainGalleryPlayer" 
+                src="https://www.youtube.com/embed/_JNPvSxG6oM" 
+                title="Reproductor de Video de Redes" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
         </div>
-
-        <button class="slider-btn" onclick="cambiarVideo(1)">&#10095;</button>
+        <div class="video-info-panel">
+            <span class="video-badge" id="currentVideoBadge">Video 1</span>
+            <h3 class="video-current-title" id="currentVideoTitle">¡Aprende los conceptos básicos de redes en menos de 15 minutos!</h3>
+        </div>
     </div>
 
-    <div class="video-title-dinamico" id="video-titulo">1. ¿Qué es una Red? Descubre la Conexión Ideal</div>
-    
-    <div class="gallery-footer" id="video-indicador">Vídeo 1 de 5</div>
+    <div class="playlist-sidebar">
+        <div class="playlist-header">
+            <h4>Contenido disponible</h4>
+            <span class="playlist-count">5 Videos</span>
+        </div>
+        
+        <div class="playlist-items-scroll">
+            
+            <div class="playlist-item active" data-video-id="_JNPvSxG6oM" data-video-label="Video 1" data-title="¡Aprende los conceptos básicos de redes en menos de 15 minutos!">
+                <div class="item-index">01</div>
+                <div class="item-details">
+                    <p class="item-topic">Conceptos Básicos</p>
+                    <p class="item-headline">Fundamentos esenciales de redes</p>
+                </div>
+            </div>
+
+            <div class="playlist-item" data-video-id="oy_vnFR-nzI" data-video-label="Video 2" data-title="Redes: Topología Física vs. Lógica Explicada">
+                <div class="item-index">02</div>
+                <div class="item-details">
+                    <p class="item-topic">Topologías de Red</p>
+                    <p class="item-headline">Estructura Física vs. Lógica</p>
+                </div>
+            </div>
+
+            <div class="playlist-item" data-video-id="aXbPixxVxEg" data-video-label="Video 3" data-title="Redes de ordenadores. Dispositivos de red | UPV">
+                <div class="item-index">03</div>
+                <div class="item-details">
+                    <p class="item-topic">Dispositivos de Red</p>
+                    <p class="item-headline">Switches, Routers y el Modelo OSI</p>
+                </div>
+            </div>
+
+            <div class="playlist-item" data-video-id="801xu7tGEfA" data-video-label="Video 4" data-title="¿Qué es una IP? Para qué sirve la IP - Curso de REDES">
+                <div class="item-index">04</div>
+                <div class="item-details">
+                    <p class="item-topic">Direccionamiento IP</p>
+                    <p class="item-headline">IP Públicas, Privadas y Formato IPv4</p>
+                </div>
+            </div>
+
+            <div class="playlist-item" data-video-id="DZziJy7PDS0" data-video-label="Video 5" data-title="CABLEADO ESTRUCTURADO: Instalación de los equipos de red">
+                <div class="item-index">05</div>
+                <div class="item-details">
+                    <p class="item-topic">Cableado Estructurado</p>
+                    <p class="item-headline">Montaje e instalación física en rack</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
-<script>
-    let indexActual = 0;
-    const track = document.getElementById('video-track');
-    const slides = document.querySelectorAll('.video-slide');
-    const tituloDinamico = document.getElementById('video-titulo');
-    const indicador = document.getElementById('video-indicador');
-
-    function cambiarVideo(direccion) {
-        // 1. Pausar el vídeo que se deja reseteando su origen (evita que siga sonando de fondo)
-        const iframeActual = slides[indexActual].querySelector('iframe');
-        const srcActual = iframeActual.src;
-        iframeActual.src = srcActual;
-
-        // 2. Calcular el nuevo índice de la diapositiva
-        indexActual += direccion;
-
-        if (indexActual >= slides.length) {
-            indexActual = 0;
-        }
-        if (indexActual < 0) {
-            indexActual = slides.length - 1;
-        }
-
-        // 3. Desplazamiento horizontal fluido multiplicando por el ancho completo (100%)
-        track.style.transform = `translateX(-${indexActual * 100}%)`;
-        
-        // 4. Actualizar el título inferior y el contador dinámicamente
-        const nuevoTitulo = slides[indexActual].getAttribute('data-titulo');
-        tituloDinamico.textContent = nuevoTitulo;
-        indicador.textContent = `Vídeo ${indexActual + 1} de ${slides.length}`;
+<style>
+    .video-gallery-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        background: #141414; /* Negro estándar de fondo de Netflix */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
-</script>
 
-</body>
-</html>
+    /* Contenedor del Reproductor Izquierdo */
+    .main-video-container {
+        flex: 2;
+        background: #000000;
+        display: flex;
+        flex-direction: column;
+    }
+    .video-ratio-keeper {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+    }
+    .video-ratio-keeper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .video-info-panel {
+        padding: 25px;
+        background: #141414;
+    }
+    .video-badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #E50914; /* Rojo Netflix */
+        background: rgba(229, 9, 20, 0.15);
+        padding: 5px 12px;
+        border-radius: 2px;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+    .video-current-title {
+        margin: 0;
+        font-size: 1.3rem;
+        color: #FFFFFF;
+        font-weight: 700;
+        line-height: 1.4;
+    }
+
+    /* Barra Lateral de Playlist */
+    .playlist-sidebar {
+        flex: 0.9;
+        background: #181818; /* Gris oscuro de tarjetas de Netflix */
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid #282828;
+    }
+    .playlist-header {
+        padding: 20px;
+        background: #141414;
+        border-bottom: 1px solid #282828;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .playlist-header h4 {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #E50914;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .playlist-count {
+        font-size: 0.75rem;
+        color: #AAAAAA;
+        font-weight: 500;
+    }
+    .playlist-items-scroll {
+        max-height: 450px;
+        overflow-y: auto;
+    }
+    
+    /* Elementos individuales de la lista */
+    .playlist-item {
+        display: flex;
+        align-items: center;
+        padding: 18px 20px;
+        border-bottom: 1px solid #202020;
+        cursor: pointer;
+        transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .playlist-item:hover {
+        background: #222222;
+    }
+    .playlist-item.active {
+        background: #282828;
+        border-left: 4px solid #E50914; /* Borde rojo activo */
+        padding-left: 16px;
+    }
+    
+    .item-index {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #555555;
+        margin-right: 15px;
+    }
+    .playlist-item.active .item-index {
+        color: #E50914;
+    }
+    
+    .item-details {
+        flex: 1;
+    }
+    .item-topic {
+        margin: 0 0 4px 0;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #FFFFFF;
+    }
+    .playlist-item.active .item-topic {
+        color: #E50914;
+    }
+    .item-headline {
+        margin: 0;
+        font-size: 0.75rem;
+        color: #999999;
+        line-height: 1.4;
+    }
+
+    /* Scrollbar minimalista estilo Netflix */
+    .playlist-items-scroll::-webkit-scrollbar {
+        width: 4px;
+    }
+    .playlist-items-scroll::-webkit-scrollbar-track {
+        background: #141414;
+    }
+    .playlist-items-scroll::-webkit-scrollbar-thumb {
+        background: #E50914;
+        border-radius: 2px;
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 800px) {
+        .video-gallery-wrapper {
+            flex-direction: column;
+        }
+        .playlist-sidebar {
+            border-left: none;
+            border-top: 1px solid #282828;
+        }
+        .playlist-items-scroll {
+            max-height: 300px;
+        }
+    }
+</style>
+
+<script>
+    (function() {
+        const player = document.getElementById('mainGalleryPlayer');
+        const currentTitle = document.getElementById('currentVideoTitle');
+        const currentVideoBadge = document.getElementById('currentVideoBadge');
+        const items = document.querySelectorAll('.playlist-item');
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelector('.playlist-item.active').classList.remove('active');
+                item.classList.add('active');
+                
+                const videoId = item.getAttribute('data-video-id');
+                const title = item.getAttribute('data-title');
+                const videoLabel = item.getAttribute('data-video-label');
+                
+                player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                currentTitle.textContent = title;
+                currentVideoBadge.textContent = videoLabel;
+            });
+        });
+    })();
+</script>
