@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - 1er Parcial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #1e3a8a;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #2c5282;
+            margin: 20px 0 10px 0;
+            padding-left: 10px;
+            border-left: 5px solid #3182ce;
+        }
+
+        .grid-archivos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #4a5568;
+            text-align: center;
+            width: 100%;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .documento-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .paginas-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Portafolio de Evidencias - Primer Parcial</h1>
+
+    <h2>Documentos y Actividades</h2>
+    <div class="grid-archivos">
+
+        <div class="card">
+            <h3>Apuntes de Encuandre</h3>
+            <img class="documento-img" src="1er/Apuntes de Encuandre.jpg" alt="Apuntes de Encuandre" loading="lazy">
+        </div>
+
+        <div class="card">
+            <h3>Ejercicio - Dispositivos de Conexión 1</h3>
+            <img class="documento-img" src="1er/Ejercicio- Dispositivos de Conexion 1.jpg" alt="Ejercicio Dispositivos de Conexión 1" loading="lazy">
+        </div>
+
+        <div class="card">
+            <h3>Ejercicio - Dispositivos de Conexión 1.2</h3>
+            <img class="documento-img" src="1er/Ejercicio- Dispositivos de Conexion 1.2.jpg" alt="Ejercicio Dispositivos de Conexión 1.2" loading="lazy">
+        </div>
+
+        <div class="card">
+            <h3>Hoja de Evaluación de la Exposición</h3>
+            <img class="documento-img" src="1er/Hoja de Evaluacion de la exposicion.jpg" alt="Hoja de Evaluación de la Exposición" loading="lazy">
+        </div>
+
+        <div class="card">
+            <h3>Investigación de Redes de Computadoras</h3>
+            <img class="documento-img" src="1er/Investacion de Redes de Compu.jpg" alt="Investigación de Redes" loading="lazy">
+        </div>
+
+        <div class="card">
+            <h3>Mapa Conceptual de Redes de Computadoras</h3>
+            <img class="documento-img" src="1er/Mapa Conceptual de Redes de Compu.jpg" alt="Mapa Conceptual" loading="lazy">
+        </div>
+
+        <div class="card">
+            <h3>Métodos para Presentar en Público</h3>
+            <img class="documento-img" src="1er/Metodos para Presentar en Publico.jpg" alt="Métodos para Presentar en Público" loading="lazy">
+        </div>
+
+    </div>
+
+    <h2>Prácticas y Tablas Especiales</h2>
+    <div class="grid-archivos">
+
+        <div class="card">
+            <h3>Línea del Tiempo</h3>
+            <div class="paginas-container">
+                <img class="documento-img" src="1er/Linea del tiempo/imagen 1.jpg" alt="Línea del tiempo - Pág 1" loading="lazy">
+                <img class="documento-img" src="1er/Linea del tiempo/imagen 1.2.jpg" alt="Línea del tiempo - Pág 2" loading="lazy">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Tabla Comparativa - Medios No Guiados</h3>
+            <div class="paginas-container">
+                <img class="documento-img" src="1er/Tabla Comp-No Medios Guiados/imagen 1.jpg" alt="Medios No Guiados - Pág 1" loading="lazy">
+                <img class="documento-img" src="1er/Tabla Comp-No Medios Guiados/imagen 1.2.jpg" alt="Medios No Guiados - Pág 2" loading="lazy">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Tabla Comparativa - Medios Guiados</h3>
+            <div class="paginas-container">
+                <img class="documento-img" src="1er/Tabla omparatica - Medios Guiados/imagen 1.jpg" alt="Medios Guiados - Pág 1" loading="lazy">
+                <img class="documento-img" src="1er/Tabla omparatica - Medios Guiados/imagen 1.2.jpg" alt="Medios Guiados - Pág 2" loading="lazy">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
