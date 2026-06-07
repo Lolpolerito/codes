@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primer Parcial</title>
+    <title>Portafolio de Evidencias</title>
     <style>
         :root {
             --bg-color: #141414;
@@ -25,28 +25,28 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            padding: 20px 4% 50px 4%;
+            padding: 40px 4% 50px 4%;
         }
 
         .main-container {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 50px;
         }
 
         .parcial-section {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .parcial-title {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #E5E5E5;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .parcial-title::after {
@@ -95,6 +95,7 @@
             padding: 10px;
         }
 
+        /* Variación de colores de fondo para las miniaturas */
         .card:nth-child(odd) .card-thumbnail { background: linear-gradient(135deg, #1c1a1a, #2c1414); }
         .card:nth-child(even) .card-thumbnail { background: linear-gradient(135deg, #141a24, #11141a); }
 
@@ -131,6 +132,7 @@
             color: #fff;
         }
 
+        /* Estilos del Modal / Visor */
         .modal {
             display: none;
             position: fixed;
@@ -229,6 +231,7 @@
 <body>
 
     <div class="main-container">
+        
         <section class="parcial-section">
             <div class="parcial-title">Primer Parcial</div>
             <div class="cards-grid">
@@ -289,7 +292,7 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Ejercicio: Medios Guiados (Tabla Comparativa)', 'img', ['1er/Tabla omparatica - Medios Guiados/imagen 1.jpg', '1er/Tabla omparatica - Medios Guiados/imagen 1.2.jpg'])">
+                <div class="card" onclick="openViewer('Ejercicio: Medios Guiados (Tabla Comparativa)', 'img', ['1er/Tabla Comparativa - Medios Guiados/imagen 1.jpg', '1er/Tabla Comparativa - Medios Guiados/imagen 1.2.jpg'])">
                     <div class="card-thumbnail">MEDIOS GUIADOS<span class="file-badge">2 IMGS</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 8</div>
@@ -307,6 +310,78 @@
 
             </div>
         </section>
+
+        <section class="parcial-section">
+            <div class="parcial-title">Segundo Parcial</div>
+            <div class="cards-grid">
+                
+                <div class="card" onclick="openViewer('Tipos de Redes y Topologías', 'img', ['2do/Tipos de Redes y Topologias/imagen 1.jpg', '2do/Tipos de Redes y Topologias/imagen 1.2.jpg'])">
+                    <div class="card-thumbnail">TOPOLOGÍAS<span class="file-badge">2 IMGS</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 1</div>
+                        <div class="card-title">Tipos de Redes y Topologías</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openViewer('Configuración de una Red LAN', 'img', ['2do/Configuracion de una Red LAN.jpg'])">
+                    <div class="card-thumbnail">RED LAN<span class="file-badge">JPG</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 2</div>
+                        <div class="card-title">Configuración de una Red LAN</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openViewer('Normas de Cableado Estructurado', 'img', ['2do/Normas de Cableado Estructurado/imagen 1.jpg', '2do/Normas de Cableado Estructurado/imagen 1.2.jpg'])">
+                    <div class="card-thumbnail">CABLEADO<span class="file-badge">2 IMGS</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 3</div>
+                        <div class="card-title">Normas de Cableado Estructurado</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openViewer('Práctica de Ponchado de Cable UTP', 'img', ['2do/Practica de Ponchado de Cable UTP.jpg'])">
+                    <div class="card-thumbnail">PONCHADO UTP<span class="file-badge">JPG</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 4</div>
+                        <div class="card-title">Práctica de Ponchado de Cable UTP</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openViewer('Cuestionario: Protocolos de Red', 'img', ['2do/Cuestionario Protocolos de Red.jpg'])">
+                    <div class="card-thumbnail">PROTOCOLOS<span class="file-badge">JPG</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 5</div>
+                        <div class="card-title">Cuestionario: Protocolos de Red</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openViewer('Direccionamiento IP e IPV4', 'img', ['2do/Direccionamiento IP e IPV4/imagen 1.jpg', '2do/Direccionamiento IP e IPV4/imagen 1.2.jpg'])">
+                    <div class="card-thumbnail">DIRECCIONES IP<span class="file-badge">2 IMGS</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 6</div>
+                        <div class="card-title">Direccionamiento IP e IPV4</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openViewer('Subneteo de Redes', 'img', ['2do/Subneteo de Redes.jpg'])">
+                    <div class="card-thumbnail">SUBNETEO<span class="file-badge">JPG</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 7</div>
+                        <div class="card-title">Subneteo de Redes</div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openViewer('Modelos OSI y TCP-IP', 'img', ['2do/Modelos OSI y TCP-IP/imagen 1.jpg', '2do/Modelos OSI y TCP-IP/imagen 1.2.jpg'])">
+                    <div class="card-thumbnail">OSI / TCP-IP<span class="file-badge">2 IMGS</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Trabajo 8</div>
+                        <div class="card-title">Modelos OSI y TCP-IP</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </div>
 
     <div id="videoModal" class="modal">
