@@ -371,7 +371,6 @@ let currentPaths = [];
 
 function openViewer(title, type, paths) {
   currentPaths = paths;
-  currentIndex = 0;
 
   const modal = document.getElementById('videoModal');
   const modalTitle = document.getElementById('modalTitle');
@@ -379,6 +378,8 @@ function openViewer(title, type, paths) {
 
   modalTitle.textContent = title;
   modalBody.innerHTML = '';
+
+  if (currentIndex >= currentPaths.length) currentIndex = 0;
 
   showImage(currentIndex);
 
@@ -415,6 +416,7 @@ function closeViewer() {
   modal.style.display = 'none';
   modalBody.innerHTML = '';
   document.body.style.overflow = 'auto';
+  currentIndex = 0;
 }
 
 window.onclick = function(event) {
