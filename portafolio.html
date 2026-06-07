@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Digital | Módulo IV</title>
+    <title>Portafolio Digital | Submódulo 2</title>
     <style>
         :root {
             --bg-color: #141414;
             --card-bg: #181818;
-            --netflix-red: #E50914;
+            --accent-red: #E50914;
             --text-color: #FFFFFF;
             --text-muted: #AAAAAA;
             --transition-speed: 0.3s;
@@ -28,7 +28,7 @@
             padding-bottom: 50px;
         }
 
-        /* --- HEADER NETFLIX STYLE --- */
+        /* --- HEADER PREMIUM --- */
         header {
             background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
             padding: 20px 4%;
@@ -44,7 +44,7 @@
         }
 
         .logo {
-            color: var(--netflix-red);
+            color: var(--accent-red);
             font-size: 2rem;
             font-weight: bold;
             letter-spacing: 1px;
@@ -62,7 +62,7 @@
 
         .profile-sub {
             font-size: 0.85rem;
-            color: var(--netflix-red);
+            color: var(--accent-red);
         }
 
         .hero-banner {
@@ -83,7 +83,7 @@
             line-height: 1.4;
         }
 
-        /* --- CONTENEDOR DE FILAS (PARCIALES) --- */
+        /* --- CONTENEDOR DE SECCIONES --- */
         .main-container {
             padding: 0 4%;
             display: flex;
@@ -114,7 +114,7 @@
             background: #333;
         }
 
-        /* --- REJILLA DE TARJETAS (ESTILO CAROUSEL/GRID) --- */
+        /* --- CUADRÍCULA DE TRABAJOS --- */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -146,19 +146,21 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            color: var(--netflix-red);
+            color: var(--accent-red);
             font-weight: bold;
             font-size: 1.1rem;
             border-bottom: 3px solid #333;
+            text-align: center;
+            padding: 10px;
         }
 
-        /* Variaciones de miniaturas para simular portadas */
         .card:nth-child(odd) .card-thumbnail { background: linear-gradient(135deg, #1c1a1a, #2c1414); }
         .card:nth-child(even) .card-thumbnail { background: linear-gradient(135deg, #141a24, #11141a); }
 
         .card.proximamente .card-thumbnail {
             color: #555;
             border-bottom-color: #222;
+            background: #191919;
         }
 
         .file-badge {
@@ -180,7 +182,7 @@
         }
 
         .card-number {
-            color: var(--netflix-red);
+            color: var(--accent-red);
             font-size: 0.8rem;
             font-weight: bold;
             margin-bottom: 5px;
@@ -194,7 +196,7 @@
             color: #fff;
         }
 
-        /* --- VISOR MODAL PREMIUM --- */
+        /* --- VISOR MODAL --- */
         .modal {
             display: none;
             position: fixed;
@@ -248,7 +250,7 @@
         }
 
         .close-btn:hover {
-            color: var(--netflix-red);
+            color: var(--accent-red);
         }
 
         .modal-body {
@@ -294,20 +296,21 @@
 
     <header>
         <div class="header-top">
-            <div class="logo">Netflix Portfolio</div>
+            <div class="logo">Portafolio Digital</div>
             <div class="profile-info">
                 <div class="profile-name">Juan Francisco Rosales López</div>
-                <div class="profile-sub">Técnico en Ofimática • 5to Semestre</div>
+                <div class="profile-sub">Técnico en Ofimática • 4to Semestre</div>
             </div>
         </div>
         <div class="hero-banner">
-            <h1>Módulo IV: Gestiona recursos mediante el uso de redes de computadoras</h1>
+            <h1>Submódulo 2: Gestiona recursos mediante el uso de redes de computadoras</h1>
             <p>Evidencias y prácticas de laboratorio estructuradas para la gestión avanzada de entornos de red local, conectividad corporativa, mapeo topológico y aprovisionamiento seguro de recursos compartidos.</p>
         </div>
     </header>
 
     <div class="main-container">
 
+        <!-- ================= 1ER PARCIAL ================= -->
         <section class="parcial-section">
             <div class="parcial-title">Primer Parcial</div>
             <div class="cards-grid">
@@ -320,7 +323,7 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Investigación de Redes de Computadoras', 'img', ['1er/Investigacion de Redes de Computadora.jpg'])">
+                <div class="card" onclick="openViewer('Investigación de Redes de Computadoras', 'img', ['1er/Investigacion de Redes de Compu.jpg'])">
                     <div class="card-thumbnail">INVESTIGACIÓN<span class="file-badge">JPG</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 2</div>
@@ -328,7 +331,7 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Mapa Conceptual: Redes de Computadoras', 'img', ['1er/Mapa Conceptual de Redes de Computa.jpg'])">
+                <div class="card" onclick="openViewer('Mapa Conceptual: Redes de Computadoras', 'img', ['1er/Mapa Conceptual de Redes de Compu.jpg'])">
                     <div class="card-thumbnail">MAPA CONC.<span class="file-badge">JPG</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 3</div>
@@ -336,8 +339,8 @@
                     </div>
                 </div>
 
-                <div class="card proximamente">
-                    <div class="card-thumbnail">LÍNEA TIEMPO<span class="file-badge" style="color:#555">N/A</span></div>
+                <div class="card" onclick="openViewer('Línea del Tiempo', 'doc', ['1er/Linea del tiempo.pdf'])">
+                    <div class="card-thumbnail">LÍNEA TIEMPO<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 4</div>
                         <div class="card-title">Línea del Tiempo de las Redes</div>
@@ -352,11 +355,11 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Hoja de Evaluación de la Exposición', 'img', ['1er/Hoja de Evaluacion de la exposicion en E.jpg'])">
+                <div class="card" onclick="openViewer('Hoja de Evaluación de la Exposición', 'img', ['1er/Hoja de Evaluacion de la exposicion.jpg'])">
                     <div class="card-thumbnail">EVALUACIÓN<span class="file-badge">JPG</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 6</div>
-                        <div class="card-title">Hoja de Evaluación de la Exposición en Equipo</div>
+                        <div class="card-title">Hoja de Evaluación de la Exposición</div>
                     </div>
                 </div>
 
@@ -376,17 +379,18 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Ejercicio: Medios No Guiados', 'doc', ['1er/Tabla Comparativa - No Medios Guiados.docx'])">
+                <div class="card" onclick="openViewer('Ejercicio: Medios No Guiados', 'doc', ['1er/Tabla Comp-No Medios Guiados.docx'])">
                     <div class="card-thumbnail">NO GUIADOS<span class="file-badge">DOCX</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 9</div>
-                        <div class="card-title">Ejercicio: Medios No Guiados (Tabla Comparativa)</div>
+                        <div class="card-title">Ejercicio: Medios No Guiados</div>
                     </div>
                 </div>
 
             </div>
         </section>
 
+        <!-- ================= 2DO PARCIAL ================= -->
         <section class="parcial-section">
             <div class="parcial-title">Segundo Parcial</div>
             <div class="cards-grid">
@@ -407,11 +411,11 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Identificación de Topologías de Red', 'img', ['2do/Ejercicio - Identificacion de Topologias de Red/imagen 1.jpg', '2do/Ejercicio - Identificacion de Topologias de Red/imagen 1.1.jpg'])">
+                <div class="card" onclick="openViewer('Identificación de Topologías de Red', 'img', ['2do/Ejercicio - Identificacion de Topologi/imagen 1.jpg', '2do/Ejercicio - Identificacion de Topologi/imagen 1.1.jpg'])">
                     <div class="card-thumbnail">TOPOLOGÍAS<span class="file-badge">2 IMGS</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 3</div>
-                        <div class="card-title">Ejercicio – Identificación de Topologías de Red</div>
+                        <div class="card-title">Ejercicio – Identificación de Topologías</div>
                     </div>
                 </div>
 
@@ -419,7 +423,7 @@
                     <div class="card-thumbnail">CABLE RECTO<span class="file-badge">JPG</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 4</div>
-                        <div class="card-title">Cable Recto – Fotografía y Evidencia</div>
+                        <div class="card-title">Cable Recto – Evidencia</div>
                     </div>
                 </div>
 
@@ -427,7 +431,7 @@
                     <div class="card-thumbnail">CABLE CRUZADO<span class="file-badge">JPG</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 5</div>
-                        <div class="card-title">Cable Cruzado – Fotografía y Evidencia</div>
+                        <div class="card-title">Cable Cruzado – Evidencia</div>
                     </div>
                 </div>
 
@@ -447,22 +451,32 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Mapa Conceptual del Cableado Estructurado', 'doc', ['2do/Mapa Conceptual del Cableado Estructur.docx'])">
-                    <div class="card-thumbnail">ESTRUCTURADO<span class="file-badge">DOCX</span></div>
+                <div class="card" onclick="openViewer('Mapa Conceptual del Cableado Estructurado', 'doc', ['2do/Mapa Conceptual del Cableado Est.pdf'])">
+                    <div class="card-thumbnail">ESTRUCTURADO<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 8</div>
                         <div class="card-title">Mapa Conceptual del Cableado Estructurado</div>
                     </div>
                 </div>
 
+                <!-- Archivo PDF de Identificación encontrado en tu carpeta de 2do parcial -->
+                <div class="card" onclick="openViewer('Identificación Clasificaciones Redes 2', 'doc', ['2do/Identificacion Clasificaciones redes 2.pdf'])">
+                    <div class="card-thumbnail">CLASIFICACIONES 2<span class="file-badge">PDF</span></div>
+                    <div class="card-info">
+                        <div class="card-number">Soporte</div>
+                        <div class="card-title">Identificación Clasificaciones Redes 2</div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
+        <!-- ================= 3ER PARCIAL ================= -->
         <section class="parcial-section">
             <div class="parcial-title">Tercer Parcial</div>
             <div class="cards-grid">
 
-                <div class="card" onclick="openViewer('Mapa Conceptual (Conocimientos del 2do Parcial)', 'img', ['3ro/Mapa Conceptual de los Conocimientos Obtenidos en el Segundo Parcial/imagen 1.jpg', '3ro/Mapa Conceptual de los Conocimientos Obtenidos en el Segundo Parcial/imagen 1.2.jpg'])">
+                <div class="card" onclick="openViewer('Mapa Conceptual: Conocimientos 2do Parcial', 'img', ['3ro/Mapa Conceptual de los Conocimientos/imagen 1.jpg', '3ro/Mapa Conceptual de los Conocimientos/imagen 1.2.jpg'])">
                     <div class="card-thumbnail">RETROALIMENTACIÓN<span class="file-badge">2 IMGS</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 1</div>
@@ -470,15 +484,15 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Práctica – Dirección IP y MAC', 'doc', ['3ro/PRACTICA - Direccion IP y MAC.docx'])">
-                    <div class="card-thumbnail">DIRECCIÓN IP / MAC<span class="file-badge">DOCX</span></div>
+                <div class="card" onclick="openViewer('Práctica – Dirección IP y MAC', 'doc', ['3ro/PRACTICA - Direccion IP y MAC.pdf'])">
+                    <div class="card-thumbnail">DIRECCIÓN IP / MAC<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 3</div>
                         <div class="card-title">Práctica – Dirección IP y MAC</div>
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Infografía de la Dirección IP y MAC', 'doc', ['3ro/INFOGRAFIA- Dirección IP y Dirección M.pdf'])">
+                <div class="card" onclick="openViewer('Infografía de la Dirección IP y MAC', 'doc', ['3ro/INFOGRAFIA-“Dirección IP ”.pdf'])">
                     <div class="card-thumbnail">INFOGRAFÍA IP<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 4</div>
@@ -486,32 +500,32 @@
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Práctica – Conexión PC a PC', 'doc', ['3ro/PRACTICA- Conextion PC a PC.docx'])">
-                    <div class="card-thumbnail">PC A PC<span class="file-badge">DOCX</span></div>
+                <div class="card" onclick="openViewer('Práctica – Conexión PC a PC', 'doc', ['3ro/PRACTICA- Conexión PC a PC.pdf'])">
+                    <div class="card-thumbnail">PC A PC<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 5</div>
                         <div class="card-title">Práctica – Conexión PC a PC</div>
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Práctica – Compartir Carpeta en Red', 'doc', ['3ro/PRACTICA- Compartir Carpeta en Red.docx'])">
-                    <div class="card-thumbnail">COMPARTIR CARPETA<span class="file-badge">DOCX</span></div>
+                <div class="card" onclick="openViewer('Práctica – Compartir Carpeta en Red', 'doc', ['3ro/PRACTICA- Compartir Carpeta .pdf'])">
+                    <div class="card-thumbnail">COMPARTIR CARPETA<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 6</div>
                         <div class="card-title">Práctica – Compartir Carpeta en Red</div>
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Práctica – Compartir Disco Duro en Red', 'doc', ['3ro/PRACTICA - Compartir Disco Duro.docx'])">
-                    <div class="card-thumbnail">COMPARTIR DISCO<span class="file-badge">DOCX</span></div>
+                <div class="card" onclick="openViewer('Práctica – Compartir Disco Duro en Red', 'doc', ['3ro/PRACTICA - Compartir Disco Duro.pdf'])">
+                    <div class="card-thumbnail">COMPARTIR DISCO<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 7</div>
                         <div class="card-title">Práctica – Compartir Disco Duro en Red</div>
                     </div>
                 </div>
 
-                <div class="card" onclick="openViewer('Práctica – Escritorio Remoto', 'doc', ['3ro/PRACTICA - Escritorio Remoto.docx'])">
-                    <div class="card-thumbnail">ESCRITORIO REMOTO<span class="file-badge">DOCX</span></div>
+                <div class="card" onclick="openViewer('Práctica – Escritorio Remoto', 'doc', ['3ro/PRACTICA - Escritorio Remoto.pdf'])">
+                    <div class="card-thumbnail">ESCRITORIO REMOTO<span class="file-badge">PDF</span></div>
                     <div class="card-info">
                         <div class="card-number">Trabajo 8</div>
                         <div class="card-title">Práctica – Escritorio Remoto</div>
@@ -531,6 +545,7 @@
 
     </div>
 
+    <!-- Visor Modal Dinámico -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -538,7 +553,8 @@
                 <button class="close-btn" onclick="closeViewer()">&times;</button>
             </div>
             <div id="modalBody" class="modal-body">
-                </div>
+                <!-- Contenido inyectado por JS -->
+            </div>
         </div>
     </div>
 
@@ -549,7 +565,7 @@
             const modalBody = document.getElementById('modalBody');
             
             modalTitle.textContent = title;
-            modalBody.innerHTML = ''; // Limpiar contenedor
+            modalBody.innerHTML = ''; 
             
             if (type === 'img') {
                 if (paths.length === 1) {
@@ -557,7 +573,6 @@
                     img.src = paths[0];
                     modalBody.appendChild(img);
                 } else {
-                    // Contenedor scrollable si son múltiples imágenes consecutivas
                     const container = document.createElement('div');
                     container.className = 'multi-image-container';
                     paths.forEach(p => {
@@ -574,31 +589,29 @@
                     iframe.src = path;
                     modalBody.appendChild(iframe);
                 } else {
-                    // Si es un archivo .docx nativo y no ha sido exportado a PDF, se despliega una advertencia de maquetación elegante.
                     modalBody.innerHTML = `
                         <div style="padding: 40px; text-align: center; color: #aaa; max-width: 500px;">
                             <svg style="width: 60px; height: 60px; fill: #E50914; margin-bottom: 20px;" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                            <h3 style="color: #fff; margin-bottom: 10px;">Archivo de Word Detectado</h3>
-                            <p style="font-size: 0.9rem; margin-bottom: 20px;">Para renderizar de forma fluida el documento "<strong>${path.split('/').pop()}</strong>" directo en pantalla, recuerda exportarlo como <strong>PDF</strong> dentro de tu carpeta.</p>
-                            <a href="${path}" download style="display: inline-block; background: #E50914; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.85rem;">Descargar Archivo Directo</a>
+                            <h3 style="color: #fff; margin-bottom: 10px;">Archivo Word Detectado</h3>
+                            <p style="font-size: 0.9rem; margin-bottom: 20px;">El documento "<strong>${path.split('/').pop()}</strong>" requiere descarga directa al no ser un formato PDF.</p>
+                            <a href="${path}" download style="display: inline-block; background: #E50914; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.85rem;">Descargar Archivo</a>
                         </div>
                     `;
                 }
             }
             
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Bloquear scroll de fondo
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeViewer() {
             const modal = document.getElementById('videoModal');
             const modalBody = document.getElementById('modalBody');
             modal.style.display = 'none';
-            modalBody.innerHTML = ''; // Liberar memoria del iframe o imágenes
-            document.body.style.overflow = 'auto'; // Reactivar scroll
+            modalBody.innerHTML = ''; 
+            document.body.style.overflow = 'auto'; 
         }
 
-        // Cerrar modal al hacer clic fuera del recuadro contenedor
         window.onclick = function(event) {
             const modal = document.getElementById('videoModal');
             if (event.target == modal) {
@@ -607,5 +620,4 @@
         }
     </script>
 </body>
-</html>
 </html>
