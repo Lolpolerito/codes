@@ -1,384 +1,395 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primer Parcial</title>
-    <style>
-        :root {
-            --bg-color: #141414;
-            --card-bg: #181818;
-            --accent-red: #E50914;
-            --text-color: #FFFFFF;
-            --text-muted: #AAAAAA;
-            --transition-speed: 0.3s;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primer Parcial</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
+<style>
+:root {
+--bg-color: #141414;
+--card-bg: #181818;
+--accent-red: #E50914;
+--text-color: #FFFFFF;
+--text-muted: #AAAAAA;
+--transition-speed: 0.3s;
+}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            padding: 20px 4% 50px 4%;
-        }
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
+body {
+background-color: var(--bg-color);
+color: var(--text-color);
+overflow-x: hidden;
+padding: 20px 4% 50px 4%;
+}
 
-        .parcial-section {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+.main-container {
+display: flex;
+flex-direction: column;
+gap: 40px;
+}
 
-        .parcial-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #E5E5E5;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.parcial-section {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
 
-        .parcial-title::after {
-            content: '';
-            flex-grow: 1;
-            height: 1px;
-            background: #333;
-        }
+.parcial-title {
+font-size: 1.4rem;
+font-weight: bold;
+color: #E5E5E5;
+display: flex;
+align-items: center;
+gap: 10px;
+}
 
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-        }
+.parcial-title::after {
+content: '';
+flex-grow: 1;
+height: 1px;
+background: #333;
+}
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 4px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-            position: relative;
-            border: 1px solid #222;
-        }
+.cards-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+gap: 20px;
+}
 
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
-            z-index: 10;
-            border-color: #444;
-        }
+.card {
+background-color: var(--card-bg);
+border-radius: 4px;
+overflow: hidden;
+cursor: pointer;
+transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+position: relative;
+border: 1px solid #222;
+}
 
-        .card-thumbnail {
-            width: 100%;
-            height: 140px;
-            background: linear-gradient(45deg, #222, #111);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            color: var(--accent-red);
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-bottom: 3px solid #333;
-            text-align: center;
-            padding: 10px;
-        }
+.card:hover {
+transform: scale(1.05);
+box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+z-index: 10;
+border-color: #444;
+}
 
-        .card:nth-child(odd) .card-thumbnail { background: linear-gradient(135deg, #1c1a1a, #2c1414); }
-        .card:nth-child(even) .card-thumbnail { background: linear-gradient(135deg, #141a24, #11141a); }
+.card-thumbnail {
+width: 100%;
+height: 140px;
+background: linear-gradient(45deg, #222, #111);
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+color: var(--accent-red);
+font-weight: bold;
+font-size: 1.1rem;
+border-bottom: 3px solid #333;
+text-align: center;
+padding: 10px;
+}
 
-        .file-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.75);
-            color: #fff;
-            padding: 3px 7px;
-            font-size: 0.7rem;
-            border-radius: 3px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 1px solid #444;
-        }
+.card:nth-child(odd) .card-thumbnail { background: linear-gradient(135deg, #1c1a1a, #2c1414); }
+.card:nth-child(even) .card-thumbnail { background: linear-gradient(135deg, #141a24, #11141a); }
 
-        .card-info {
-            padding: 15px;
-        }
+.file-badge {
+position: absolute;
+top: 10px;
+right: 10px;
+background-color: rgba(0, 0, 0, 0.75);
+color: #fff;
+padding: 3px 7px;
+font-size: 0.7rem;
+border-radius: 3px;
+font-weight: bold;
+text-transform: uppercase;
+border: 1px solid #444;
+}
 
-        .card-number {
-            color: var(--accent-red);
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
+.card-info {
+padding: 15px;
+}
 
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: bold;
-            line-height: 1.3;
-            color: #fff;
-        }
+.card-number {
+color: var(--accent-red);
+font-size: 0.8rem;
+font-weight: bold;
+margin-bottom: 5px;
+text-transform: uppercase;
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.92);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+.card-title {
+font-size: 0.95rem;
+font-weight: bold;
+line-height: 1.3;
+color: #fff;
+}
 
-        .modal-content {
-            background-color: #181818;
-            width: 100%;
-            max-width: 1000px;
-            height: 85vh;
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            border: 1px solid #333;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-        }
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.92);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+padding: 20px;
+}
 
-        .modal-header {
-            padding: 15px 20px;
-            background-color: #202020;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
+.modal-content {
+background-color: #181818;
+width: 100%;
+max-width: 1000px;
+height: 85vh;
+border-radius: 8px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+position: relative;
+border: 1px solid #333;
+box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
 
-        .modal-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
+.modal-header {
+padding: 15px 20px;
+background-color: #202020;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid #333;
+}
 
-        .close-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.8rem;
-            cursor: pointer;
-            line-height: 1;
-            transition: color 0.2s;
-        }
+.modal-title {
+font-size: 1.1rem;
+font-weight: bold;
+}
 
-        .close-btn:hover {
-            color: var(--accent-red);
-        }
+.close-btn {
+background: none;
+border: none;
+color: #fff;
+font-size: 1.8rem;
+cursor: pointer;
+line-height: 1;
+transition: color 0.2s;
+}
 
-        .modal-body {
-            flex-grow: 1;
-            background-color: #141414;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: auto;
-        }
+.close-btn:hover {
+color: var(--accent-red);
+}
 
-        .modal-body iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+.modal-body {
+flex-grow: 1;
+background-color: #141414;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: auto;
+}
 
-        .modal-body img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
+.modal-body img {
+max-width: 100%;
+max-height: 100%;
+object-fit: contain;
+}
 
-        .multi-image-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 20px;
-            align-items: center;
-        }
+.multi-image-container {
+display: flex;
+flex-direction: column;
+gap: 20px;
+width: 100%;
+height: 100%;
+overflow-y: auto;
+padding: 20px;
+align-items: center;
+}
 
-        .multi-image-container img {
-            max-width: 90%;
-            border: 1px solid #333;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-    </style>
+.multi-image-container img {
+max-width: 90%;
+border: 1px solid #333;
+box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+</style>
 </head>
+
 <body>
 
-    <div class="main-container">
-        <section class="parcial-section">
-            <div class="parcial-title">Primer Parcial</div>
-            <div class="cards-grid">
-                
-                <div class="card" onclick="openViewer('Apuntes de Encuadre', 'img', ['1er/Apuntes de Encuadre.jpg'])">
-                    <div class="card-thumbnail">ENCUADRE<span class="file-badge">JPG</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 1</div>
-                        <div class="card-title">Apuntes de Encuadre</div>
-                    </div>
-                </div>
+<div class="main-container">
 
-                <div class="card" onclick="openViewer('Investigación de Redes de Computadoras', 'img', ['1er/Investigacion de Redes de Compu.jpg'])">
-                    <div class="card-thumbnail">INVESTIGACIÓN<span class="file-badge">JPG</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 2</div>
-                        <div class="card-title">Investigación de Redes de Computadoras</div>
-                    </div>
-                </div>
+<section class="parcial-section">
 
-                <div class="card" onclick="openViewer('Mapa Conceptual: Redes de Computadoras', 'img', ['1er/Mapa Conceptual de Redes de Compu.jpg'])">
-                    <div class="card-thumbnail">MAPA CONC.<span class="file-badge">JPG</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 3</div>
-                        <div class="card-title">Mapa Conceptual: Redes de Computadoras</div>
-                    </div>
-                </div>
+<div class="parcial-title">Primer Parcial</div>
 
-                <div class="card" onclick="openViewer('Línea del Tiempo', 'doc', ['1er/Linea del tiempo.pdf'])">
-                    <div class="card-thumbnail">LÍNEA TIEMPO<span class="file-badge">PDF</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 4</div>
-                        <div class="card-title">Línea del Tiempo de las Redes</div>
-                    </div>
-                </div>
+<div class="cards-grid">
 
-                <div class="card" onclick="openViewer('Métodos para Presentar en Público', 'img', ['1er/Metodos para Presentar en Publico.jpg'])">
-                    <div class="card-thumbnail">EXPOSICIÓN<span class="file-badge">JPG</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 5</div>
-                        <div class="card-title">Métodos para Presentar en Público</div>
-                    </div>
-                </div>
+<!-- 1. APUNTES DE ENCUADRE -->
+<div class="card" onclick="openViewer('Apuntes de Encuadre', 'img', [
+'1er/Apuntes de Encuadre.jpg'
+])">
+<div class="card-thumbnail">ENCUADRE<span class="file-badge">JPG</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 1</div>
+<div class="card-title">Apuntes de Encuadre</div>
+</div>
+</div>
 
-                <div class="card" onclick="openViewer('Hoja de Evaluación de la Exposición', 'img', ['1er/Hoja de Evaluacion de la exposicion.jpg'])">
-                    <div class="card-thumbnail">EVALUACIÓN<span class="file-badge">JPG</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 6</div>
-                        <div class="card-title">Hoja de Evaluación de la Exposición</div>
-                    </div>
-                </div>
+<!-- 2. INVESTIGACIÓN DE REDES -->
+<div class="card" onclick="openViewer('Investigación de Redes de Computadoras', 'img', [
+'1er/Investigacion de Redes de Compu.jpg'
+])">
+<div class="card-thumbnail">INVESTIGACIÓN<span class="file-badge">JPG</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 2</div>
+<div class="card-title">Investigación de Redes de Computadoras</div>
+</div>
+</div>
 
-                <div class="card" onclick="openViewer('Ejercicio: Dispositivos de Conexión', 'img', ['1er/Ejercicio- Dispositivos de Conexion 1.jpg', '1er/Ejercicio- Dispositivos de Conexion 1.2.jpg'])">
-                    <div class="card-thumbnail">DISPOSITIVOS<span class="file-badge">2 IMGS</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 7</div>
-                        <div class="card-title">Ejercicio: Dispositivos de Conexión</div>
-                    </div>
-                </div>
+<!-- 3. MAPA CONCEPTUAL -->
+<div class="card" onclick="openViewer('Mapa Conceptual Redes de Computadoras', 'img', [
+'1er/Mapa Conceptual de Redes de Compu.jpg'
+])">
+<div class="card-thumbnail">MAPA<span class="file-badge">JPG</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 3</div>
+<div class="card-title">Mapa Conceptual Redes de Computadoras</div>
+</div>
+</div>
 
-                <div class="card" onclick="openViewer('Ejercicio: Medios Guiados', 'doc', ['1er/Tabla Comparativa - Medios Guiados.pdf'])">
-                    <div class="card-thumbnail">MEDIOS GUIADOS<span class="file-badge">PDF</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 8</div>
-                        <div class="card-title">Ejercicio: Medios Guiados (Tabla Comparativa)</div>
-                    </div>
-                </div>
+<!-- 4. LÍNEA DEL TIEMPO -->
+<div class="card" onclick="openViewer('Línea del Tiempo de las Redes', 'img', [
+'1er/Linea del tiempo/imagen 1.jpg',
+'1er/Linea del tiempo/imagen 1.2.jpg',
+'1er/Linea del tiempo/imagen 1.3.jpg'
+])">
+<div class="card-thumbnail">LÍNEA DEL TIEMPO<span class="file-badge">3 IMGS</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 4</div>
+<div class="card-title">Línea del Tiempo de las Redes</div>
+</div>
+</div>
 
-                <div class="card" onclick="openViewer('Ejercicio: Medios No Guiados', 'doc', ['1er/Tabla Comp-No Medios Guiados.pdf'])">
-                    <div class="card-thumbnail">NO GUIADOS<span class="file-badge">PDF</span></div>
-                    <div class="card-info">
-                        <div class="card-number">Trabajo 9</div>
-                        <div class="card-title">Ejercicio: Medios No Guiados</div>
-                    </div>
-                </div>
+<!-- 5. MÉTODOS PARA PRESENTAR -->
+<div class="card" onclick="openViewer('Métodos para Presentar en Público', 'img', [
+'1er/Metodos para Presentar en Publico.jpg'
+])">
+<div class="card-thumbnail">MÉTODOS<span class="file-badge">JPG</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 5</div>
+<div class="card-title">Métodos para Presentar en Público</div>
+</div>
+</div>
 
-            </div>
-        </section>
+<!-- 6. HOJA DE EVALUACIÓN -->
+<div class="card" onclick="openViewer('Hoja de Evaluación de la Exposición', 'img', [
+'1er/Hoja de Evaluacion de la exposicion.jpg'
+])">
+<div class="card-thumbnail">EVALUACIÓN<span class="file-badge">JPG</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 6</div>
+<div class="card-title">Hoja de Evaluación de la Exposición</div>
+</div>
+</div>
+
+<!-- 7. DISPOSITIVOS DE CONEXIÓN -->
+<div class="card" onclick="openViewer('Ejercicio – Dispositivos de Conexión', 'img', [
+'1er/Ejercicio- Dispositivos de Conexion 1.jpg',
+'1er/Ejercicio- Dispositivos de Conexion 1.2.jpg'
+])">
+<div class="card-thumbnail">DISPOSITIVOS<span class="file-badge">2 IMGS</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 7</div>
+<div class="card-title">Ejercicio – Dispositivos de Conexión</div>
+</div>
+</div>
+
+<!-- 8. MEDIOS GUIADOS -->
+<div class="card" onclick="openViewer('Ejercicio – Medios Guiados', 'img', [
+'1er/Tabla omparatica - Medios Guiados/imagen 1.jpg',
+'1er/Tabla omparatica - Medios Guiados/imagen 1.2.jpg'
+])">
+<div class="card-thumbnail">GUIADOS<span class="file-badge">2 IMGS</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 8</div>
+<div class="card-title">Ejercicio – Medios Guiados</div>
+</div>
+</div>
+
+<!-- 9. MEDIOS NO GUIADOS -->
+<div class="card" onclick="openViewer('Ejercicio – Medios No Guiados', 'img', [
+'1er/Tabla Comp-No Medios Guiados/imagen 1.jpg',
+'1er/Tabla Comp-No Medios Guiados/imagen 1.2.jpg'
+])">
+<div class="card-thumbnail">NO GUIADOS<span class="file-badge">2 IMGS</span></div>
+<div class="card-info">
+<div class="card-number">Trabajo 9</div>
+<div class="card-title">Ejercicio – Medios No Guiados</div>
+</div>
+</div>
+
+</div>
+</section>
+</div>
+
+<!-- MODAL -->
+<div id="videoModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div id="modalTitle" class="modal-title">Nombre del Trabajo</div>
+      <button class="close-btn" onclick="closeViewer()">&times;</button>
     </div>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
 
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div id="modalTitle" class="modal-title">Nombre del Trabajo</div>
-                <button class="close-btn" onclick="closeViewer()">&times;</button>
-            </div>
-            <div id="modalBody" class="modal-body"></div>
-        </div>
-    </div>
+<script>
+function openViewer(title, type, paths) {
+  const modal = document.getElementById('videoModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
 
-    <script>
-        function openViewer(title, type, paths) {
-            const modal = document.getElementById('videoModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalTitle.textContent = title;
-            modalBody.innerHTML = ''; 
-            
-            if (type === 'img') {
-                if (paths.length === 1) {
-                    const img = document.createElement('img');
-                    img.src = paths[0];
-                    modalBody.appendChild(img);
-                } else {
-                    const container = document.createElement('div');
-                    container.className = 'multi-image-container';
-                    paths.forEach(p => {
-                        const img = document.createElement('img');
-                        img.src = p;
-                        container.appendChild(img);
-                    });
-                    modalBody.appendChild(container);
-                }
-            } else if (type === 'doc') {
-                const path = paths[0];
-                if (path.endsWith('.pdf')) {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = path;
-                    modalBody.appendChild(iframe);
-                } else {
-                    modalBody.innerHTML = `
-                        <div style="padding: 40px; text-align: center; color: #aaa; max-width: 500px;">
-                            <svg style="width: 60px; height: 60px; fill: #E50914; margin-bottom: 20px;" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                            <h3 style="color: #fff; margin-bottom: 10px;">Archivo No Soportado</h3>
-                            <p style="font-size: 0.9rem; margin-bottom: 20px;">El documento "<strong>${path.split('/').pop()}</strong>" requiere descarga directa.</p>
-                            <a href="${path}" download style="display: inline-block; background: #E50914; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.85rem;">Descargar Archivo</a>
-                        </div>
-                    `;
-                }
-            }
-            
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
-        }
+  modalTitle.textContent = title;
+  modalBody.innerHTML = '';
 
-        function closeViewer() {
-            const modal = document.getElementById('videoModal');
-            const modalBody = document.getElementById('modalBody');
-            modal.style.display = 'none';
-            modalBody.innerHTML = ''; 
-            document.body.style.overflow = 'auto'; 
-        }
+  const container = document.createElement('div');
+  container.className = 'multi-image-container';
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target == modal) {
-                closeViewer();
-            }
-        }
-    </script>
+  paths.forEach(p => {
+    const img = document.createElement('img');
+    img.src = p;
+    container.appendChild(img);
+  });
+
+  modalBody.appendChild(container);
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeViewer() {
+  const modal = document.getElementById('videoModal');
+  const modalBody = document.getElementById('modalBody');
+  modal.style.display = 'none';
+  modalBody.innerHTML = '';
+  document.body.style.overflow = 'auto';
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById('videoModal');
+  if (event.target == modal) {
+    closeViewer();
+  }
+}
+</script>
+
 </body>
 </html>
