@@ -216,7 +216,7 @@ body {
 /* ======== SONIDO CRUNCH ======== */
 const crunchSound = new Audio("sounds/crunch.mp3");
 
-/* ======== NUEVA MECÁNICA: AUTO-AVANCE ======== */
+/* ======== NUEVA MECÁNICA CORREGIDA ======== */
 function toggleCard(card) {
 
     crunchSound.currentTime = 0;
@@ -227,21 +227,22 @@ function toggleCard(card) {
 
     const isOpen = card.classList.contains("open");
 
-    // Cerrar todas
-    cards.forEach(c => c.classList.remove("open"));
-
+    // PRIMER CLIC → SOLO ABRE
     if (!isOpen) {
-        // Abrir la tarjeta actual
+        cards.forEach(c => c.classList.remove("open"));
         card.classList.add("open");
+        return;
+    }
 
-        // Después de 1.2s, avanzar a la siguiente
+    // SEGUNDO CLIC → CIERRA Y AVANZA
+    card.classList.remove("open");
+
+    const next = cards[index + 1];
+    if (next) {
         setTimeout(() => {
-            const next = cards[index + 1];
-            if (next) {
-                next.classList.add("open");
-                next.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
-        }, 1200);
+            next.classList.add("open");
+            next.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 400);
     }
 }
 
