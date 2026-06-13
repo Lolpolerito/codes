@@ -8,14 +8,14 @@
 <style>
 
 /* ============================
-   🎨 ESTILO GLOBAL PREMIUM
+   🎨 ESTILO GLOBAL MOBILE FIRST
    ============================ */
 body {
   margin: 0;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, #6f432a 0%, #4b2d1d 100%);
+  background: #6f432a;
   color: #fdfaf6;
-  padding: 25px 15px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,77 +24,74 @@ body {
 .bloque-interactivo {
   width: 100%;
   max-width: 480px;
-  margin-top: 25px;
+  margin-bottom: 20px;
 }
 
 /* ============================
    🟫 TARJETAS
    ============================ */
 .card {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 18px;
-  padding: 18px 22px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 16px 16px 0 0;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   gap: 15px;
   cursor: pointer;
-  transition: 0.35s ease;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-}
-
-.card:hover {
-  background: rgba(255,255,255,0.18);
-  transform: translateY(-3px);
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 .card.activa {
-  background: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.25);
   border-color: #ffb766;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+}
+
+.icon-wrapper {
+  font-size: 2rem;
+}
+
+.card-body h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #ffb766;
+}
+
+.card-body p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #f7e9dd;
 }
 
 /* ============================
-   📌 PANEL DESPLEGABLE
+   📌 PANEL DESPLEGABLE (ABIERTAS)
    ============================ */
 .panel-desplegable {
   background: #fffdf9;
   color: #3e2723;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  padding: 0 18px;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.45s ease, opacity 0.35s ease;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-}
-
-.panel-desplegable.abierto {
-  padding: 20px 18px;
+  border-radius: 0 0 16px 16px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   max-height: 900px;
   opacity: 1;
+  overflow: hidden;
+  transition: 0.4s ease;
 }
 
-.panel-desplegable h3 {
-  margin: 0 0 10px 0;
-  color: #d35400;
-  font-size: 1.35rem;
+.panel-desplegable.cerrado {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 20px;
 }
 
 /* ============================
-   🥞 TARJETA 1 — INGREDIENTES
+   🥞 TARJETA 1
    ============================ */
 .img-bun {
-  width: 180px;
-  animation: aparecer 0.6s ease-out;
-}
-
-@keyframes aparecer {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+  width: 150px;
+  border-radius: 12px;
 }
 
 .ingredientes-lista {
@@ -103,24 +100,24 @@ body {
 }
 
 /* ============================
-   🌍 TARJETA 2 — PERSONAJE DISEÑADO + TEXTO ESCRITO
+   🌍 TARJETA 2 — PERSONAJE DISEÑADO
    ============================ */
 
 .personaje-container {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
-/* PERSONAJE DISEÑADO POR MÍ (CSS PURO) */
+/* PERSONAJE LINDO (CSS PURO) */
 .personaje {
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle at 30% 30%, #ffcc66, #ff9e40 70%);
+  width: 110px;
+  height: 110px;
+  background: radial-gradient(circle at 30% 30%, #ffe08a, #ff9e40 70%);
   border-radius: 50%;
   position: relative;
-  box-shadow: 0 0 15px rgba(255,180,80,0.6);
   animation: flotar 2s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(255,200,120,0.6);
 }
 
 @keyframes flotar {
@@ -134,23 +131,23 @@ body {
 .personaje::after {
   content: "";
   position: absolute;
-  top: 40px;
-  width: 18px;
-  height: 18px;
+  top: 38px;
+  width: 16px;
+  height: 16px;
   background: #3e2723;
   border-radius: 50%;
 }
 
-.personaje::before { left: 30px; }
-.personaje::after { right: 30px; }
+.personaje::before { left: 28px; }
+.personaje::after { right: 28px; }
 
 /* BOCA ANIMADA */
 .boca {
   position: absolute;
-  bottom: 30px;
+  bottom: 28px;
   left: 50%;
-  width: 45px;
-  height: 25px;
+  width: 40px;
+  height: 20px;
   background: #3e2723;
   border-radius: 0 0 40px 40px;
   transform: translateX(-50%);
@@ -158,15 +155,15 @@ body {
 }
 
 @keyframes hablar {
-  0% { height: 10px; }
-  50% { height: 25px; }
-  100% { height: 10px; }
+  0% { height: 8px; }
+  50% { height: 22px; }
+  100% { height: 8px; }
 }
 
 /* TEXTO QUE SE ESCRIBE */
 .texto-escritura {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.45;
   width: 60%;
   white-space: pre-line;
   border-right: 2px solid #d35400;
@@ -204,7 +201,7 @@ body {
      🥞 TARJETA 1
      ============================ -->
 <div class="bloque-interactivo">
-  <div class="card" onclick="toggleCard('que-son')">
+  <div class="card activa" onclick="toggleCard('que-son')">
     <div class="icon-wrapper">🥞</div>
     <div class="card-body">
       <h2>¿Qué son los Buñuelos?</h2>
@@ -215,7 +212,7 @@ body {
   <div class="panel-desplegable" id="panel-que-son">
     <h3>🥞 Ingredientes del Buñuelo</h3>
 
-    <div style="display:flex; gap:20px; align-items:center; justify-content:center;">
+    <div style="display:flex; gap:15px; align-items:center; justify-content:center;">
       <img src="producto.png" class="img-bun">
 
       <div class="ingredientes-lista">
@@ -231,10 +228,10 @@ body {
 </div>
 
 <!-- ============================
-     🌍 TARJETA 2 — PERSONAJE + TEXTO
+     🌍 TARJETA 2
      ============================ -->
 <div class="bloque-interactivo">
-  <div class="card" onclick="toggleCard('origen')">
+  <div class="card activa" onclick="toggleCard('origen')">
     <div class="icon-wrapper">🌍</div>
     <div class="card-body">
       <h2>Su Origen</h2>
@@ -262,10 +259,10 @@ body {
 </div>
 
 <!-- ============================
-     🍯 TARJETA 3 — TEXTO CINEMÁTICO
+     🍯 TARJETA 3
      ============================ -->
 <div class="bloque-interactivo">
-  <div class="card" onclick="toggleCard('comprarnos')">
+  <div class="card activa" onclick="toggleCard('comprarnos')">
     <div class="icon-wrapper">🔥</div>
     <div class="card-body">
       <h2>¿Por qué los nuestros?</h2>
@@ -279,7 +276,7 @@ body {
     <div class="texto-cinematico">
       Nuestros buñuelos se preparan cada día,
       uno por uno, con dedicación y cariño.
-      
+
       No son industriales, no son de fábrica:
       son una tradición viva, crujiente y dulce,
       hecha para disfrutarse al momento.
@@ -300,26 +297,22 @@ function toggleCard(id) {
   const cards = [...document.querySelectorAll(".card")];
   const index = cards.indexOf(tarjeta);
 
-  const abierto = panel.classList.contains("abierto");
+  const abierto = !panel.classList.contains("cerrado");
 
-  if (!abierto) {
-    panels.forEach(p => p.classList.remove("abierto"));
-    cards.forEach(c => c.classList.remove("activa"));
+  if (abierto) {
+    panel.classList.add("cerrado");
+    tarjeta.classList.remove("activa");
 
-    panel.classList.add("abierto");
+    const siguiente = cards[index + 1];
+    if (siguiente) {
+      setTimeout(() => {
+        siguiente.click();
+        siguiente.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 400);
+    }
+  } else {
+    panel.classList.remove("cerrado");
     tarjeta.classList.add("activa");
-    return;
-  }
-
-  panel.classList.remove("abierto");
-  tarjeta.classList.remove("activa");
-
-  const siguiente = cards[index + 1];
-  if (siguiente) {
-    setTimeout(() => {
-      siguiente.click();
-      siguiente.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 400);
   }
 }
 
