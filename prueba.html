@@ -1,92 +1,94 @@
-<section class="vintage-section">
+<section class="timeline-section">
 
-    <div class="vintage-container fade-in">
+    <canvas class="particle-canvas"></canvas>
+
+    <div class="timeline-container">
 
         <h1 class="title-main">BUÑUELOS C.S</h1>
 
-        <div class="card slide-up">
-            <img src="img/quienes.jpg" class="card-img" alt="Imagen quienes somos">
+        <!-- QUIÉNES SOMOS -->
+        <div class="card" onclick="scrollToSection('mision')">
+            <img src="img/quienes.jpg" class="card-img">
             <div class="card-text">
                 <h2>¿Quiénes somos?</h2>
                 <p>
-                    Somos un grupo de estudiantes del Centro de Bachillerato Tecnológico Agropecuario No.198 con la meta de ofrecer un producto agradable, rico y accesible. 
-                    Nuestro emprendimiento nació hace un año dentro del módulo profesional 
-                    <strong>“Determina la estrategia de comercialización y productos”</strong>, guiados por la Lic. Estela Rodríguez Villafaña.
-                    <br><br>
-                    Aunque inició como un proyecto escolar, decidimos llevarlo más lejos: vendemos tradición, aroma, calidad e higiene. 
-                    Distribuimos desde la escuela hasta tiendas de conveniencia y redes sociales.
+                    Somos un grupo de estudiantes del CBTa 198 dedicados a ofrecer un producto rico, accesible y tradicional.
+                    Nuestro proyecto nació en el módulo profesional “Estrategia de comercialización y productos”.
                 </p>
             </div>
         </div>
 
-        <div class="card slide-up">
-            <img src="img/mision.jpg" class="card-img" alt="Imagen misión">
+        <!-- MISIÓN -->
+        <div id="mision" class="card">
+            <img src="img/mision.jpg" class="card-img">
             <div class="card-text">
                 <h2>Misión</h2>
                 <p>
-                    Ofrecer productos de alta calidad elaborados con ingredientes frescos y recetas tradicionales, garantizando un sabor excepcional en cada porción. 
-                    Mantener precios accesibles para que todos disfruten una experiencia culinaria auténtica.
+                    Elaborar productos de alta calidad con ingredientes frescos y recetas tradicionales, manteniendo precios accesibles
+                    para que todos disfruten una experiencia auténtica.
                 </p>
             </div>
         </div>
 
-        <div class="card slide-up">
-            <img src="img/vision.jpg" class="card-img" alt="Imagen visión">
+        <!-- VISIÓN -->
+        <div class="card">
+            <img src="img/vision.jpg" class="card-img">
             <div class="card-text">
                 <h2>Visión</h2>
                 <p>
-                    Consolidarnos como la opción preferida del mercado mediante un crecimiento firme y sostenido. 
-                    Aspiramos a obtener el reconocimiento que nuestra calidad merece, posicionando la marca como un referente de tradición y valor.
+                    Ser la opción preferida del mercado, creciendo de forma firme y constante, posicionándonos como un referente de tradición y valor.
                 </p>
             </div>
         </div>
 
     </div>
-
 </section>
 
 <style>
-/* Fondo vintage */
-.vintage-section {
-    background: url('img/fondo-textura.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    padding: 70px 20px;
+/* ======== ESTILO GENERAL ======== */
+.timeline-section {
+    background: #e7d2b5; /* café suave */
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
     font-family: 'Cormorant Garamond', serif;
 }
 
 /* Contenedor */
-.vintage-container {
+.timeline-container {
     max-width: 900px;
     margin: auto;
-    backdrop-filter: blur(6px);
-    background: rgba(255, 248, 240, 0.75);
-    padding: 40px;
+    background: rgba(255, 248, 240, 0.85);
+    padding: 35px;
     border-radius: 20px;
-    border: 1px solid #d8c4a8;
+    border: 1px solid #c7a98a;
     box-shadow: 0 0 25px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
 }
 
-/* Título principal */
+/* Título */
 .title-main {
     text-align: center;
-    font-size: 48px;
-    margin-bottom: 40px;
+    font-size: 42px;
     color: #5a3e2b;
+    margin-bottom: 40px;
     letter-spacing: 2px;
 }
 
-/* Tarjetas */
+/* ======== TARJETAS ======== */
 .card {
     display: flex;
-    gap: 25px;
-    margin-bottom: 50px;
-    align-items: center;
+    gap: 20px;
     background: rgba(255, 255, 255, 0.65);
-    padding: 25px;
+    padding: 20px;
     border-radius: 15px;
-    border: 1px solid #e2d3c2;
+    border: 1px solid #d8c4a8;
+    margin-bottom: 45px;
+    cursor: pointer;
     transition: transform .3s ease, box-shadow .3s ease;
+    animation: slideUp 1s ease forwards;
+    opacity: 0;
 }
 
 .card:hover {
@@ -96,55 +98,103 @@
 
 /* Imagen */
 .card-img {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     object-fit: cover;
     border-radius: 12px;
-    border: 2px solid #c7b299;
+    border: 2px solid #b08a6b;
 }
 
 /* Texto */
 .card-text h2 {
-    font-size: 30px;
-    margin-bottom: 10px;
+    font-size: 28px;
     color: #6b4a33;
+    margin-bottom: 10px;
 }
 
 .card-text p {
     font-size: 18px;
-    line-height: 1.6;
     color: #4a3a2a;
+    line-height: 1.6;
 }
 
-/* Animaciones */
-.fade-in {
-    animation: fadeIn 1.2s ease forwards;
-    opacity: 0;
-}
-
-.slide-up {
-    animation: slideUp 1s ease forwards;
-    opacity: 0;
-}
-
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
-
+/* ======== ANIMACIONES ======== */
 @keyframes slideUp {
     from { transform: translateY(40px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* Responsive */
+/* ======== RESPONSIVE ======== */
 @media (max-width: 768px) {
     .card {
         flex-direction: column;
         text-align: center;
     }
+
     .card-img {
         width: 100%;
         height: 200px;
     }
+
+    .title-main {
+        font-size: 34px;
+    }
+}
+
+/* ======== PARTÍCULAS ======== */
+.particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 </style>
+
+<script>
+/* ======== SCROLL SUAVE ======== */
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+/* ======== PARTÍCULAS CAFÉ ======== */
+const canvas = document.querySelector('.particle-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 60; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speed: Math.random() * 0.6 + 0.2,
+        color: "rgba(120, 80, 50, 0.4)" /* café suave */
+    });
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+</script>
