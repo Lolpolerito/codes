@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido de Buñuelos</title>
+  <style>
+    /* Se cambió el background a transparent para quitar el fondo */
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: transparent; text-align: center; padding-bottom: 50px; margin: 0; }
+    
+    /* Contenedores adaptables para pantallas móviles */
+    .producto, .formulario, .ticket {
+      background-color: #fff; padding: 20px; margin: 20px auto;
+      width: 90%; max-width: 420px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-sizing: border-box;
+      animation: fadeIn 0.6s ease;
+    }
+    @keyframes fadeIn { from {opacity:0; transform:scale(0.95);} to {opacity:1; transform:scale(1);} }
+    .img-producto { width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+    button { margin: 5px; padding: 12px 18px; font-size: 16px; cursor: pointer; border-radius: 8px; border: none; font-weight: bold; transition: 0.3s; }
+    button:hover { transform: scale(1.05); }
+    .btn-agregar { background-color: #007bff; color: white; }
+    .btn-quitar { background-color: #6c757d; color: white; }
+    .btn-aceptar { background-color: #28a745; color: white; width: 95%; margin-top: 10px; }
+    #estado { font-weight: bold; color: #c47f00; font-size: 18px; margin: 15px 0; padding: 0 5px; }
+    .ticket { border: 2px dashed #c47f00; background-color: #fffde7; }
+    .ticket h3 { color: #c47f00; }
+    .opciones { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
+    .opcion {
+      background: #eee; padding: 15px; border-radius: 8px; cursor: pointer;
+      transition: 0.3s; font-weight: bold; font-size: 15px;
+    }
+    .opcion:hover { background: #d4edda; }
+    .opcion.seleccionada { background: #25D366; color: #fff; }
+    .contacto { margin-top: 20px; font-size: 14px; }
+    .contacto a { display: block; margin: 5px; text-decoration: none; color: #fff; background: #25D366; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #ccc; padding: 8px; font-size: 15px; }
+    th { background: #f3f3f3; }
+    .mensaje-error { color: red; font-weight: bold; margin-top: 10px; font-size: 14px; }
+    
+    .input-hora {
+      padding: 10px;
+      font-size: 16px;
+      width: 85%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+      font-weight: bold;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .input-text {
+      padding: 10px; width: 85%; border-radius: 8px; border:1px solid #ccc; box-sizing: border-box; font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="producto" id="etapa1">
+    <h2>🥮 Buñuelos Tradicionales</h2>
+    <img class="img-producto" src="https://images.unsplash.com/photo-1621849400072-f554417f704a?q=80&w=600&auto=format&fit=crop" alt="Buñuelos Deliciosos">
+    <p>Precio unitario: $10 | <strong>Oferta: $25 por cada 3 piezas</strong></p>
+    <div id="estado">¡Elige la cantidad de buñuelos que deseas!</div>
+    <p>Cantidad seleccionada: <span id="cantidad" style="font-size: 20px; font-weight: bold; color: #007bff;">0</span></p>
+    <p id="precioTotal" style="font-size: 18px; font-weight: bold;">Total: $0</p>
+    <button class="btn-agregar" onclick="agregar()">➕ Agregar</button>
+    <button class="btn-quitar" onclick="quitar()">➖ Quitar</button><br>
+    <button class="btn-aceptar" onclick="aceptar()">Aceptar Pedido</button>
+    <div class="mensaje-error" id="errorCliente"></div>
+  </div>
+
+  <div class="formulario" id="etapa2" style="display:none;">
+    <h2>📍 Confirmación de Entrega</h2>
+    <p>¿A nombre de quién dejamos el pedido y dónde lo recibes?</p>
+    
+    <label><strong>Tu Nombre:</strong><br>
+      <input type="text" id="nombre" class="input-text" placeholder="Ej. Juan Pérez">
+    </label><br><br>
+    
+    <label><strong>🕒 ¿A qué hora lo necesitas?</strong><br>
+      <input type="time" id="horaEntrega" class="input-hora">
+    </label><br><br>
+
+    <strong>Lugar de entrega:</strong>
+    <div class="opciones">
+      <div class="opcion" onclick="seleccionar(this,'Parque de la Delegación')">🌳 Parque de la Delegación</div>
+      <div class="opcion" onclick="seleccionar(this,'Maneadero CBTA 198')">🏫 Maneadero CBTA 198</div>
+      <div class="opcion" onclick="seleccionar(this,'Punto Medio (contacta al vendedor)')">📍 Punto Medio (contacta al vendedor)</div>
+    </div><br>
+    
+    <table>
+      <tr><th>Cantidad</th><th>Total a Pagar</th></tr>
+      <tr><td id="resumenCantidad"></td><td id="resumenTotal"></td></tr>
+    </table>
+    <div class="mensaje-error" id="errorForm"></div><br>
+    <button onclick="volver()">⬅️ Volver</button>
+    <button onclick="cancelar()" style="background: #dc3545; color: white;">❌ Cancelar</button>
+    <button onclick="confirmar()" style="background: #28a745; color: white;">✅ Confirmar</button>
+  </div>
+
+  <div class="ticket" id="etapa3" style="display:none;">
+    <h3>🎟️ Ticket de Pedido Realizado 🎟️</h3>
+    <p><strong>Cliente:</strong> <span id="ticketNombre"></span></p>
+    <p><strong>Hora Pactada:</strong> <span id="ticketHora"></span></p>
+    <p><strong>Lugar de Entrega:</strong> <span id="ticketDireccion"></span></p>
+    <p><strong>Cantidad Pedida:</strong> <span id="ticketCantidad"></span> buñuelos</p>
+    <p><strong>Total Neto:</strong> <span id="ticketTotal"></span></p>
+    <div class="contacto">
+      <p>⚠️ <strong>¡PASO FINAL!</strong><br>Haz clic abajo para enviar tu pedido directo al WhatsApp del vendedor:</p>
+      <a id="linkWhatsapp" href="#" target="_blank">💬 ENVIAR PEDIDO POR WHATSAPP</a>
+    </div>
+    <button onclick="nuevoPedido()" style="margin-top:20px; width: 100%; background: #007bff; color: white;">🔄 Hacer otro pedido</button>
+  </div>
+
+  <script>
+    let cantidad = 0;
+    let total = 0;
+    let direccionSeleccionada = "";
+
+    const frasesRandoms = [
+      "¡No más infidelidad, mejor comer buñuelos y no pañuelos! 🤫🥮",
+      "Los científicos dicen que comer buñuelos reduce los enojos en un 100%. Fuente: De los deseos. ✨",
+      "Si la vida te da la espalda... ¡dale un mordisco a un buñuelo! 😋",
+      "Aviso: El consumo excesivo de estos buñuelos puede causar felicidad extrema. ⚠️😂",
+      "Amor es que no me pidas de mi buñuelo. ¡Pide los tuyos! 🛑🥮",
+      "Un buñuelo al día es la llave de la alegría. ¡Comprobado! 🗝️"
+    ];
+
+    function actualizar() {
+      if (cantidad >= 3) {
+        let grupos = Math.floor(cantidad / 3);
+        let resto = cantidad % 3;
+        total = (grupos * 25) + (resto * 10);
+      } else {
+        total = cantidad * 10;
+      }
+      document.getElementById("cantidad").textContent = cantidad;
+      document.getElementById("precioTotal").textContent = "Total: $" + total;
+      document.getElementById("resumenCantidad").textContent = parseInt(cantidad) + " piezas";
+      document.getElementById("resumenTotal").textContent = "$" + total;
+      document.getElementById("estado").textContent = cantidad > 0 ? "🍳 ¡Se van a preparar " + cantidad + " buñuelos!" : "¡Listo para recibir tu orden!";
+    }
+
+    function agregar() { 
+      cantidad++; 
+      document.getElementById("errorCliente").textContent = ""; 
+      actualizar(); 
+    }
+    
+    function quitar() { 
+      if (cantidad > 0) { 
+        cantidad--; 
+        actualizar(); 
+      } 
+    }
+    
+    function aceptar() { 
+      if (cantidad > 0) { 
+        document.getElementById("etapa1").style.display="none"; 
+        document.getElementById("etapa2").style.display="block"; 
+        document.getElementById("errorForm").textContent = "";
+      } else { 
+        document.getElementById("errorCliente").textContent = "⚠️ Por favor, agrega al menos 1 buñuelo a tu orden."; 
+      } 
+    }
+
+    function seleccionar(elemento, direccion) {
+      document.querySelectorAll(".opcion").forEach(op => op.classList.remove("seleccionada"));
+      elemento.classList.add("seleccionada");
+      direccionSeleccionada = direccion;
+    }
+
+    function volver() {
+      document.getElementById("etapa2").style.display = "none";
+      document.getElementById("etapa1").style.display = "block";
+    }
+
+    function cancelar() {
+      cantidad = 0;
+      direccionSeleccionada = "";
+      document.querySelectorAll(".opcion").forEach(op => op.classList.remove("seleccionada"));
+      document.getElementById("nombre").value = "";
+      document.getElementById("horaEntrega").value = "";
+      actualizar();
+      document.getElementById("etapa2").style.display = "none";
+      document.getElementById("etapa1").style.display = "block";
+    }
+
+    function confirmar() {
+      const nombre = document.getElementById("nombre").value.trim();
+      const horaCliente = document.getElementById("horaEntrega").value;
+      const errorForm = document.getElementById("errorForm");
+
+      if (!nombre || !horaCliente || !direccionSeleccionada) {
+        errorForm.textContent = "⚠️ Por favor, escribe tu nombre, elige una hora y marca un lugar para la entrega.";
+        return;
+      }
+
+      let [horas, minutos] = horaCliente.split(':');
+      let ampm = horas >= 12 ? 'PM' : 'AM';
+      horas = horas % 12;
+      horas = horas ? horas : 12;
+      let horaAmPm = horas + ':' + minutos + ' ' + ampm;
+
+      document.getElementById("ticketNombre").textContent = nombre;
+      document.getElementById("ticketHora").textContent = horaAmPm;
+      document.getElementById("ticketDireccion").textContent = direccionSeleccionada;
+      document.getElementById("ticketCantidad").textContent = cantidad;
+      document.getElementById("ticketTotal").textContent = "$" + total;
+
+      const fraseSeleccionada = frasesRandoms[Math.floor(Math.random() * frasesRandoms.length)];
+
+      const numTelefono = "526461037036"; 
+      const mensajeWhatsApp = "Confirmo mi pedido de " + cantidad + " buñuelos.\n" +
+                              "Total: $" + total + "\n" +
+                              "Lugar: " + direccionSeleccionada + "\n" +
+                              "Hora: " + horaAmPm + "\n\n" +
+                              "_" + fraseSeleccionada + "_";
+
+      document.getElementById("linkWhatsapp").href = "https://wa.me/" + numTelefono + "?text=" + encodeURIComponent(mensajeWhatsApp);
+
+      document.getElementById("etapa2").style.display = "none";
+      document.getElementById("etapa3").style.display = "block";
+    }
+
+    function nuevoPedido() {
+      cantidad = 0;
+      direccionSeleccionada = "";
