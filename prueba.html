@@ -124,49 +124,85 @@ body {
 }
 
 /* ============================
-   🌍 TARJETA 2 — ANIMACIÓN ORIGEN
+   🌍 TARJETA 2 — ANIMACIÓN NUEVA
    ============================ */
-.punto-latido {
-  animation: latido 1.6s infinite ease-in-out;
+.mapa-animado { margin-top: 10px; }
+
+.punto-origen {
+  fill: #ffb766;
+  filter: drop-shadow(0 0 6px #ffb766);
+  animation: brillo 2s infinite ease-in-out;
 }
 
-@keyframes latido {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.25); }
-  100% { transform: scale(1); }
+@keyframes brillo {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
 }
 
-.flecha-mov {
-  animation: moverFlecha 2s infinite linear;
+.ruta-dibujo {
+  stroke: #d35400;
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: dibujar 2.5s ease forwards;
 }
 
-@keyframes moverFlecha {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -40; }
+@keyframes dibujar {
+  to { stroke-dashoffset: 0; }
+}
+
+.texto-origen {
+  font-size: 1rem;
+  margin-top: 12px;
+  color: #5a3e2b;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* ============================
-   🍯 TARJETA 3 — BUÑUELO GIRANDO
+   🍯 TARJETA 3 — ANIMACIÓN NUEVA SIN IMÁGENES
    ============================ */
-.bun-giro {
+.anim-bunuelo {
+  position: relative;
   width: 160px;
-  animation: girar 3s infinite linear;
+  height: 160px;
+  margin: auto;
 }
 
-@keyframes girar {
+.bunuelo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f7c27a 0%, #d88a3b 70%);
+  box-shadow: inset 0 0 20px #8a4f1d, 0 0 20px rgba(0,0,0,0.3);
+  animation: giroBun 4s linear infinite;
+}
+
+@keyframes giroBun {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.miel {
-  width: 120px;
-  animation: mielCae 2s infinite ease-in-out;
+.miel-gota {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 20px;
+  height: 40px;
+  background: linear-gradient(#ffcc66, #d48a1f);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: caerMiel 1.8s infinite ease-in-out;
+  filter: drop-shadow(0 0 6px #ffb766);
 }
 
-@keyframes mielCae {
-  0% { transform: translateY(-10px); opacity: 0.4; }
-  50% { transform: translateY(10px); opacity: 1; }
-  100% { transform: translateY(-10px); opacity: 0.4; }
+@keyframes caerMiel {
+  0% { transform: translate(-50%, -10px); opacity: 0.4; }
+  50% { transform: translate(-50%, 20px); opacity: 1; }
+  100% { transform: translate(-50%, -10px); opacity: 0.4; }
 }
 
 </style>
@@ -218,19 +254,16 @@ body {
   <div class="panel-desplegable" id="panel-origen">
     <h3>🌍 La Ruta del Buñuelo</h3>
 
-    <svg width="100%" viewBox="0 0 400 200">
-      <circle cx="320" cy="60" r="12" fill="#e67e22" class="punto-latido"/>
-      <circle cx="200" cy="80" r="12" fill="#e67e22" class="punto-latido"/>
-      <circle cx="80" cy="120" r="12" fill="#e67e22" class="punto-latido"/>
+    <svg width="100%" viewBox="0 0 400 200" class="mapa-animado">
+      <circle cx="330" cy="50" r="10" class="punto-origen"/>
+      <circle cx="200" cy="90" r="10" class="punto-origen"/>
+      <circle cx="70"  cy="140" r="10" class="punto-origen"/>
 
-      <path d="M320 60 Q260 40 200 80" stroke="#d35400" stroke-width="3"
-            fill="none" stroke-dasharray="6" class="flecha-mov"/>
-
-      <path d="M200 80 Q140 100 80 120" stroke="#d35400" stroke-width="3"
-            fill="none" stroke-dasharray="6" class="flecha-mov"/>
+      <path d="M330 50 Q260 40 200 90" class="ruta-dibujo"/>
+      <path d="M200 90 Q130 120 70 140" class="ruta-dibujo"/>
     </svg>
 
-    <p>De Medio Oriente → España → México.</p>
+    <p class="texto-origen">De Medio Oriente → España → México.</p>
   </div>
 </div>
 
@@ -247,11 +280,11 @@ body {
   </div>
 
   <div class="panel-desplegable" id="panel-comprarnos">
-    <h3>🔥 Buñuelo Giratorio con Miel</h3>
+    <h3>🔥 Calidad Artesanal</h3>
 
-    <div style="display:flex; flex-direction:column; align-items:center;">
-      <img src="producto.png" class="bun-giro">
-      <img src="miel.png" class="miel">
+    <div class="anim-bunuelo">
+      <div class="bunuelo"></div>
+      <div class="miel-gota"></div>
     </div>
 
     <p>Hechos al momento, crujientes y con miel natural.</p>
@@ -273,7 +306,6 @@ function toggleCard(id) {
 
   const abierto = panel.classList.contains("abierto");
 
-  // PRIMER CLIC → ABRIR
   if (!abierto) {
     panels.forEach(p => p.classList.remove("abierto"));
     cards.forEach(c => c.classList.remove("activa"));
@@ -283,7 +315,6 @@ function toggleCard(id) {
     return;
   }
 
-  // SEGUNDO CLIC → CERRAR Y AVANZAR
   panel.classList.remove("abierto");
   tarjeta.classList.remove("activa");
 
