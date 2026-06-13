@@ -103,118 +103,97 @@ body {
 }
 
 /* ============================
-   🌍 TARJETA 2 — ANIMACIÓN DETALLADA
+   🌍 TARJETA 2 — PERSONAJE DISEÑADO + TEXTO ESCRITO
    ============================ */
 
-.mapa-container {
-  width: 100%;
-  height: 180px;
+.personaje-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* PERSONAJE DISEÑADO POR MÍ (CSS PURO) */
+.personaje {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, #ffcc66, #ff9e40 70%);
+  border-radius: 50%;
   position: relative;
-  margin-top: 10px;
+  box-shadow: 0 0 15px rgba(255,180,80,0.6);
+  animation: flotar 2s ease-in-out infinite;
 }
 
-.ruta {
-  position: absolute;
-  top: 40px;
-  left: 20px;
-  width: 85%;
-  height: 4px;
-  background: linear-gradient(90deg, #d35400, #ffb766);
-  border-radius: 4px;
-  overflow: hidden;
+@keyframes flotar {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
 }
 
-.ruta::before {
+/* OJOS */
+.personaje::before,
+.personaje::after {
   content: "";
   position: absolute;
-  width: 0%;
-  height: 100%;
-  background: #ffb766;
-  animation: dibujarRuta 3s ease forwards;
-}
-
-@keyframes dibujarRuta {
-  to { width: 100%; }
-}
-
-.punto-viajero {
-  position: absolute;
-  top: 32px;
-  left: 20px;
+  top: 40px;
   width: 18px;
   height: 18px;
-  background: #ffb766;
+  background: #3e2723;
   border-radius: 50%;
-  box-shadow: 0 0 10px #ffb766;
-  animation: viajar 3s ease forwards;
 }
 
-@keyframes viajar {
-  from { transform: translateX(0); }
-  to { transform: translateX(85vw); }
+.personaje::before { left: 30px; }
+.personaje::after { right: 30px; }
+
+/* BOCA ANIMADA */
+.boca {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  width: 45px;
+  height: 25px;
+  background: #3e2723;
+  border-radius: 0 0 40px 40px;
+  transform: translateX(-50%);
+  animation: hablar 1s infinite;
+}
+
+@keyframes hablar {
+  0% { height: 10px; }
+  50% { height: 25px; }
+  100% { height: 10px; }
+}
+
+/* TEXTO QUE SE ESCRIBE */
+.texto-escritura {
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 60%;
+  white-space: pre-line;
+  border-right: 2px solid #d35400;
+  overflow: hidden;
+  animation: escribir 5s steps(80) forwards;
+}
+
+@keyframes escribir {
+  from { width: 0; }
+  to { width: 60%; }
 }
 
 /* ============================
-   🍯 TARJETA 3 — ANIMACIÓN DETALLADA SIN IMÁGENES
+   🍯 TARJETA 3 — TEXTO CINEMÁTICO
    ============================ */
 
-.anim-bunuelo {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  margin: auto;
+.texto-cinematico {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0;
+  animation: aparecerTexto 4s ease forwards;
+  white-space: pre-line;
 }
 
-.bunuelo {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #f7d08a, #d88a3b 70%);
-  box-shadow: inset 0 0 25px #8a4f1d, 0 0 25px rgba(0,0,0,0.3);
-  animation: giroReal 4s infinite linear;
-}
-
-@keyframes giroReal {
-  0% { transform: rotate(0deg); filter: brightness(1); }
-  50% { transform: rotate(180deg); filter: brightness(1.15); }
-  100% { transform: rotate(360deg); filter: brightness(1); }
-}
-
-.miel-onda {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 90px;
-  height: 40px;
-  background: radial-gradient(circle, #ffcc66, #d48a1f);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  animation: ondaMiel 2s infinite ease-in-out;
-  filter: drop-shadow(0 0 6px #ffb766);
-}
-
-@keyframes ondaMiel {
-  0% { transform: translate(-50%, -10px) scaleX(1); opacity: 0.4; }
-  50% { transform: translate(-50%, 10px) scaleX(1.2); opacity: 1; }
-  100% { transform: translate(-50%, -10px) scaleX(1); opacity: 0.4; }
-}
-
-.gota {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  width: 14px;
-  height: 30px;
-  background: linear-gradient(#ffcc66, #d48a1f);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  animation: gotaCae 1.8s infinite ease-in-out;
-}
-
-@keyframes gotaCae {
-  0% { transform: translate(-50%, 0); opacity: 0.4; }
-  50% { transform: translate(-50%, 25px); opacity: 1; }
-  100% { transform: translate(-50%, 0); opacity: 0.4; }
+@keyframes aparecerTexto {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 </style>
@@ -252,7 +231,7 @@ body {
 </div>
 
 <!-- ============================
-     🌍 TARJETA 2 — NUEVA ANIMACIÓN
+     🌍 TARJETA 2 — PERSONAJE + TEXTO
      ============================ -->
 <div class="bloque-interactivo">
   <div class="card" onclick="toggleCard('origen')">
@@ -264,19 +243,26 @@ body {
   </div>
 
   <div class="panel-desplegable" id="panel-origen">
-    <h3>🌍 La Ruta del Buñuelo</h3>
+    <h3>🌍 ¿De dónde vienen?</h3>
 
-    <div class="mapa-container">
-      <div class="ruta"></div>
-      <div class="punto-viajero"></div>
+    <div class="personaje-container">
+      <div class="personaje">
+        <div class="boca"></div>
+      </div>
+
+      <div class="texto-escritura">
+        Los buñuelos nacieron en el Medio Oriente,
+        viajaron a España durante la época medieval
+        y finalmente llegaron a México,
+        donde se transformaron en la receta crujiente
+        que conocemos hoy.
+      </div>
     </div>
-
-    <p class="texto-origen">De Medio Oriente → España → México.</p>
   </div>
 </div>
 
 <!-- ============================
-     🍯 TARJETA 3 — NUEVA ANIMACIÓN
+     🍯 TARJETA 3 — TEXTO CINEMÁTICO
      ============================ -->
 <div class="bloque-interactivo">
   <div class="card" onclick="toggleCard('comprarnos')">
@@ -290,13 +276,14 @@ body {
   <div class="panel-desplegable" id="panel-comprarnos">
     <h3>🔥 Calidad Artesanal</h3>
 
-    <div class="anim-bunuelo">
-      <div class="bunuelo"></div>
-      <div class="miel-onda"></div>
-      <div class="gota"></div>
+    <div class="texto-cinematico">
+      Nuestros buñuelos se preparan cada día,
+      uno por uno, con dedicación y cariño.
+      
+      No son industriales, no son de fábrica:
+      son una tradición viva, crujiente y dulce,
+      hecha para disfrutarse al momento.
     </div>
-
-    <p>Hechos al momento, crujientes y con miel natural.</p>
   </div>
 </div>
 
