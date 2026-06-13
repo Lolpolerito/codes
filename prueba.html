@@ -146,4 +146,86 @@
 
   <div class="bloque-interactivo">
     <div class="card" id="tarjeta-origen" onclick="conmutarContenido('origen')">
-      <div class="icon
+      <div class="icon-wrapper">🌍</div>
+      <div class="card-body">
+        <h2>Su Origen</h2>
+        <p>Nacieron en la cultura árabe medieval y viajaron hasta el corazón de México.</p>
+      </div>
+    </div>
+    
+    <div class="panel-desplegable" id="panel-origen">
+      <h3>🌍 La Ruta Histórica del Sabor</h3>
+      <p>Toca los círculos naranjas en el mapa para descubrir su historia.</p>
+      <div class="map-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="100%" height="100%">
+          <rect width="800" height="320" fill="#eef2f7" rx="10"/>
+          <path class="pais clave" onclick="cambiarTextoRuta('oriente')" d="M500,130 L540,120 L550,140 L520,170 Z" />
+          <path class="pais clave" onclick="cambiarTextoRuta('espana')" d="M420,100 L450,100 L455,120 L430,135 Z" />
+          <path class="pais clave" onclick="cambiarTextoRuta('mexico')" d="M120,140 L150,150 L165,170 L140,200 L110,155 Z" />
+          <path d="M510,140 Q465,110 435,120" fill="none" class="ruta-linea" />
+          <path d="M420,125 Q280,120 150,165" fill="none" class="ruta-linea" />
+          <circle cx="510" cy="140" r="14" fill="#e67e22" style="cursor:pointer;" onclick="cambiarTextoRuta('oriente')" />
+          <circle cx="435" cy="120" r="14" fill="#e67e22" style="cursor:pointer;" onclick="cambiarTextoRuta('espana')" />
+          <circle cx="150" cy="165" r="14" fill="#e67e22" style="cursor:pointer;" onclick="cambiarTextoRuta('mexico')" />
+          <text x="510" y="115" font-family="sans-serif" font-size="14" font-weight="bold" fill="#3e2723" text-anchor="middle">1. Oriente</text>
+          <text x="435" y="95" font-family="sans-serif" font-size="14" font-weight="bold" fill="#3e2723" text-anchor="middle">2. España</text>
+          <text x="150" y="140" font-family="sans-serif" font-size="14" font-weight="bold" fill="#3e2723" text-anchor="middle">3. México</text>
+        </svg>
+      </div>
+      <div class="mini-tooltip" id="texto-mapa">💡 Toca cualquiera de los 3 puntos del mapa para leer la historia.</div>
+    </div>
+  </div>
+
+  <div class="bloque-interactivo">
+    <div class="card" id="tarjeta-comprarnos" onclick="conmutarContenido('comprarnos')">
+      <div class="icon-wrapper">🔥</div>
+      <div class="card-body">
+        <h2>¿Por qué los nuestros?</h2>
+        <p>Hechos al momento, crujientes, con receta secreta de la casa y sin conservadores.</p>
+      </div>
+    </div>
+    
+    <div class="panel-desplegable" id="panel-comprarnos">
+      <h3>🔥 Calidad de la Casa vs Lo Comercial</h3>
+      <p>Nuestros buñuelos se preparan bajo pedido diario, garantizando que te lleves un producto crujiente, calientito y con ese inigualable sabor familiar que las marcas de bolsa nunca podrán replicar.</p>
+      <div class="grafico-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <rect x="20" y="20" width="60" height="60" rx="12" fill="#ff9100"/>
+          <circle cx="40" cy="48" r="6" fill="#fff"/><circle cx="60" cy="48" r="6" fill="#fff"/>
+          <circle cx="40" cy="48" r="2.5" fill="#3e2723"/><circle cx="60" cy="48" r="2.5" fill="#3e2723"/>
+          <path d="M35,62 Q50,74 65,62" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M25,14 L35,22 L45,14 L55,22 L65,14 L75,22 L85,14" fill="none" stroke="#d35400" stroke-width="3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Datos para el mapa interactivo de la tarjeta de Origen
+  const infoRutas = {
+    oriente: "🐪 <b>Medio Oriente:</b> Masas fritas en miel de la época medieval.",
+    espana: "🏰 <b>España:</b> Se integró a las ferias usando sartenes europeas.",
+    mexico: "🇲🇽 <b>México:</b> Se fusionó con canela para ser gigante y crujiente."
+  };
+
+  // Función unificada que recibe el ID de la sección que se quiere abrir/cerrar
+  function conmutarContenido(idSeccion) {
+    const tarjeta = document.getElementById('tarjeta-' + idSeccion);
+    const panel = document.getElementById('panel-' + idSeccion);
+    
+    if (panel.style.display === 'block') {
+      panel.style.display = 'none';
+      tarjeta.classList.remove('activa');
+    } else {
+      panel.style.display = 'block';
+      tarjeta.classList.add('activa');
+    }
+  }
+
+  // Función específica para el mapa de origen
+  function cambiarTextoRuta(punto) {
+    document.getElementById('texto-mapa').innerHTML = infoRutas[punto];
+  }
+</script>
+</body>
+</html>
