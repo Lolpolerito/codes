@@ -40,18 +40,40 @@ body {
     background-size: cover;
     background-position: center;
     border-radius: 20px;
-    padding: 60px 20px;
+    padding: 70px 20px;
     text-align: center;
-    color: white;
     margin-bottom: 40px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.25);
     border: 2px solid rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
 }
 
-.header-card h1 {
-    font-size: 50px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+/* Bloques estilo imagen anterior */
+.header-title {
+    display: inline-flex;
+    gap: 10px;
+    font-size: 55px;
+    font-weight: bold;
     letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.header-title span {
+    padding: 8px 18px;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+/* Colores estilo imagen */
+.header-title .white {
+    background: #ffffff;
+    color: #5a3e2b;
+}
+
+.header-title .brown {
+    background: #5a3e2b;
+    color: #ffffff;
 }
 
 /* ======== TARJETAS EXPANDIBLES ======== */
@@ -119,8 +141,10 @@ body {
 /* ======== RESPONSIVE ======== */
 @media (max-width: 768px) {
 
-    .header-card h1 {
+    .header-title {
         font-size: 36px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .card-header {
@@ -161,7 +185,11 @@ body {
 
         <!-- TARJETA DE TÍTULO -->
         <div class="header-card">
-            <h1>MISIÓN Y VISIÓN</h1>
+            <div class="header-title">
+                <span class="white">NO</span>
+                <span class="brown">SO</span>
+                <span class="white">TROS</span>
+            </div>
         </div>
 
         <!-- QUIÉNES SOMOS -->
