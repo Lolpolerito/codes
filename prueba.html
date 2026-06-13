@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pedido de Buñuelos</title>
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: transparent; text-align: center; padding-bottom: 50px; margin: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg,#fff8e1,#ffe082); text-align: center; padding-bottom: 50px; margin: 0; }
     
     /* Contenedor adaptables para pantallas móviles */
     .producto, .formulario, .ticket {
       background-color: #fff; padding: 20px; margin: 20px auto;
       width: 90%; max-width: 420px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      box-sizing: border-box; animation: fadeIn 0.6s ease;
+      box-sizing: border-box;
+      animation: fadeIn 0.6s ease;
     }
     @keyframes fadeIn { from {opacity:0; transform:scale(0.95);} to {opacity:1; transform:scale(1);} }
     .img-producto { width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
@@ -48,7 +49,7 @@
 
   <div class="producto" id="etapa1">
     <h2>🥮 Buñuelos Tradicionales</h2>
-    <img class="img-producto" src="https://images.unsplash.com/photo-1621849400072-f554417f704a?q=80&w=600&auto=format&fit=crop" alt="Buñuelos Deliciosos">
+    <img class="img-producto" src="codes/WEB/pedidoos.jpg" alt="Buñuelos Deliciosos">
     <p>Precio unitario: $10 | <strong>Oferta: $25 por cada 3 piezas</strong></p>
     <div id="estado">¡Elige la cantidad de buñuelos que deseas!</div>
     <p>Cantidad seleccionada: <span id="cantidad" style="font-size: 20px; font-weight: bold; color: #007bff;">0</span></p>
