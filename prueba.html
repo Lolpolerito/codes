@@ -36,7 +36,7 @@ body {
 
 /* ======== TARJETA DE TÍTULO ======== */
 .header-card {
-    background: url('WEB/header.jpg'); /* ← AQUÍ VA LA IMAGEN QUE ME PASARÁS */
+    background: url('WEB/banner.png');
     background-size: cover;
     background-position: center;
     border-radius: 20px;
@@ -255,14 +255,8 @@ body {
 
 <script>
 
-/* ======== SONIDO CRUNCH ======== */
-const crunchSound = new Audio("WEB/crunch.mp3");
-
-/* ======== MECÁNICA CORREGIDA ======== */
+/* ======== MECÁNICA SIN AUDIO ======== */
 function toggleCard(card) {
-
-    crunchSound.currentTime = 0;
-    crunchSound.play();
 
     const cards = [...document.querySelectorAll(".card")];
     const index = cards.indexOf(card);
