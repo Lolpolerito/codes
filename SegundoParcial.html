@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Segundo Parcial</title>
@@ -73,35 +74,38 @@ body {
   border-color: #444;
 }
 
+/* CUADRO QUE CRECE SEGÚN EL TEXTO */
 .card-thumbnail {
   width: 100%;
-  height: 140px;
   background: #111 !important;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: flex-start;
   color: var(--accent-red);
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   border-bottom: 3px solid #333;
   text-align: center;
-  padding: 10px;
+  padding: 14px 10px;
+  gap: 10px;
 }
 
-.file-badge {
-  position: absolute;
-  bottom: 8px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.75);
+/* DESCRIPCIÓN GRANDE Y SIN FONDO */
+.card-description {
+  width: 100%;
+  background: transparent;
   color: #fff;
-  padding: 3px 7px;
-  font-size: 0.7rem;
-  border-radius: 3px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: 1px solid #444;
+  font-size: 1rem;
+  padding: 0px 5px 5px 5px;
+  text-align: center;
+  line-height: 1.35;
+  font-weight: normal;
+  box-sizing: border-box;
 }
+
+/* Eliminado el badge */
+.file-badge { display: none; }
 
 .card-info {
   padding: 15px;
@@ -195,7 +199,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Navegación */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -228,6 +231,7 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 </style>
+
 </head>
 
 <body>
@@ -305,44 +309,93 @@ const trabajos = [
 </script>
 
 <!-- TARJETAS -->
+
 <div class="card" onclick="openViewerIndex(0)">
-  <div class="card-thumbnail">CLASIFICACIÓN I<span class="file-badge">5 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 1</div><div class="card-title">Ejercicio Clasificación de Redes (Parte 1)</div></div>
+  <div class="card-thumbnail">
+    CLASIFICACIÓN I
+    <div class="card-description">Ejercicio práctico donde se clasifican redes según su alcance, estructura y función.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 1</div>
+    <div class="card-title">Ejercicio Clasificación de Redes (Parte 1)</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(1)">
-  <div class="card-thumbnail">CLASIFICACIÓN II<span class="file-badge">4 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 2</div><div class="card-title">Ejercicio Clasificación de Redes (Parte 2)</div></div>
+  <div class="card-thumbnail">
+    CLASIFICACIÓN II
+    <div class="card-description">Continuación del análisis de clasificación de redes con ejemplos aplicados.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 2</div>
+    <div class="card-title">Ejercicio Clasificación de Redes (Parte 2)</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(2)">
-  <div class="card-thumbnail">TOPOLOGÍAS<span class="file-badge">2 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 3</div><div class="card-title">Ejercicio – Identificación de Topologías</div></div>
+  <div class="card-thumbnail">
+    TOPOLOGÍAS
+    <div class="card-description">Identificación de topologías de red mediante diagramas y ejemplos reales.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 3</div>
+    <div class="card-title">Ejercicio – Identificación de Topologías</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(3)">
-  <div class="card-thumbnail">CABLE RECTO<span class="file-badge">JPG</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 4</div><div class="card-title">Cable Recto – Evidencia</div></div>
+  <div class="card-thumbnail">
+    CABLE RECTO
+    <div class="card-description">Evidencia fotográfica del armado correcto de un cable recto Ethernet.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 4</div>
+    <div class="card-title">Cable Recto – Evidencia</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(4)">
-  <div class="card-thumbnail">CABLE CRUZADO<span class="file-badge">JPG</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 5</div><div class="card-title">Cable Cruzado – Evidencia</div></div>
+  <div class="card-thumbnail">
+    CABLE CRUZADO
+    <div class="card-description">Evidencia del proceso de creación de un cable cruzado para conexión directa.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 5</div>
+    <div class="card-title">Cable Cruzado – Evidencia</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(5)">
-  <div class="card-thumbnail">MANUAL<span class="file-badge">5 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 6</div><div class="card-title">Manual de creación de Cables de Red</div></div>
+  <div class="card-thumbnail">
+    MANUAL
+    <div class="card-description">Manual ilustrado que explica paso a paso cómo fabricar cables de red.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 6</div>
+    <div class="card-title">Manual de creación de Cables de Red</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(6)">
-  <div class="card-thumbnail">INFOGRAFÍA<span class="file-badge">2 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 7</div><div class="card-title">Infografía de Cables de Red</div></div>
+  <div class="card-thumbnail">
+    INFOGRAFÍA
+    <div class="card-description">Infografía comparativa sobre tipos de cables de red y sus características.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 7</div>
+    <div class="card-title">Infografía de Cables de Red</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(7)">
-  <div class="card-thumbnail">ESTRUCTURADO<span class="file-badge">2 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 8</div><div class="card-title">Mapa Conceptual del Cableado Estructurado</div></div>
+  <div class="card-thumbnail">
+    ESTRUCTURADO
+    <div class="card-description">Mapa conceptual del proceso de cableado estructurado y sus componentes.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 8</div>
+    <div class="card-title">Mapa Conceptual del Cableado Estructurado</div>
+  </div>
 </div>
 
 </div>
