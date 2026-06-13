@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buñuelos C.S</title>
+
+<style>
+
+/* ======== ESTILO GENERAL ======== */
+body {
+    margin: 0;
+    padding: 0;
+    background: #e7d2b5;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.timeline-section {
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Contenedor */
+.timeline-container {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(255, 248, 240, 0.92);
+    padding: 40px;
+    border-radius: 25px;
+    border: 1px solid #c7a98a;
+    box-shadow: 0 0 35px rgba(0,0,0,0.18);
+    position: relative;
+    z-index: 2;
+}
+
+/* ======== TARJETA DE TÍTULO ======== */
+.header-card {
+    background: url('WEB/banner.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    padding: 70px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    border: 2px solid rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Bloques estilo imagen anterior */
+.header-title {
+    display: inline-flex;
+    gap: 10px;
+    font-size: 55px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.header-title span {
+    padding: 8px 18px;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+/* Colores estilo imagen */
+.header-title .white {
+    background: #ffffff;
+    color: #5a3e2b;
+}
+
+.header-title .brown {
+    background: #5a3e2b;
+    color: #ffffff;
+}
+
+/* ======== TARJETAS EXPANDIBLES ======== */
+.card {
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 18px;
+    border: 1px solid #d8c4a8;
+    margin-bottom: 35px;
+    padding: 20px;
+    transition: all .4s ease;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Cabecera */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.card-header h2 {
+    font-size: 30px;
+    color: #6b4a33;
+}
+
+/* Imagen */
+.card-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid #b08a6b;
+}
+
+/* Contenido oculto */
+.card-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height .6s ease, opacity .4s ease;
+    padding-left: 10px;
+}
+
+.card-content p {
+    font-size: 18px;
+    color: #4a3a2a;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* Cuando se expande */
+.card.open .card-content {
+    max-height: 800px;
+    opacity: 1;
+    margin-top: 15px;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+
+    .header-title {
+        font-size: 36px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .card-img {
+        width: 100%;
+        height: 220px;
+    }
+
+    .card-content {
+        padding-left: 0;
+    }
+}
+
+/* ======== PARTÍCULAS ======== */
+.particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+</style>
+</head>
+<body>
+
+<section class="timeline-section">
+
+    <canvas class="particle-canvas"></canvas>
+
+    <div class="timeline-container">
+
+        <!-- TARJETA DE TÍTULO -->
+        <div class="header-card">
+            <div class="header-title">
+                <span class="white">NO</span>
+                <span class="brown">SO</span>
+                <span class="white">TROS</span>
+            </div>
+        </div>
+
+        <!-- QUIÉNES SOMOS -->
+        <div class="card">
+            <div class="card-header">
+                <img src="WEB/quienes-somos.jpg" class="card-img">
+                <h2>¿Quiénes somos?</h2>
+            </div>
+
+            <div class="card-content">
+                <p>
+                    Somos un grupo de estudiantes del CBTa 198 dedicados a ofrecer un producto rico, accesible y tradicional.
+                </p>
+
+                <p>
+                    Con el tiempo, este proyecto dejó de ser solo una actividad escolar y se convirtió en un emprendimiento real.
+                </p>
+
+                <p>
+                    Actualmente distribuimos desde la escuela hasta tiendas de conveniencia y redes sociales.
+                </p>
+            </div>
+        </div>
+
+        <!-- MISIÓN -->
+        <div class="card">
+            <div class="card-header">
+                <img src="WEB/mision.jpg" class="card-img">
+                <h2>Misión</h2>
+            </div>
+
+            <div class="card-content">
+                <p>
+                    Elaborar productos de alta calidad con ingredientes frescos y recetas tradicionales.
+                </p>
+
+                <p>
+                    Nuestra misión también incluye preservar la tradición culinaria mexicana.
+                </p>
+            </div>
+        </div>
+
+        <!-- VISIÓN -->
+        <div class="card">
+            <div class="card-header">
+                <img src="WEB/vision.png" class="card-img">
+                <h2>Visión</h2>
+            </div>
+
+            <div class="card-content">
+                <p>
+                    Ser la opción preferida del mercado, creciendo de forma firme y constante.
+                </p>
+
+                <p>
+                    Aspiramos a expandir nuestra presencia manteniendo la calidad.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+
+/* ======== MECÁNICA SIN AUDIO ======== */
+function toggleCard(card) {
+
+    const cards = [...document.querySelectorAll(".card")];
+    const index = cards.indexOf(card);
+
+    const isOpen = card.classList.contains("open");
+
+    // PRIMER CLIC → SOLO ABRE
+    if (!isOpen) {
+        cards.forEach(c => c.classList.remove("open"));
+        card.classList.add("open");
+        return;
+    }
+
+    // SEGUNDO CLIC → CIERRA Y AVANZA
+    card.classList.remove("open");
+
+    const next = cards[index + 1];
+    if (next) {
+        setTimeout(() => {
+            next.classList.add("open");
+            next.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 400);
+    }
+}
+
+/* ======== ASIGNAR EVENTOS ======== */
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => toggleCard(card));
+});
+
+/* ======== PARTÍCULAS CAFÉ ======== */
+const canvas = document.querySelector('.particle-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speed: Math.random() * 0.5 + 0.2,
+        color: "rgba(120, 80, 50, 0.35)"
+    });
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+</script>
+
+</body>
+</html>
