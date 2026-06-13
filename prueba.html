@@ -1,119 +1,14 @@
-<section class="timeline-section">
-
-    <canvas class="particle-canvas"></canvas>
-
-    <div class="timeline-container">
-
-        <h1 class="title-main">BUÑUELOS C.S</h1>
-
-        <!-- QUIÉNES SOMOS -->
-        <div class="card expandable" onclick="toggleCard(this)">
-            <div class="card-header">
-                <img src="img/quienes.jpg" class="card-img">
-                <h2>¿Quiénes somos?</h2>
-            </div>
-
-            <div class="card-content">
-                <p>
-                    Somos un grupo de estudiantes del CBTa 198 dedicados a ofrecer un producto rico, accesible y tradicional.
-                    Nuestro proyecto nació en el módulo profesional “Estrategia de comercialización y productos”.
-                </p>
-
-                <p>
-                    Con el tiempo, este proyecto dejó de ser solo una actividad escolar y se convirtió en un emprendimiento real.
-                    Nos enfocamos en mantener la calidad, higiene y tradición en cada buñuelo que elaboramos.
-                </p>
-
-                <p>
-                    Actualmente distribuimos desde la escuela hasta tiendas de conveniencia y redes sociales.
-                </p>
-            </div>
-        </div>
-
-        <!-- MISIÓN -->
-        <div class="card expandable" onclick="toggleCard(this)">
-            <div class="card-header">
-                <img src="img/mision.jpg" class="card-img">
-                <h2>Misión</h2>
-            </div>
-
-            <div class="card-content">
-                <p>
-                    Elaborar productos de alta calidad con ingredientes frescos y recetas tradicionales, manteniendo precios accesibles
-                    para que todos disfruten una experiencia auténtica.
-                </p>
-
-                <p>
-                    Nuestra misión también incluye preservar la tradición culinaria mexicana, ofreciendo un producto que evoque
-                    recuerdos familiares y momentos especiales.
-                </p>
-            </div>
-        </div>
-
-        <!-- VISIÓN -->
-        <div class="card expandable" onclick="toggleCard(this)">
-            <div class="card-header">
-                <img src="img/vision.jpg" class="card-img">
-                <h2>Visión</h2>
-            </div>
-
-            <div class="card-content">
-                <p>
-                    Ser la opción preferida del mercado, creciendo de forma firme y constante, posicionándonos como un referente de tradición y valor.
-                </p>
-
-                <p>
-                    Aspiramos a expandir nuestra presencia, manteniendo siempre la calidad y esencia que nos caracteriza.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<style>
-/* ======== ESTILO GENERAL ======== */
-.timeline-section {
-    background: #e7d2b5;
-    padding: 60px 20px;
-    position: relative;
-    overflow: hidden;
-    font-family: 'Cormorant Garamond', serif;
-}
-
-/* Contenedor */
-.timeline-container {
-    max-width: 900px;
-    margin: auto;
-    background: rgba(255, 248, 240, 0.9);
-    padding: 40px;
-    border-radius: 25px;
-    border: 1px solid #c7a98a;
-    box-shadow: 0 0 35px rgba(0,0,0,0.18);
-    position: relative;
-    z-index: 2;
-}
-
-/* Título */
-.title-main {
-    text-align: center;
-    font-size: 46px;
-    color: #5a3e2b;
-    margin-bottom: 50px;
-    letter-spacing: 2px;
-}
-
 /* ======== TARJETAS EXPANDIBLES ======== */
 .card {
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.78);
     border-radius: 18px;
     border: 1px solid #d8c4a8;
     margin-bottom: 35px;
     padding: 20px;
     transition: all .4s ease;
-    overflow: hidden;
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden; /* evita recortes bruscos */
 }
 
 .card:hover {
@@ -128,11 +23,6 @@
     gap: 20px;
 }
 
-.card-header h2 {
-    font-size: 30px;
-    color: #6b4a33;
-}
-
 /* Imagen */
 .card-img {
     width: 120px;
@@ -145,28 +35,30 @@
 /* Contenido oculto */
 .card-content {
     max-height: 0;
-    overflow: hidden;
     opacity: 0;
-    transition: all .5s ease;
+    overflow: hidden;
+    transition: max-height .6s ease, opacity .4s ease;
     padding-left: 10px;
-}
-
-.card-content p {
-    font-size: 18px;
-    color: #4a3a2a;
-    line-height: 1.6;
-    margin-top: 15px;
 }
 
 /* Cuando se expande */
 .card.open .card-content {
-    max-height: 500px;
+    max-height: 800px; /* suficiente para cualquier texto */
     opacity: 1;
-    margin-top: 10px;
+    margin-top: 15px;
+}
+
+/* Texto */
+.card-content p {
+    font-size: 18px;
+    color: #4a3a2a;
+    line-height: 1.6;
+    margin-bottom: 12px;
 }
 
 /* ======== RESPONSIVE ======== */
 @media (max-width: 768px) {
+
     .card-header {
         flex-direction: column;
         text-align: center;
@@ -174,65 +66,10 @@
 
     .card-img {
         width: 100%;
-        height: 200px;
+        height: 220px;
     }
 
-    .title-main {
-        font-size: 36px;
+    .card-content {
+        padding-left: 0;
     }
 }
-
-/* ======== PARTÍCULAS ======== */
-.particle-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-</style>
-
-<script>
-/* ======== TARJETAS EXPANDIBLES ======== */
-function toggleCard(card) {
-    card.classList.toggle("open");
-}
-
-/* ======== PARTÍCULAS CAFÉ ======== */
-const canvas = document.querySelector('.particle-canvas');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 80; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        speed: Math.random() * 0.5 + 0.2,
-        color: "rgba(120, 80, 50, 0.35)"
-    });
-}
-
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach(p => {
-        p.y += p.speed;
-        if (p.y > canvas.height) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-    });
-
-    requestAnimationFrame(animateParticles);
-}
-
-animateParticles();
-</script>
