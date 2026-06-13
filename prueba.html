@@ -25,8 +25,8 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: transparent; text
   position: relative;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-end;
-  padding: 0 18px 18px 18px;
+  justify-content: center; /* MÁS CENTRADO */
+  padding-bottom: 18px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.35);
   border-bottom: 4px solid #ffb766;
   animation: bannerFade 1.2s ease-out forwards;
@@ -38,25 +38,18 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: transparent; text
 }
 
 .banner-titulo {
-  padding: 12px 20px;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(6px);
-  border-radius: 14px;
-  text-align: right;
-  font-size: 1.7rem;
-  font-weight: bold;
-  color: #fffdf9;
-  letter-spacing: 1.3px;
-  width: fit-content;
-  max-width: 90%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-  border-right: 4px solid #ffb766;
+  font-size: 2.3rem; /* MÁS GRANDE */
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(0,0,0,0.7), 0 0 14px rgba(0,0,0,0.5);
   animation: tituloSlide 1.4s ease-out forwards;
+  background: none !important; /* SIN FONDO */
 }
 
 @keyframes tituloSlide {
-  0% { opacity: 0; transform: translateX(40px); }
-  100% { opacity: 1; transform: translateX(0); }
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* ============================
