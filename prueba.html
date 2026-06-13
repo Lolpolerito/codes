@@ -151,7 +151,7 @@ body {
         <h1 class="title-main">BUÑUELOS C.S</h1>
 
         <!-- QUIÉNES SOMOS -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card">
             <div class="card-header">
                 <img src="img/quienes.jpg" class="card-img">
                 <h2>¿Quiénes somos?</h2>
@@ -160,12 +160,10 @@ body {
             <div class="card-content">
                 <p>
                     Somos un grupo de estudiantes del CBTa 198 dedicados a ofrecer un producto rico, accesible y tradicional.
-                    Nuestro proyecto nació en el módulo profesional “Estrategia de comercialización y productos”.
                 </p>
 
                 <p>
                     Con el tiempo, este proyecto dejó de ser solo una actividad escolar y se convirtió en un emprendimiento real.
-                    Nos enfocamos en mantener la calidad, higiene y tradición en cada buñuelo que elaboramos.
                 </p>
 
                 <p>
@@ -175,7 +173,7 @@ body {
         </div>
 
         <!-- MISIÓN -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card">
             <div class="card-header">
                 <img src="img/mision.jpg" class="card-img">
                 <h2>Misión</h2>
@@ -183,19 +181,17 @@ body {
 
             <div class="card-content">
                 <p>
-                    Elaborar productos de alta calidad con ingredientes frescos y recetas tradicionales, manteniendo precios accesibles
-                    para que todos disfruten una experiencia auténtica.
+                    Elaborar productos de alta calidad con ingredientes frescos y recetas tradicionales.
                 </p>
 
                 <p>
-                    Nuestra misión también incluye preservar la tradición culinaria mexicana, ofreciendo un producto que evoque
-                    recuerdos familiares y momentos especiales.
+                    Nuestra misión también incluye preservar la tradición culinaria mexicana.
                 </p>
             </div>
         </div>
 
         <!-- VISIÓN -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card">
             <div class="card-header">
                 <img src="img/vision.jpg" class="card-img">
                 <h2>Visión</h2>
@@ -203,11 +199,11 @@ body {
 
             <div class="card-content">
                 <p>
-                    Ser la opción preferida del mercado, creciendo de forma firme y constante, posicionándonos como un referente de tradición y valor.
+                    Ser la opción preferida del mercado, creciendo de forma firme y constante.
                 </p>
 
                 <p>
-                    Aspiramos a expandir nuestra presencia, manteniendo siempre la calidad y esencia que nos caracteriza.
+                    Aspiramos a expandir nuestra presencia manteniendo la calidad.
                 </p>
             </div>
         </div>
@@ -217,20 +213,42 @@ body {
 
 <script>
 
-/* ======== TARJETAS EXPANDIBLES ======== */
+/* ======== SONIDO CRUNCH ======== */
+const crunchSound = new Audio("sounds/crunch.mp3");
+
+/* ======== NUEVA MECÁNICA: AUTO-AVANCE ======== */
 function toggleCard(card) {
+
+    crunchSound.currentTime = 0;
+    crunchSound.play();
+
+    const cards = [...document.querySelectorAll(".card")];
+    const index = cards.indexOf(card);
+
     const isOpen = card.classList.contains("open");
 
-    document.querySelectorAll(".card.open").forEach(c => {
-        if (c !== card) c.classList.remove("open");
-    });
+    // Cerrar todas
+    cards.forEach(c => c.classList.remove("open"));
 
     if (!isOpen) {
+        // Abrir la tarjeta actual
         card.classList.add("open");
-    } else {
-        card.classList.remove("open");
+
+        // Después de 1.2s, avanzar a la siguiente
+        setTimeout(() => {
+            const next = cards[index + 1];
+            if (next) {
+                next.classList.add("open");
+                next.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        }, 1200);
     }
 }
+
+/* ======== ASIGNAR EVENTOS ======== */
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => toggleCard(card));
+});
 
 /* ======== PARTÍCULAS CAFÉ ======== */
 const canvas = document.querySelector('.particle-canvas');
