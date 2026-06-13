@@ -74,34 +74,34 @@ body {
   border-color: #444;
 }
 
+/* CUADRO QUE CRECE SEGÚN EL TEXTO */
 .card-thumbnail {
   width: 100%;
-  height: 160px;
   background: #111 !important;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: flex-start;
   color: var(--accent-red);
   font-weight: bold;
   font-size: 1.2rem;
   border-bottom: 3px solid #333;
   text-align: center;
-  padding: 10px;
+  padding: 14px 10px;
+  gap: 10px;
 }
 
-/* DESCRIPCIÓN GRANDE */
+/* DESCRIPCIÓN GRANDE Y COMPLETA */
 .card-description {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   background: rgba(0,0,0,0.75);
   color: #fff;
   font-size: 1rem;
   padding: 10px 12px;
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.35;
   font-weight: normal;
+  box-sizing: border-box;
 }
 
 /* Eliminado el badge */
@@ -331,7 +331,7 @@ const trabajos = [
 <div class="card" onclick="openViewerIndex(5)">
   <div class="card-thumbnail">
     EVALUACIÓN
-    <div class="card-description">Hoja de evaluación de la exposición grupal, valorando aspectos técnicos y comunicativos.</div>
+    <div class="card-description">Hoja de evaluación de la exposición grupal valorando aspectos técnicos y comunicativos.</div>
   </div>
   <div class="card-info">
     <div class="card-number">Trabajo 6</div>
