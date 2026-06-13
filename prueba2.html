@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto Buñuelos</title>
+
+<style>
+
+/* ============================
+   🎨 ESTILO GLOBAL PREMIUM
+   ============================ */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg, #6f432a 0%, #4b2d1d 100%);
+  color: #fdfaf6;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bloque-interactivo {
+  width: 100%;
+  max-width: 480px;
+  margin-top: 25px;
+}
+
+/* ============================
+   🟫 TARJETAS
+   ============================ */
+.card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 18px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: 0.35s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-3px);
+}
+
+.card.activa {
+  background: rgba(255,255,255,0.22);
+  border-color: #ffb766;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* ============================
+   📌 PANEL DESPLEGABLE
+   ============================ */
+.panel-desplegable {
+  background: #fffdf9;
+  color: #3e2723;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  padding: 0 18px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.45s ease, opacity 0.35s ease;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+.panel-desplegable.abierto {
+  padding: 20px 18px;
+  max-height: 900px;
+  opacity: 1;
+}
+
+.panel-desplegable h3 {
+  margin: 0 0 10px 0;
+  color: #d35400;
+  font-size: 1.35rem;
+}
+
+/* ============================
+   🥞 TARJETA 1 — INGREDIENTES
+   ============================ */
+.img-bun {
+  width: 180px;
+  animation: aparecer 0.6s ease-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.ingredientes-lista {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ============================
+   🌍 TARJETA 2 — PERSONAJE ANIMADO + TEXTO ESCRITO
+   ============================ */
+
+.personaje-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.personaje {
+  width: 120px;
+  animation: hablar 1s infinite;
+}
+
+@keyframes hablar {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(0.85); }
+  100% { transform: scaleY(1); }
+}
+
+.texto-escritura {
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 60%;
+  white-space: pre-line;
+  border-right: 2px solid #d35400;
+  overflow: hidden;
+  animation: escribir 5s steps(60) forwards;
+}
+
+@keyframes escribir {
+  from { width: 0; }
+  to { width: 60%; }
+}
+
+/* ============================
+   🍯 TARJETA 3 — ANIMACIÓN DETALLADA SIN IMÁGENES
+   ============================ */
+
+.bunuelo-solar {
+  width: 180px;
+  height: 180px;
+  margin: auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f7d08a, #d88a3b 70%);
+  box-shadow: inset 0 0 25px #8a4f1d, 0 0 25px rgba(0,0,0,0.3);
+  position: relative;
+  animation: giroLuz 5s infinite linear;
+}
+
+@keyframes giroLuz {
+  0% { transform: rotate(0deg); filter: brightness(1); }
+  50% { transform: rotate(180deg); filter: brightness(1.2); }
+  100% { transform: rotate(360deg); filter: brightness(1); }
+}
+
+.rayos {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: conic-gradient(
+    rgba(255,200,120,0.4),
+    rgba(255,200,120,0) 20%,
+    rgba(255,200,120,0.4) 40%,
+    rgba(255,200,120,0) 60%,
+    rgba(255,200,120,0.4) 80%,
+    rgba(255,200,120,0) 100%
+  );
+  animation: rayosGiro 6s infinite linear;
+}
+
+@keyframes rayosGiro {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================
+     🥞 TARJETA 1
+     ============================ -->
+<div class="bloque-interactivo">
+  <div class="card" onclick="toggleCard('que-son')">
+    <div class="icon-wrapper">🥞</div>
+    <div class="card-body">
+      <h2>¿Qué son los Buñuelos?</h2>
+      <p>Masa delgada, frita y crujiente.</p>
+    </div>
+  </div>
+
+  <div class="panel-desplegable" id="panel-que-son">
+    <h3>🥞 Ingredientes del Buñuelo</h3>
+
+    <div style="display:flex; gap:20px; align-items:center; justify-content:center;">
+      <img src="producto.png" class="img-bun">
+
+      <div class="ingredientes-lista">
+        <b>Ingredientes:</b><br>
+        • Harina fina<br>
+        • Agua y sal<br>
+        • Aceite caliente<br>
+        • Azúcar<br>
+        • Canela molida<br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     🌍 TARJETA 2 — NUEVA ANIMACIÓN
+     ============================ -->
+<div class="bloque-interactivo">
+  <div class="card" onclick="toggleCard('origen')">
+    <div class="icon-wrapper">🌍</div>
+    <div class="card-body">
+      <h2>Su Origen</h2>
+      <p>Un viaje histórico del sabor.</p>
+    </div>
+  </div>
+
+  <div class="panel-desplegable" id="panel-origen">
+    <h3>🌍 ¿De dónde vienen?</h3>
+
+    <div class="personaje-container">
+      <img src="personaje.png" class="personaje">
+
+      <div class="texto-escritura">
+        Los buñuelos nacieron en el Medio Oriente,
+        viajaron a España durante la época medieval
+        y finalmente llegaron a México,
+        donde se transformaron en la receta crujiente
+        que conocemos hoy.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     🍯 TARJETA 3 — NUEVA ANIMACIÓN
+     ============================ -->
+<div class="bloque-interactivo">
+  <div class="card" onclick="toggleCard('comprarnos')">
+    <div class="icon-wrapper">🔥</div>
+    <div class="card-body">
+      <h2>¿Por qué los nuestros?</h2>
+      <p>Calidad artesanal.</p>
+    </div>
+  </div>
+
+  <div class="panel-desplegable" id="panel-comprarnos">
+    <h3>🔥 Buñuelo Solar Artesanal</h3>
+
+    <div class="bunuelo-solar">
+      <div class="rayos"></div>
+    </div>
+
+    <p>Hechos al momento, crujientes y con miel natural.</p>
+  </div>
+</div>
+
+<script>
+
+/* ============================
+   🔧 MECÁNICA DE AVANCE AUTOMÁTICO
+   ============================ */
+function toggleCard(id) {
+  const panel = document.getElementById("panel-" + id);
+  const tarjeta = panel.previousElementSibling;
+
+  const panels = [...document.querySelectorAll(".panel-desplegable")];
+  const cards = [...document.querySelectorAll(".card")];
+  const index = cards.indexOf(tarjeta);
+
+  const abierto = panel.classList.contains("abierto");
+
+  if (!abierto) {
+    panels.forEach(p => p.classList.remove("abierto"));
+    cards.forEach(c => c.classList.remove("activa"));
+
+    panel.classList.add("abierto");
+    tarjeta.classList.add("activa");
+    return;
+  }
+
+  panel.classList.remove("abierto");
+  tarjeta.classList.remove("activa");
+
+  const siguiente = cards[index + 1];
+  if (siguiente) {
+    setTimeout(() => {
+      siguiente.click();
+      siguiente.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 400);
+  }
+}
+
+</script>
+
+</body>
+</html>
