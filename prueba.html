@@ -21,7 +21,6 @@ body {
   align-items: center;
 }
 
-/* Contenedor */
 .bloque-interactivo {
   width: 100%;
   max-width: 480px;
@@ -57,24 +56,6 @@ body {
   border-bottom-right-radius: 0;
 }
 
-/* Icono */
-.icon-wrapper {
-  font-size: 2.4rem;
-}
-
-/* Texto */
-.card-body h2 {
-  font-size: 1.25rem;
-  margin: 0 0 4px 0;
-  color: #ffb766;
-}
-
-.card-body p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #f7e9dd;
-}
-
 /* ============================
    📌 PANEL DESPLEGABLE
    ============================ */
@@ -106,13 +87,6 @@ body {
 /* ============================
    🥞 TARJETA 1 — INGREDIENTES
    ============================ */
-.ingredientes-lista {
-  text-align: left;
-  margin-top: 10px;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
 .img-bun {
   width: 180px;
   animation: aparecer 0.6s ease-out;
@@ -123,86 +97,124 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* ============================
-   🌍 TARJETA 2 — ANIMACIÓN NUEVA
-   ============================ */
-.mapa-animado { margin-top: 10px; }
-
-.punto-origen {
-  fill: #ffb766;
-  filter: drop-shadow(0 0 6px #ffb766);
-  animation: brillo 2s infinite ease-in-out;
-}
-
-@keyframes brillo {
-  0% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.25); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.7; }
-}
-
-.ruta-dibujo {
-  stroke: #d35400;
-  stroke-width: 3;
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  animation: dibujar 2.5s ease forwards;
-}
-
-@keyframes dibujar {
-  to { stroke-dashoffset: 0; }
-}
-
-.texto-origen {
-  font-size: 1rem;
-  margin-top: 12px;
-  color: #5a3e2b;
-  font-weight: bold;
-  text-align: center;
+.ingredientes-lista {
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 /* ============================
-   🍯 TARJETA 3 — ANIMACIÓN NUEVA SIN IMÁGENES
+   🌍 TARJETA 2 — ANIMACIÓN DETALLADA
    ============================ */
+
+.mapa-container {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.ruta {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  width: 85%;
+  height: 4px;
+  background: linear-gradient(90deg, #d35400, #ffb766);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ruta::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background: #ffb766;
+  animation: dibujarRuta 3s ease forwards;
+}
+
+@keyframes dibujarRuta {
+  to { width: 100%; }
+}
+
+.punto-viajero {
+  position: absolute;
+  top: 32px;
+  left: 20px;
+  width: 18px;
+  height: 18px;
+  background: #ffb766;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ffb766;
+  animation: viajar 3s ease forwards;
+}
+
+@keyframes viajar {
+  from { transform: translateX(0); }
+  to { transform: translateX(85vw); }
+}
+
+/* ============================
+   🍯 TARJETA 3 — ANIMACIÓN DETALLADA SIN IMÁGENES
+   ============================ */
+
 .anim-bunuelo {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   margin: auto;
 }
 
 .bunuelo {
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  background: radial-gradient(circle, #f7c27a 0%, #d88a3b 70%);
-  box-shadow: inset 0 0 20px #8a4f1d, 0 0 20px rgba(0,0,0,0.3);
-  animation: giroBun 4s linear infinite;
+  background: radial-gradient(circle at 30% 30%, #f7d08a, #d88a3b 70%);
+  box-shadow: inset 0 0 25px #8a4f1d, 0 0 25px rgba(0,0,0,0.3);
+  animation: giroReal 4s infinite linear;
 }
 
-@keyframes giroBun {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes giroReal {
+  0% { transform: rotate(0deg); filter: brightness(1); }
+  50% { transform: rotate(180deg); filter: brightness(1.15); }
+  100% { transform: rotate(360deg); filter: brightness(1); }
 }
 
-.miel-gota {
+.miel-onda {
   position: absolute;
-  top: -10px;
+  top: -5px;
   left: 50%;
-  width: 20px;
+  width: 90px;
   height: 40px;
-  background: linear-gradient(#ffcc66, #d48a1f);
+  background: radial-gradient(circle, #ffcc66, #d48a1f);
   border-radius: 50%;
   transform: translateX(-50%);
-  animation: caerMiel 1.8s infinite ease-in-out;
+  animation: ondaMiel 2s infinite ease-in-out;
   filter: drop-shadow(0 0 6px #ffb766);
 }
 
-@keyframes caerMiel {
-  0% { transform: translate(-50%, -10px); opacity: 0.4; }
-  50% { transform: translate(-50%, 20px); opacity: 1; }
-  100% { transform: translate(-50%, -10px); opacity: 0.4; }
+@keyframes ondaMiel {
+  0% { transform: translate(-50%, -10px) scaleX(1); opacity: 0.4; }
+  50% { transform: translate(-50%, 10px) scaleX(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -10px) scaleX(1); opacity: 0.4; }
+}
+
+.gota {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 14px;
+  height: 30px;
+  background: linear-gradient(#ffcc66, #d48a1f);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: gotaCae 1.8s infinite ease-in-out;
+}
+
+@keyframes gotaCae {
+  0% { transform: translate(-50%, 0); opacity: 0.4; }
+  50% { transform: translate(-50%, 25px); opacity: 1; }
+  100% { transform: translate(-50%, 0); opacity: 0.4; }
 }
 
 </style>
@@ -240,7 +252,7 @@ body {
 </div>
 
 <!-- ============================
-     🌍 TARJETA 2
+     🌍 TARJETA 2 — NUEVA ANIMACIÓN
      ============================ -->
 <div class="bloque-interactivo">
   <div class="card" onclick="toggleCard('origen')">
@@ -254,21 +266,17 @@ body {
   <div class="panel-desplegable" id="panel-origen">
     <h3>🌍 La Ruta del Buñuelo</h3>
 
-    <svg width="100%" viewBox="0 0 400 200" class="mapa-animado">
-      <circle cx="330" cy="50" r="10" class="punto-origen"/>
-      <circle cx="200" cy="90" r="10" class="punto-origen"/>
-      <circle cx="70"  cy="140" r="10" class="punto-origen"/>
-
-      <path d="M330 50 Q260 40 200 90" class="ruta-dibujo"/>
-      <path d="M200 90 Q130 120 70 140" class="ruta-dibujo"/>
-    </svg>
+    <div class="mapa-container">
+      <div class="ruta"></div>
+      <div class="punto-viajero"></div>
+    </div>
 
     <p class="texto-origen">De Medio Oriente → España → México.</p>
   </div>
 </div>
 
 <!-- ============================
-     🍯 TARJETA 3
+     🍯 TARJETA 3 — NUEVA ANIMACIÓN
      ============================ -->
 <div class="bloque-interactivo">
   <div class="card" onclick="toggleCard('comprarnos')">
@@ -284,7 +292,8 @@ body {
 
     <div class="anim-bunuelo">
       <div class="bunuelo"></div>
-      <div class="miel-gota"></div>
+      <div class="miel-onda"></div>
+      <div class="gota"></div>
     </div>
 
     <p>Hechos al momento, crujientes y con miel natural.</p>
