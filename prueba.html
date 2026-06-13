@@ -2,28 +2,26 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proyecto Buñuelos</title>
 
 <style>
 
 /* ============================
-   🎨 ESTILO GLOBAL MEJORADO
+   🎨 ESTILO GLOBAL PREMIUM
    ============================ */
 body {
   margin: 0;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background: linear-gradient(180deg, #6f432a 0%, #4b2d1d 100%);
   color: #fdfaf6;
+  padding: 25px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 25px 15px;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
-/* Contenedor de cada bloque */
+/* Contenedor */
 .bloque-interactivo {
   width: 100%;
   max-width: 480px;
@@ -31,13 +29,12 @@ body {
 }
 
 /* ============================
-   🟫 TARJETAS INTERACTIVAS
+   🟫 TARJETAS
    ============================ */
 .card {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255,255,255,0.12);
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 18px;
   padding: 18px 22px;
   display: flex;
@@ -46,26 +43,23 @@ body {
   cursor: pointer;
   transition: 0.35s ease;
   box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-  transform: translateY(0);
 }
 
 .card:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255,255,255,0.18);
   transform: translateY(-3px);
 }
 
 .card.activa {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255,255,255,0.22);
   border-color: #ffb766;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  box-shadow: 0 10px 25px rgba(255, 183, 102, 0.35);
 }
 
 /* Icono */
 .icon-wrapper {
   font-size: 2.4rem;
-  flex-shrink: 0;
 }
 
 /* Texto */
@@ -73,18 +67,16 @@ body {
   font-size: 1.25rem;
   margin: 0 0 4px 0;
   color: #ffb766;
-  font-weight: 600;
 }
 
 .card-body p {
-  font-size: 0.9rem;
   margin: 0;
+  font-size: 0.9rem;
   color: #f7e9dd;
-  line-height: 1.45;
 }
 
 /* ============================
-   📌 PANEL DESPLEGABLE PREMIUM
+   📌 PANEL DESPLEGABLE
    ============================ */
 .panel-desplegable {
   background: #fffdf9;
@@ -92,9 +84,6 @@ body {
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
   padding: 0 18px;
-  box-sizing: border-box;
-  border: 1px solid rgba(255,255,255,0.18);
-  border-top: none;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -112,68 +101,72 @@ body {
   margin: 0 0 10px 0;
   color: #d35400;
   font-size: 1.35rem;
-  font-weight: 700;
 }
 
-.panel-desplegable p {
+/* ============================
+   🥞 TARJETA 1 — INGREDIENTES
+   ============================ */
+.ingredientes-lista {
+  text-align: left;
+  margin-top: 10px;
   font-size: 0.95rem;
-  line-height: 1.55;
-  margin: 0 0 15px 0;
+  line-height: 1.5;
+}
+
+.img-bun {
+  width: 180px;
+  animation: aparecer 0.6s ease-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 /* ============================
-   🗺 MAPA INTERACTIVO
+   🌍 TARJETA 2 — ANIMACIÓN ORIGEN
    ============================ */
-.map-wrapper {
-  width: 100%;
-  background: #eef2f7;
-  border-radius: 14px;
-  padding: 8px;
-  border: 1px solid #d8cfc4;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.08);
+.punto-latido {
+  animation: latido 1.6s infinite ease-in-out;
 }
 
-.pais { fill: #c7b5a8; transition: 0.25s; }
-.pais:hover { fill: #ffb766; }
-
-.ruta-linea {
-  stroke: #d35400;
-  stroke-width: 2.2;
-  stroke-dasharray: 6;
-  animation: fluirRuta 2s linear infinite;
+@keyframes latido {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
 }
 
-@keyframes fluirRuta { to { stroke-dashoffset: -25; } }
+.flecha-mov {
+  animation: moverFlecha 2s infinite linear;
+}
 
-.mini-tooltip {
-  background: #3e2723;
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  margin-top: 12px;
-  text-align: center;
-  border-left: 5px solid #ffb766;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+@keyframes moverFlecha {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -40; }
 }
 
 /* ============================
-   🥞 IMAGEN DE PRODUCTO
+   🍯 TARJETA 3 — BUÑUELO GIRANDO
    ============================ */
-.img-display {
-  max-width: 100%;
-  width: 250px;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.bun-giro {
+  width: 160px;
+  animation: girar 3s infinite linear;
 }
 
-/* ============================
-   🔥 GRÁFICO SVG
-   ============================ */
-.grafico-wrapper {
-  width: 140px;
-  margin: 0 auto;
-  filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.2));
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.miel {
+  width: 120px;
+  animation: mielCae 2s infinite ease-in-out;
+}
+
+@keyframes mielCae {
+  0% { transform: translateY(-10px); opacity: 0.4; }
+  50% { transform: translateY(10px); opacity: 1; }
+  100% { transform: translateY(-10px); opacity: 0.4; }
 }
 
 </style>
@@ -184,18 +177,29 @@ body {
      🥞 TARJETA 1
      ============================ -->
 <div class="bloque-interactivo">
-  <div class="card" onclick="conmutarContenido('que-son')">
+  <div class="card" onclick="toggleCard('que-son')">
     <div class="icon-wrapper">🥞</div>
     <div class="card-body">
       <h2>¿Qué son los Buñuelos?</h2>
-      <p>Una masa delgada, frita a la perfección y espolvoreada con azúcar y canela.</p>
+      <p>Masa delgada, frita y crujiente.</p>
     </div>
   </div>
 
   <div class="panel-desplegable" id="panel-que-son">
-    <h3>🥞 El Arte del Auténtico Buñuelo</h3>
-    <p>Redondos, crujientes y perfectos. Si quieres el tuyo, haz un pedido.</p>
-    <img class="img-display" src="producto.png">
+    <h3>🥞 Ingredientes del Buñuelo</h3>
+
+    <div style="display:flex; gap:20px; align-items:center; justify-content:center;">
+      <img src="producto.png" class="img-bun">
+
+      <div class="ingredientes-lista">
+        <b>Ingredientes:</b><br>
+        • Harina fina<br>
+        • Agua y sal<br>
+        • Aceite caliente<br>
+        • Azúcar<br>
+        • Canela molida<br>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -203,86 +207,93 @@ body {
      🌍 TARJETA 2
      ============================ -->
 <div class="bloque-interactivo">
-  <div class="card" onclick="conmutarContenido('origen')">
+  <div class="card" onclick="toggleCard('origen')">
     <div class="icon-wrapper">🌍</div>
     <div class="card-body">
       <h2>Su Origen</h2>
-      <p>Nacieron en la cultura árabe medieval y viajaron hasta México.</p>
+      <p>Un viaje histórico del sabor.</p>
     </div>
   </div>
 
   <div class="panel-desplegable" id="panel-origen">
-    <h3>🌍 La Ruta Histórica del Sabor</h3>
-    <p>Toca los puntos naranjas del mapa para descubrir su historia.</p>
+    <h3>🌍 La Ruta del Buñuelo</h3>
 
-    <div class="map-wrapper">
-      <!-- SVG igual que el tuyo -->
-      <!-- (No lo repito aquí por espacio, pero lo mantengo intacto en tu versión final) -->
-    </div>
+    <svg width="100%" viewBox="0 0 400 200">
+      <circle cx="320" cy="60" r="12" fill="#e67e22" class="punto-latido"/>
+      <circle cx="200" cy="80" r="12" fill="#e67e22" class="punto-latido"/>
+      <circle cx="80" cy="120" r="12" fill="#e67e22" class="punto-latido"/>
 
-    <div class="mini-tooltip" id="texto-mapa">
-      💡 Toca cualquiera de los 3 puntos del mapa para leer la historia.
-    </div>
+      <path d="M320 60 Q260 40 200 80" stroke="#d35400" stroke-width="3"
+            fill="none" stroke-dasharray="6" class="flecha-mov"/>
+
+      <path d="M200 80 Q140 100 80 120" stroke="#d35400" stroke-width="3"
+            fill="none" stroke-dasharray="6" class="flecha-mov"/>
+    </svg>
+
+    <p>De Medio Oriente → España → México.</p>
   </div>
 </div>
 
 <!-- ============================
-     🔥 TARJETA 3
+     🍯 TARJETA 3
      ============================ -->
 <div class="bloque-interactivo">
-  <div class="card" onclick="conmutarContenido('comprarnos')">
+  <div class="card" onclick="toggleCard('comprarnos')">
     <div class="icon-wrapper">🔥</div>
     <div class="card-body">
       <h2>¿Por qué los nuestros?</h2>
-      <p>Crujientes, hechos al momento y con receta secreta.</p>
+      <p>Calidad artesanal.</p>
     </div>
   </div>
 
   <div class="panel-desplegable" id="panel-comprarnos">
-    <h3>🔥 Calidad de la Casa vs Lo Comercial</h3>
-    <p>Preparados bajo pedido diario, con sabor familiar que ninguna marca iguala.</p>
+    <h3>🔥 Buñuelo Giratorio con Miel</h3>
 
-    <div class="grafico-wrapper">
-      <!-- SVG igual que el tuyo -->
+    <div style="display:flex; flex-direction:column; align-items:center;">
+      <img src="producto.png" class="bun-giro">
+      <img src="miel.png" class="miel">
     </div>
+
+    <p>Hechos al momento, crujientes y con miel natural.</p>
   </div>
 </div>
 
 <script>
 
 /* ============================
-   🔧 FUNCIÓN DE ACORDEÓN PREMIUM
+   🔧 MECÁNICA DE AVANCE AUTOMÁTICO
    ============================ */
-function conmutarContenido(id) {
+function toggleCard(id) {
   const panel = document.getElementById("panel-" + id);
   const tarjeta = panel.previousElementSibling;
 
+  const panels = [...document.querySelectorAll(".panel-desplegable")];
+  const cards = [...document.querySelectorAll(".card")];
+  const index = cards.indexOf(tarjeta);
+
   const abierto = panel.classList.contains("abierto");
 
-  // Cerrar todos los paneles
-  document.querySelectorAll(".panel-desplegable").forEach(p => {
-    p.classList.remove("abierto");
-    p.previousElementSibling.classList.remove("activa");
-  });
-
-  // Abrir el seleccionado
+  // PRIMER CLIC → ABRIR
   if (!abierto) {
+    panels.forEach(p => p.classList.remove("abierto"));
+    cards.forEach(c => c.classList.remove("activa"));
+
     panel.classList.add("abierto");
     tarjeta.classList.add("activa");
+    return;
   }
-}
 
-/* ============================
-   🌍 MAPA INTERACTIVO
-   ============================ */
-const infoRutas = {
-  oriente: "🐪 <b>Medio Oriente:</b> Masas fritas bañadas en miel desde la época medieval.",
-  espana: "🏰 <b>España:</b> Se integró a ferias y celebraciones populares.",
-  mexico: "🇲🇽 <b>México:</b> Se fusionó con canela y tradición para ser gigante y crujiente."
-};
+  // SEGUNDO CLIC → CERRAR Y AVANZAR
+  panel.classList.remove("abierto");
+  tarjeta.classList.remove("activa");
 
-function cambiarTextoRuta(punto) {
-  document.getElementById("texto-mapa").innerHTML = infoRutas[punto];
+  const siguiente = cards[index + 1];
+  if (siguiente) {
+    setTimeout(() => {
+      siguiente.click();
+      siguiente.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 400);
+  }
 }
 
 </script>
