@@ -1,102 +1,150 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gato Buñuelo Simple</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: transparent; /* Fondo transparente */
-            font-family: system-ui, sans-serif;
-            overflow: hidden;
-            user-select: none;
-        }
+<section class="vintage-section">
 
-        #contenedor {
-            text-align: center;
-        }
+    <div class="vintage-container fade-in">
 
-        #gato {
-            width: 250px; /* Tamaño grande y cómodo */
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            
-            /* --- EL TRUCO ESTÁ AQUÍ --- */
-            mix-blend-mode: multiply; /* Elimina el fondo blanco de la imagen */
-        }
+        <h1 class="title-main">BUÑUELOS C.S</h1>
 
-        /* Animación simple al hacer clic */
-        #gato.animar {
-            transform: scale(1.1);
-        }
+        <div class="card slide-up">
+            <img src="img/quienes.jpg" class="card-img" alt="Imagen quienes somos">
+            <div class="card-text">
+                <h2>¿Quiénes somos?</h2>
+                <p>
+                    Somos un grupo de estudiantes del Centro de Bachillerato Tecnológico Agropecuario No.198 con la meta de ofrecer un producto agradable, rico y accesible. 
+                    Nuestro emprendimiento nació hace un año dentro del módulo profesional 
+                    <strong>“Determina la estrategia de comercialización y productos”</strong>, guiados por la Lic. Estela Rodríguez Villafaña.
+                    <br><br>
+                    Aunque inició como un proyecto escolar, decidimos llevarlo más lejos: vendemos tradición, aroma, calidad e higiene. 
+                    Distribuimos desde la escuela hasta tiendas de conveniencia y redes sociales.
+                </p>
+            </div>
+        </div>
 
-        #mensaje {
-            margin-top: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffffff;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            /* Sombra negra para que el texto resalte sobre cualquier fondo */
-            text-shadow: 2px 2px 4px #000000, -2px -2px 4px #000000, 2px -2px 4px #000000, -2px 2px 4px #000000;
-        }
+        <div class="card slide-up">
+            <img src="img/mision.jpg" class="card-img" alt="Imagen misión">
+            <div class="card-text">
+                <h2>Misión</h2>
+                <p>
+                    Ofrecer productos de alta calidad elaborados con ingredientes frescos y recetas tradicionales, garantizando un sabor excepcional en cada porción. 
+                    Mantener precios accesibles para que todos disfruten una experiencia culinaria auténtica.
+                </p>
+            </div>
+        </div>
 
-        #mensaje.mostrar {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
+        <div class="card slide-up">
+            <img src="img/vision.jpg" class="card-img" alt="Imagen visión">
+            <div class="card-text">
+                <h2>Visión</h2>
+                <p>
+                    Consolidarnos como la opción preferida del mercado mediante un crecimiento firme y sostenido. 
+                    Aspiramos a obtener el reconocimiento que nuestra calidad merece, posicionando la marca como un referente de tradición y valor.
+                </p>
+            </div>
+        </div>
 
-    <div id="contenedor">
-        <img id="gato" src="https://th.bing.com/th/id/OIP.JNKv3Ms1cGD52ShscBWM0wHaHa?w=220&h=220&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3" alt="Gato Waffle" onclick="interactuar()">
-        <div id="mensaje"></div>
     </div>
 
-    <script>
-        const gato = document.getElementById('gato');
-        const mensaje = document.getElementById('mensaje');
+</section>
 
-        const frases = [
-            "Mi pancita dice que sí. ✨",
-            "La felicidad es redonda. 🍩",
-            "Con uno se arregla el día. 🌸",
-            "¿Y si nos comemos uno? 😋",
-            "Es una señal del destino. 🔮"
-        ];
+<style>
+/* Fondo vintage */
+.vintage-section {
+    background: url('img/fondo-textura.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 70px 20px;
+    font-family: 'Cormorant Garamond', serif;
+}
 
-        let activo = false;
+/* Contenedor */
+.vintage-container {
+    max-width: 900px;
+    margin: auto;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 248, 240, 0.75);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #d8c4a8;
+    box-shadow: 0 0 25px rgba(0,0,0,0.15);
+}
 
-        function interactuar() {
-            if (activo) return;
-            activo = true;
+/* Título principal */
+.title-main {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 40px;
+    color: #5a3e2b;
+    letter-spacing: 2px;
+}
 
-            // Animación del gato
-            gato.classList.add('animar');
+/* Tarjetas */
+.card {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 50px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.65);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #e2d3c2;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
 
-            // Elegir frase y mostrar texto
-            const fraseRandom = frases[Math.floor(Math.random() * frases.length)];
-            mensaje.innerHTML = `¡Compra un buñuelo!<br>${fraseRandom}`;
-            mensaje.classList.add('mostrar');
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
 
-            // Quitar animación de crecimiento
-            setTimeout(() => {
-                gato.classList.remove('animar');
-            }, 200);
+/* Imagen */
+.card-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #c7b299;
+}
 
-            // Ocultar texto después de 2.5 segundos
-            setTimeout(() => {
-                mensaje.classList.remove('mostrar');
-                activo = false;
-            }, 2500);
-        }
-    </script>
+/* Texto */
+.card-text h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #6b4a33;
+}
 
-</body>
-</html>
+.card-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #4a3a2a;
+}
+
+/* Animaciones */
+.fade-in {
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+}
+
+.slide-up {
+    animation: slideUp 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .card-img {
+        width: 100%;
+        height: 200px;
+    }
+}
+</style>
