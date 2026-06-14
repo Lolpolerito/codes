@@ -15,36 +15,46 @@
         font-family: 'Montserrat', sans-serif;
         color: #ffffff;
         overflow-x: hidden;
+        background: #0f0f0f;
     }
 
     /* ============================
-       🔥 FONDO ANIMADO PREMIUM
+       🔥 FONDO ANIMADO PROFESIONAL
+       (ondas energéticas en movimiento)
     ============================ */
-    body::before {
-        content: "";
+    .fondo-animado {
         position: fixed;
         top: 0; left: 0;
         width: 100%; height: 100%;
-        background: radial-gradient(circle at 20% 30%, #C85A17 0%, transparent 60%),
-                    radial-gradient(circle at 80% 70%, #7D906E 0%, transparent 60%),
-                    #1a1a1a;
-        animation: mover 12s infinite alternate ease-in-out;
-        z-index: -2;
-    }
-
-    @keyframes mover {
-        0% { background-position: 20% 30%, 80% 70%; }
-        100% { background-position: 30% 40%, 70% 60%; }
-    }
-
-    /* Capa de difuminado suave */
-    body::after {
-        content: "";
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        backdrop-filter: blur(40px);
+        overflow: hidden;
         z-index: -1;
+    }
+
+    .onda {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background: radial-gradient(circle, rgba(200,90,23,0.35) 0%, transparent 60%);
+        animation: rotar 18s linear infinite;
+        filter: blur(80px);
+    }
+
+    .onda:nth-child(2) {
+        background: radial-gradient(circle, rgba(125,144,110,0.35) 0%, transparent 60%);
+        animation-duration: 26s;
+    }
+
+    .onda:nth-child(3) {
+        background: radial-gradient(circle, rgba(255,180,80,0.25) 0%, transparent 60%);
+        animation-duration: 32s;
+    }
+
+    @keyframes rotar {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.2); }
+        100% { transform: rotate(360deg) scale(1); }
     }
 
     /* ============================
@@ -136,6 +146,15 @@
 </head>
 
 <body>
+
+<!-- ============================
+     🔥 FONDO ANIMADO
+============================ -->
+<div class="fondo-animado">
+    <div class="onda"></div>
+    <div class="onda"></div>
+    <div class="onda"></div>
+</div>
 
 <!-- ============================
      🟧 BANNER SUPERIOR
