@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tercer Parcial</title>
@@ -73,35 +74,38 @@ body {
   border-color: #444;
 }
 
+/* CUADRO QUE CRECE SEGÚN EL TEXTO */
 .card-thumbnail {
   width: 100%;
-  height: 140px;
   background: #111 !important;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: flex-start;
   color: var(--accent-red);
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   border-bottom: 3px solid #333;
   text-align: center;
-  padding: 10px;
+  padding: 14px 10px;
+  gap: 10px;
 }
 
-.file-badge {
-  position: absolute;
-  bottom: 8px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.75);
+/* DESCRIPCIÓN GRANDE Y SIN FONDO */
+.card-description {
+  width: 100%;
+  background: transparent;
   color: #fff;
-  padding: 3px 7px;
-  font-size: 0.7rem;
-  border-radius: 3px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: 1px solid #444;
+  font-size: 1rem;
+  padding: 0px 5px 5px 5px;
+  text-align: center;
+  line-height: 1.35;
+  font-weight: normal;
+  box-sizing: border-box;
 }
+
+/* Eliminado el badge */
+.file-badge { display: none; }
 
 .card-info {
   padding: 15px;
@@ -195,7 +199,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Navegación */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -228,6 +231,7 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 </style>
+
 </head>
 
 <body>
@@ -321,44 +325,93 @@ const trabajos = [
 </script>
 
 <!-- TARJETAS -->
+
 <div class="card" onclick="openViewerIndex(0)">
-  <div class="card-thumbnail">MAPA<span class="file-badge">2 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 1</div><div class="card-title">Mapa Conceptual de los Conocimientos</div></div>
+  <div class="card-thumbnail">
+    MAPA
+    <div class="card-description">Mapa conceptual que resume los conocimientos obtenidos en el parcial.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 1</div>
+    <div class="card-title">Mapa Conceptual de los Conocimientos</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(1)">
-  <div class="card-thumbnail">BINARIO<span class="file-badge">1 IMG</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 2</div><div class="card-title">Código Binario</div></div>
+  <div class="card-thumbnail">
+    BINARIO
+    <div class="card-description">Actividad donde se convierte texto a código binario como práctica básica.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 2</div>
+    <div class="card-title">Código Binario</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(2)">
-  <div class="card-thumbnail">INFOGRAFÍA<span class="file-badge">4 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 3</div><div class="card-title">Infografía – Dirección IP y MAC</div></div>
+  <div class="card-thumbnail">
+    INFOGRAFÍA
+    <div class="card-description">Infografía que explica la dirección IP y la dirección MAC con ejemplos.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 3</div>
+    <div class="card-title">Infografía – Dirección IP y MAC</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(3)">
-  <div class="card-thumbnail">PC A PC<span class="file-badge">5 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 4</div><div class="card-title">Práctica – Conexión PC a PC</div></div>
+  <div class="card-thumbnail">
+    PC A PC
+    <div class="card-description">Práctica donde se realiza una conexión directa entre dos computadoras.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 4</div>
+    <div class="card-title">Práctica – Conexión PC a PC</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(4)">
-  <div class="card-thumbnail">CARPETA<span class="file-badge">6 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 5</div><div class="card-title">Práctica – Compartir Carpeta</div></div>
+  <div class="card-thumbnail">
+    CARPETA
+    <div class="card-description">Actividad donde se comparte una carpeta en red dentro de un entorno local.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 5</div>
+    <div class="card-title">Práctica – Compartir Carpeta</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(5)">
-  <div class="card-thumbnail">DISCO DURO<span class="file-badge">8 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 6</div><div class="card-title">Práctica – Compartir Disco Duro</div></div>
+  <div class="card-thumbnail">
+    DISCO DURO
+    <div class="card-description">Práctica donde se comparte un disco duro completo a través de la red.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 6</div>
+    <div class="card-title">Práctica – Compartir Disco Duro</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(6)">
-  <div class="card-thumbnail">ESCRITORIO<span class="file-badge">6 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 7</div><div class="card-title">Práctica – Escritorio Remoto</div></div>
+  <div class="card-thumbnail">
+    ESCRITORIO
+    <div class="card-description">Práctica donde se accede remotamente a otra computadora mediante red.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 7</div>
+    <div class="card-title">Práctica – Escritorio Remoto</div>
+  </div>
 </div>
 
 <div class="card" onclick="openViewerIndex(7)">
-  <div class="card-thumbnail">IMPRESORA<span class="file-badge">2 IMGS</span></div>
-  <div class="card-info"><div class="card-number">Trabajo 8</div><div class="card-title">Práctica – Impresora en Red</div></div>
+  <div class="card-thumbnail">
+    IMPRESORA
+    <div class="card-description">Actividad donde se configura una impresora para ser usada en red.</div>
+  </div>
+  <div class="card-info">
+    <div class="card-number">Trabajo 8</div>
+    <div class="card-title">Práctica – Impresora en Red</div>
+  </div>
 </div>
 
 </div>
