@@ -19,8 +19,8 @@
     }
 
     /* ============================
-       🔥 FONDO ANIMADO PROFESIONAL
-       (ondas energéticas en movimiento)
+       🔥 FONDO ANIMADO ULTRA
+       (ondas + partículas + profundidad)
     ============================ */
     .fondo-animado {
         position: fixed;
@@ -30,6 +30,7 @@
         z-index: -1;
     }
 
+    /* Ondas grandes */
     .onda {
         position: absolute;
         width: 200%;
@@ -53,9 +54,33 @@
 
     @keyframes rotar {
         0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.2); }
+        50% { transform: rotate(180deg) scale(1.25); }
         100% { transform: rotate(360deg) scale(1); }
     }
+
+    /* Partículas flotando */
+    .particula {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(255,255,255,0.7);
+        border-radius: 50%;
+        animation: flotar 6s infinite ease-in-out;
+        filter: blur(1px);
+    }
+
+    @keyframes flotar {
+        0% { transform: translateY(0) scale(1); opacity: 0.8; }
+        50% { transform: translateY(-40px) scale(1.4); opacity: 1; }
+        100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    }
+
+    /* Generar partículas */
+    .particula:nth-child(4) { left: 20%; top: 70%; animation-duration: 5s; }
+    .particula:nth-child(5) { left: 50%; top: 80%; animation-duration: 7s; }
+    .particula:nth-child(6) { left: 80%; top: 65%; animation-duration: 6s; }
+    .particula:nth-child(7) { left: 30%; top: 50%; animation-duration: 8s; }
+    .particula:nth-child(8) { left: 60%; top: 40%; animation-duration: 9s; }
 
     /* ============================
        🟧 BANNER SUPERIOR
@@ -154,6 +179,12 @@
     <div class="onda"></div>
     <div class="onda"></div>
     <div class="onda"></div>
+
+    <div class="particula"></div>
+    <div class="particula"></div>
+    <div class="particula"></div>
+    <div class="particula"></div>
+    <div class="particula"></div>
 </div>
 
 <!-- ============================
@@ -173,7 +204,8 @@
         y contarnos tu experiencia.
     </p>
 
-    <img src="WEB/qr.png" alt="Código QR" class="qr">
+    <!-- QR con directorio correcto -->
+    <img src="WEB/QR.png" alt="Código QR" class="qr">
 
     <p class="texto">
         También puedes contactarnos directamente por correo:
