@@ -90,7 +90,8 @@ transition: 0.3s; font-weight: bold; font-size: 15px;
 .opcion.seleccionada { background: #25D366; color: #fff; }
 
 .contacto { margin-top: 20px; font-size: 14px; }
-.contacto a { display: block; margin: 5px; text-decoration: none; color: #fff; background: #25D366; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: bold; }
+/* Se cambió el color de fondo verde WhatsApp por un azul institucional para Email */
+.contacto a { display: block; margin: 5px; text-decoration: none; color: #fff; background: #007bff; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: bold; }
 
 table { width: 100%; border-collapse: collapse; margin-top: 15px; }
 th, td { border: 1px solid #ccc; padding: 8px; font-size: 15px; }
@@ -111,14 +112,9 @@ padding: 10px; width: 85%; border-radius: 8px; border:1px solid #ccc; box-sizing
 
 <body>
 
-<!-- BANNER INSERTADO -->
 <div class="banner">
   <div class="banner-titulo">PEDIDOS</div>
 </div>
-
-<!-- ============================
-     CONTENIDO ORIGINAL (NO MODIFICADO)
-     ============================ -->
 
 <div class="producto" id="etapa1">
 
@@ -188,8 +184,8 @@ padding: 10px; width: 85%; border-radius: 8px; border:1px solid #ccc; box-sizing
 <p><strong>Total Neto:</strong> <span id="ticketTotal"></span></p>
 
 <div class="contacto">
-<p>⚠️ <strong>¡PASO FINAL!</strong><br>Haz clic abajo para enviar tu pedido directo al WhatsApp del vendedor:</p>
-<a id="linkWhatsapp" href="#" target="_blank">💬 ENVIAR PEDIDO POR WHATSAPP</a>
+<p>⚠️ <strong>¡PASO FINAL!</strong><br>Haz clic abajo para enviar tu pedido directo al correo del vendedor:</p>
+<a id="linkEmail" href="#" target="_blank">✉️ ENVIAR PEDIDO POR CORREO</a>
 </div>
 
 <button onclick="nuevoPedido()" style="margin-top:20px; width: 100%; background: #007bff; color: white;">🔄 Hacer otro pedido</button>
@@ -201,6 +197,15 @@ padding: 10px; width: 85%; border-radius: 8px; border:1px solid #ccc; box-sizing
 let cantidad = 0;
 let total = 0;
 let direccionSeleccionada = "";
+
+// Lista de correos institucionales extraídos de la imagen
+const correosVendedores = [
+  "cesaralexander.ara24@cbta198.edu.mx",
+  "ezequiel.palacios24@cbta198.edu.mx",
+  "jimenanereyda.antiveros24@cbta198.edu.mx",
+  "pedro.cineros24@cbta198.edu.mx",
+  "omar.florez24@cbta198.edu.mx"
+];
 
 const frasesRandoms = [
 "¡No más infidelidad, mejor comer buñuelos y no pañuelos! 🤫🥮",
@@ -296,15 +301,21 @@ document.getElementById("ticketTotal").textContent = "$" + total;
 
 const fraseSeleccionada = frasesRandoms[Math.floor(Math.random() * frasesRandoms.length)];
 
-const numTelefono = "526461037036";
+// Selección rotativa/aleatoria del correo destino para balancear los pedidos
+const correoDestino = correosVendedores[Math.floor(Math.random() * correosVendedores.length)];
 
-const mensajeWhatsApp = "Confirmo mi pedido de " + cantidad + " buñuelos.\n" +
+// Construcción del asunto y cuerpo del correo electrónico
+const asuntoEmail = "Nuevo Pedido de Buñuelos - " + nombre;
+const cuerpoEmail = "Confirmo mi pedido de " + cantidad + " buñuelos.\n" +
 "Total: $" + total + "\n" +
-"Lugar: " + direccionSeleccionada + "\n" +
+"Lugar de entrega: " + direccionSeleccionada + "\n" +
 "Hora: " + horaAmPm + "\n\n" +
-"_" + fraseSeleccionada + "_";
+fraseSeleccionada;
 
-document.getElementById("linkWhatsapp").href = "https://wa.me/" + numTelefono + "?text=" + encodeURIComponent(mensajeWhatsApp);
+// Reemplazo de WhatsApp por la sintaxis estandarizada 'mailto:'
+document.getElementById("linkEmail").href = "mailto:" + correoDestino + 
+  "?subject=" + encodeURIComponent(asuntoEmail) + 
+  "&body=" + encodeURIComponent(cuerpoEmail);
 
 document.getElementById("etapa2").style.display = "none";
 document.getElementById("etapa3").style.display = "block";
