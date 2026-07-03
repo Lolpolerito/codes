@@ -1,305 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Juego de pintar multiplicaciones</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      margin-bottom: 5px;
-    }
-
-    .subtitulo {
-      margin-bottom: 15px;
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    .contenedor-juego {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(6, 60px);
-      grid-auto-rows: 60px;
-      gap: 4px;
-      background: #fff;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
-
-    .celda {
-      border: 1px solid #ccc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      cursor: pointer;
-      background: #fafafa;
-      transition: transform 0.1s, box-shadow 0.1s;
-    }
-
-    .celda:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .paleta {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: #fff;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      min-width: 220px;
-    }
-
-    .color-opcion {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 4px;
-      transition: background 0.1s;
-    }
-
-    .color-opcion:hover {
-      background: #eee;
-    }
-
-    .color-muestra {
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
-      border: 1px solid #999;
-    }
-
-    .color-opcion.activo {
-      outline: 2px solid #000;
-    }
-
-    .clave {
-      font-size: 0.8rem;
-      margin-top: 5px;
-      color: #444;
-    }
-
-    .panel-inferior {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      font-size: 0.85rem;
-    }
-
-    button {
-      padding: 6px 12px;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-      background: #007bff;
-      color: #fff;
-      font-size: 0.85rem;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-
-    .mensaje {
-      padding: 6px 10px;
-      border-radius: 4px;
-      background: #fff;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      min-width: 200px;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Pintar por número - Catálogo</title>
+<style>
+  body {
+    font-family: Arial;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  #catalogo img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    border: 3px solid transparent;
+  }
+  #catalogo img:hover {
+    border-color: #007bff;
+  }
+  #canvas {
+    margin-top: 20px;
+    display: grid;
+    justify-content: center;
+    gap: 1px;
+  }
+  .pixel {
+    width: 4px;
+    height: 4px;
+    background: #ddd;
+    cursor: pointer;
+  }
+  #paleta {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .color {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .color.activo {
+    border-color: black;
+  }
+</style>
 </head>
 <body>
-  <h1>Tablas de la multiplicación</h1>
-  <div class="subtitulo">
-    Pinta cada casilla según el color que corresponde al resultado de la multiplicación.
-  </div>
 
-  <div class="contenedor-juego">
-    <!-- GRID DE MULTIPLICACIONES -->
-    <div class="grid" id="grid">
-      <!-- Las celdas se generan con JS -->
-    </div>
+<h1>🎨 Pintar por número</h1>
+<p>Elige una imagen del catálogo para convertirla en un lienzo de 200×200 píxeles.</p>
 
-    <!-- PALETA DE COLORES / CLAVE -->
-    <div class="paleta">
-      <strong>Paleta de colores</strong>
-      <div id="paleta-colores"></div>
-      <div class="clave">
-        Haz clic en un color y luego en una casilla para pintarla.  
-        El juego comprueba si el color coincide con el resultado.
-      </div>
-    </div>
-  </div>
+<div id="catalogo">
+  <img src="https://i.imgur.com/3ZQ3Z4P.jpeg" data-nombre="Koala">
+  <img src="https://i.imgur.com/3cXQF1P.jpeg" data-nombre="Gato">
+  <img src="https://i.imgur.com/8zQY0mM.jpeg" data-nombre="Dinosaurio">
+</div>
 
-  <div class="panel-inferior">
-    <button id="btn-revisar">Revisar todo</button>
-    <button id="btn-limpiar">Limpiar</button>
-    <div class="mensaje" id="mensaje">Selecciona un color y empieza a pintar.</div>
-  </div>
+<h2 id="titulo"></h2>
 
-  <script>
-    // Mapeo de resultados a colores (similar al estilo de la ficha)
-    const mapaResultados = {
-      NEGRO:   { color: "#000000", resultados: [54, 16, 27] },
-      CAFE:    { color: "#8B4513", resultados: [15, 30, 14] },
-      AMARILLO:{ color: "#FFD700", resultados: [60, 32, 48] },
-      NARANJA: { color: "#FFA500", resultados: [21, 40, 81] },
-      ROJO:    { color: "#FF0000", resultados: [18, 72, 12] },
-      CELESTE: { color: "#87CEEB", resultados: [28, 35, 64] },
-      VERDE:   { color: "#008000", resultados: [24, 36, 63] },
-      VERDECLARO:{ color: "#7CFC00", resultados: [56, 42, 45] }
-    };
+<div id="paleta"></div>
+<div id="canvas"></div>
 
-    // Lista de multiplicaciones para el grid (puedes editar o ampliar)
-    const multiplicaciones = [
-      "8x3","4x4","9x6","3x5","7x9","6x4",
-      "2x8","5x3","9x3","7x6","4x5","8x2",
-      "6x3","3x7","8x7","5x6","9x8","4x8",
-      "7x3","6x5","3x4","8x5","9x2","5x9",
-      "4x6","7x8","6x7","3x6","8x4","9x5",
-      "2x7","5x8","4x9","7x4","6x8","3x8"
-    ];
+<script>
+const canvas = document.getElementById("canvas");
+const paleta = document.getElementById("paleta");
+let colorSeleccionado = null;
+let mapaColores = [];
 
-    const grid = document.getElementById("grid");
-    const paletaColores = document.getElementById("paleta-colores");
-    const mensaje = document.getElementById("mensaje");
-    const btnRevisar = document.getElementById("btn-revisar");
-    const btnLimpiar = document.getElementById("btn-limpiar");
-
-    let colorSeleccionado = null; // {nombre, color}
-
-    // Crear paleta de colores
-    Object.entries(mapaResultados).forEach(([nombre, info]) => {
-      const div = document.createElement("div");
-      div.className = "color-opcion";
-      div.dataset.nombre = nombre;
-
-      const muestra = document.createElement("div");
-      muestra.className = "color-muestra";
-      muestra.style.backgroundColor = info.color;
-
-      const texto = document.createElement("span");
-      texto.textContent = `${nombre} → ${info.resultados.join(", ")}`;
-
-      div.appendChild(muestra);
-      div.appendChild(texto);
-
-      div.addEventListener("click", () => {
-        document.querySelectorAll(".color-opcion").forEach(c => c.classList.remove("activo"));
-        div.classList.add("activo");
-        colorSeleccionado = { nombre, color: info.color };
-        mensaje.textContent = `Color seleccionado: ${nombre}. Ahora haz clic en una casilla.`;
-      });
-
-      paletaColores.appendChild(div);
+function generarPaleta(colores) {
+  paleta.innerHTML = "";
+  colores.forEach((c, i) => {
+    const div = document.createElement("div");
+    div.className = "color";
+    div.style.background = c;
+    div.dataset.color = c;
+    div.addEventListener("click", () => {
+      document.querySelectorAll(".color").forEach(x => x.classList.remove("activo"));
+      div.classList.add("activo");
+      colorSeleccionado = c;
     });
+    paleta.appendChild(div);
+  });
+}
 
-    // Función para calcular el resultado de "a x b"
-    function calcular(multi) {
-      const [a, b] = multi.split("x").map(Number);
-      return a * b;
-    }
+function procesarImagen(img) {
+  const w = 200, h = 200;
+  const tempCanvas = document.createElement("canvas");
+  tempCanvas.width = w;
+  tempCanvas.height = h;
+  const ctx = tempCanvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, w, h);
 
-    // Crear celdas del grid
-    multiplicaciones.forEach((multi, index) => {
-      const celda = document.createElement("div");
-      celda.className = "celda";
-      celda.textContent = multi;
-      celda.dataset.multi = multi;
-      celda.dataset.index = index;
-      celda.dataset.correctColor = obtenerColorCorrecto(calcular(multi)) || "";
+  const data = ctx.getImageData(0, 0, w, h).data;
 
-      celda.addEventListener("click", () => {
-        if (!colorSeleccionado) {
-          mensaje.textContent = "Primero selecciona un color en la paleta.";
-          return;
-        }
-        // Pintar la celda
-        celda.style.backgroundColor = colorSeleccionado.color;
-        celda.dataset.userColor = colorSeleccionado.nombre;
+  const coloresUnicos = new Set();
+  mapaColores = [];
 
-        // Feedback inmediato
-        const resultado = calcular(multi);
-        const colorCorrecto = obtenerColorCorrecto(resultado);
-        if (colorCorrecto === colorSeleccionado.nombre) {
-          mensaje.textContent = `¡Bien! ${multi} = ${resultado}, corresponde a ${colorCorrecto}.`;
-        } else {
-          mensaje.textContent = `Revisa: ${multi} = ${resultado}. Ese resultado no va con ${colorSeleccionado.nombre}.`;
-        }
-      });
+  for (let i = 0; i < data.length; i += 4) {
+    const rgb = `rgb(${data[i]},${data[i+1]},${data[i+2]})`;
+    coloresUnicos.add(rgb);
+    mapaColores.push(rgb);
+  }
 
-      grid.appendChild(celda);
-    });
+  generarPaleta([...coloresUnicos].slice(0, 20)); // Máx 20 colores
 
-    // Obtener el nombre de color correcto según el resultado
-    function obtenerColorCorrecto(resultado) {
-      for (const [nombre, info] of Object.entries(mapaResultados)) {
-        if (info.resultados.includes(resultado)) {
-          return nombre;
-        }
+  canvas.style.gridTemplateColumns = `repeat(${w}, 4px)`;
+  canvas.innerHTML = "";
+
+  mapaColores.forEach((color, index) => {
+    const div = document.createElement("div");
+    div.className = "pixel";
+    div.dataset.correcto = color;
+    div.addEventListener("click", () => {
+      if (!colorSeleccionado) return;
+      div.style.background = colorSeleccionado;
+      if (colorSeleccionado === color) {
+        div.style.outline = "1px solid lime";
+      } else {
+        div.style.outline = "1px solid red";
       }
-      return null;
-    }
-
-    // Revisar todas las celdas
-    btnRevisar.addEventListener("click", () => {
-      const celdas = document.querySelectorAll(".celda");
-      let total = celdas.length;
-      let correctas = 0;
-
-      celdas.forEach(celda => {
-        const multi = celda.dataset.multi;
-        const resultado = calcular(multi);
-        const colorCorrecto = obtenerColorCorrecto(resultado);
-        const colorUsuario = celda.dataset.userColor;
-
-        if (colorUsuario && colorUsuario === colorCorrecto) {
-          correctas++;
-          celda.style.outline = "2px solid #00aa00";
-        } else if (colorUsuario) {
-          celda.style.outline = "2px solid #ff0000";
-        } else {
-          celda.style.outline = "2px dashed #999";
-        }
-      });
-
-      mensaje.textContent = `Has pintado correctamente ${correctas} de ${total} casillas.`;
     });
+    canvas.appendChild(div);
+  });
+}
 
-    // Limpiar el tablero
-    btnLimpiar.addEventListener("click", () => {
-      document.querySelectorAll(".celda").forEach(celda => {
-        celda.style.backgroundColor = "#fafafa";
-        celda.style.outline = "none";
-        celda.dataset.userColor = "";
-      });
-      mensaje.textContent = "Tablero limpio. Selecciona un color y vuelve a pintar.";
-    });
-  </script>
+document.querySelectorAll("#catalogo img").forEach(img => {
+  img.addEventListener("click", () => {
+    document.getElementById("titulo").textContent =
+      "Imagen seleccionada: " + img.dataset.nombre;
+
+    const imagen = new Image();
+    imagen.crossOrigin = "anonymous";
+    imagen.src = img.src;
+    imagen.onload = () => procesarImagen(imagen);
+  });
+});
+</script>
+
 </body>
 </html>
