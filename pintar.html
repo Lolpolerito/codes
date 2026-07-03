@@ -2,44 +2,22 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Pintar por número - Catálogo</title>
+<title>Pintar por número 40x40</title>
 <style>
   body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: #f0f0f0;
     margin: 0;
     padding: 20px;
     text-align: center;
   }
-  #catalogo img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px;
-    border: 3px solid transparent;
-  }
-  #catalogo img:hover {
-    border-color: #007bff;
-  }
-  #canvas {
-    margin-top: 20px;
-    display: grid;
-    justify-content: center;
-    gap: 1px;
-  }
-  .pixel {
-    width: 4px;
-    height: 4px;
-    background: #ddd;
-    cursor: pointer;
-  }
+  h1 { margin-bottom: 5px; }
   #paleta {
-    margin-top: 20px;
+    margin: 15px 0;
     display: flex;
     justify-content: center;
     gap: 10px;
+    flex-wrap: wrap;
   }
   .color {
     width: 30px;
@@ -51,98 +29,115 @@
   .color.activo {
     border-color: black;
   }
+  #canvas {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(40, 12px);
+    grid-template-rows: repeat(40, 12px);
+    gap: 1px;
+    justify-content: center;
+  }
+  .pixel {
+    width: 12px;
+    height: 12px;
+    background: #ddd;
+    cursor: pointer;
+  }
+  #mensaje {
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
 </style>
 </head>
 <body>
 
-<h1>🎨 Pintar por número</h1>
-<p>Elige una imagen del catálogo para convertirla en un lienzo de 200×200 píxeles.</p>
-
-<div id="catalogo">
-  <img src="https://i.imgur.com/3ZQ3Z4P.jpeg" data-nombre="Koala">
-  <img src="https://i.imgur.com/3cXQF1P.jpeg" data-nombre="Gato">
-  <img src="https://i.imgur.com/8zQY0mM.jpeg" data-nombre="Dinosaurio">
-</div>
-
-<h2 id="titulo"></h2>
+<h1>🎨 Pintar por número 40×40</h1>
+<p>Selecciona un color y haz clic en un pixel. Para pintarlo, resuelve el problema matemático.</p>
 
 <div id="paleta"></div>
 <div id="canvas"></div>
+<div id="mensaje">Elige un color para empezar.</div>
 
 <script>
-const canvas = document.getElementById("canvas");
 const paleta = document.getElementById("paleta");
+const canvas = document.getElementById("canvas");
+const mensaje = document.getElementById("mensaje");
+
 let colorSeleccionado = null;
-let mapaColores = [];
 
-function generarPaleta(colores) {
-  paleta.innerHTML = "";
-  colores.forEach((c, i) => {
-    const div = document.createElement("div");
-    div.className = "color";
-    div.style.background = c;
-    div.dataset.color = c;
-    div.addEventListener("click", () => {
-      document.querySelectorAll(".color").forEach(x => x.classList.remove("activo"));
-      div.classList.add("activo");
-      colorSeleccionado = c;
-    });
-    paleta.appendChild(div);
+// Paleta fija de colores
+const coloresBase = [
+  "#000000", // negro
+  "#8B4513", // café
+  "#FFD700", // amarillo
+  "#FFA500", // naranja
+  "#FF0000", // rojo
+  "#87CEEB", // celeste
+  "#008000", // verde
+  "#7CFC00"  // verde claro
+];
+
+// Generar paleta
+coloresBase.forEach(c => {
+  const div = document.createElement("div");
+  div.className = "color";
+  div.style.background = c;
+  div.dataset.color = c;
+  div.addEventListener("click", () => {
+    document.querySelectorAll(".color").forEach(x => x.classList.remove("activo"));
+    div.classList.add("activo");
+    colorSeleccionado = c;
+    mensaje.textContent = "Color seleccionado. Haz clic en un pixel para resolver un problema.";
   });
-}
-
-function procesarImagen(img) {
-  const w = 200, h = 200;
-  const tempCanvas = document.createElement("canvas");
-  tempCanvas.width = w;
-  tempCanvas.height = h;
-  const ctx = tempCanvas.getContext("2d");
-  ctx.drawImage(img, 0, 0, w, h);
-
-  const data = ctx.getImageData(0, 0, w, h).data;
-
-  const coloresUnicos = new Set();
-  mapaColores = [];
-
-  for (let i = 0; i < data.length; i += 4) {
-    const rgb = `rgb(${data[i]},${data[i+1]},${data[i+2]})`;
-    coloresUnicos.add(rgb);
-    mapaColores.push(rgb);
-  }
-
-  generarPaleta([...coloresUnicos].slice(0, 20)); // Máx 20 colores
-
-  canvas.style.gridTemplateColumns = `repeat(${w}, 4px)`;
-  canvas.innerHTML = "";
-
-  mapaColores.forEach((color, index) => {
-    const div = document.createElement("div");
-    div.className = "pixel";
-    div.dataset.correcto = color;
-    div.addEventListener("click", () => {
-      if (!colorSeleccionado) return;
-      div.style.background = colorSeleccionado;
-      if (colorSeleccionado === color) {
-        div.style.outline = "1px solid lime";
-      } else {
-        div.style.outline = "1px solid red";
-      }
-    });
-    canvas.appendChild(div);
-  });
-}
-
-document.querySelectorAll("#catalogo img").forEach(img => {
-  img.addEventListener("click", () => {
-    document.getElementById("titulo").textContent =
-      "Imagen seleccionada: " + img.dataset.nombre;
-
-    const imagen = new Image();
-    imagen.crossOrigin = "anonymous";
-    imagen.src = img.src;
-    imagen.onload = () => procesarImagen(imagen);
-  });
+  paleta.appendChild(div);
 });
+
+// Generar problemas matemáticos simples (multiplicaciones)
+function generarProblema() {
+  const a = Math.floor(Math.random() * 9) + 2; // 2–10
+  const b = Math.floor(Math.random() * 9) + 2;
+  return { texto: `${a} × ${b}`, resultado: a * b };
+}
+
+// Crear grid 40x40
+for (let i = 0; i < 40 * 40; i++) {
+  const pixel = document.createElement("div");
+  pixel.className = "pixel";
+
+  // Asignar problema al pixel
+  const problema = generarProblema();
+  pixel.dataset.problema = problema.texto;
+  pixel.dataset.resultado = problema.resultado;
+
+  pixel.addEventListener("click", () => {
+    if (!colorSeleccionado) {
+      mensaje.textContent = "Primero selecciona un color en la paleta.";
+      return;
+    }
+
+    const texto = pixel.dataset.problema;
+    const resultadoCorrecto = Number(pixel.dataset.resultado);
+
+    const respuesta = prompt(`Resuelve para pintar:\n${texto} = ?`);
+    if (respuesta === null) return; // cancelado
+
+    const valor = Number(respuesta);
+
+    if (!Number.isFinite(valor)) {
+      mensaje.textContent = "Escribe un número válido.";
+      return;
+    }
+
+    if (valor === resultadoCorrecto) {
+      pixel.style.background = colorSeleccionado;
+      mensaje.textContent = `Correcto: ${texto} = ${resultadoCorrecto}. Pixel pintado.`;
+    } else {
+      mensaje.textContent = `Incorrecto: ${texto} = ${resultadoCorrecto}. Intenta de nuevo.`;
+    }
+  });
+
+  canvas.appendChild(pixel);
+}
 </script>
 
 </body>
