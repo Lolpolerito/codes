@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Zomboid - Mapa Táctico de Rosewood</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #ff4444;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .map-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #2a2a2a;
+            border: 3px solid #444;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.7);
+            overflow: hidden;
+        }
+
+        /* Carreteras y Calles */
+        .main-street {
+            position: absolute;
+            left: 150px;
+            top: 0;
+            width: 60px;
+            height: 100%;
+            background-color: #3a3a3a;
+            border-left: 2px dashed #555;
+            border-right: 2px dashed #555;
+        }
+
+        .side-street-1 {
+            position: absolute;
+            left: 210px;
+            top: 120px;
+            width: 600px;
+            height: 40px;
+            background-color: #3a3a3a;
+        }
+
+        .side-street-2 {
+            position: absolute;
+            left: 210px;
+            top: 400px;
+            width: 600px;
+            height: 40px;
+            background-color: #3a3a3a;
+        }
+
+        /* Edificios */
+        .building {
+            position: absolute;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 10px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .building:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .fire-station {
+            left: 20px;
+            bottom: 40px;
+            width: 100px;
+            height: 120px;
+            background-color: #992222;
+            border: 2px solid #ff4444;
+            color: #fff;
+        }
+
+        .police-station {
+            left: 230px;
+            top: 460px;
+            width: 120px;
+            height: 80px;
+            background-color: #224499;
+            border: 2px solid #4444ff;
+            color: #fff;
+        }
+
+        .booknook {
+            left: 250px;
+            top: 30px;
+            width: 140px;
+            height: 70px;
+            background-color: #997722;
+            border: 2px solid #ffaa00;
+            color: #fff;
+        }
+
+        .school {
+            right: 40px;
+            top: 200px;
+            width: 180px;
+            height: 150px;
+            background-color: #442266;
+            border: 2px solid #aa55ff;
+            color: #fff;
+        }
+
+        .gas-station {
+            left: 130px;
+            top: 10px;
+            width: 90px;
+            height: 60px;
+            background-color: #226633;
+            border: 2px solid #22ff66;
+            color: #fff;
+        }
+
+        .residential {
+            left: 300px;
+            top: 200px;
+            width: 220px;
+            height: 160px;
+            background-color: #444;
+            border: 2px dashed #666;
+            color: #aaa;
+            opacity: 0.7;
+        }
+
+        /* Indicador de Ruta */
+        .route-line {
+            position: absolute;
+            border: 3px dotted #ff0000;
+            animation: pulse 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* Info Panel */
+        .info-panel {
+            margin-top: 20px;
+            width: 800px;
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 10px;
+        }
+
+        .color-box {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ROSEWOOD - PROTOCOLO GENERADOR</h1>
+    <div class="subtitle">Ruta táctica de suministros desde la Estación de Bomberos</div>
+
+    <div class="map-container">
+        <!-- Calles -->
+        <div class="main-street"></div>
+        <div class="side-street-1"></div>
+        <div class="side-street-2"></div>
+
+        <!-- Zonas y Edificios -->
+        <div class="building residential">ZONA RESIDENCIAL<br>(Buzones con revistas)</div>
+        <div class="building fire-station">★ TU BASE<br>Estación de Bomberos</div>
+        <div class="building police-station">Comisaría de<br>Policía</div>
+        <div class="building booknook">📚 LIBRERÍA<br>(Prioridad 1)</div>
+        <div class="building school">🏫 ESCUELA<br>(Biblioteca - Prioridad 2)</div>
+        <div class="building gas-station">⛽ GASOLINA</div>
+
+        <!-- Líneas de Ruta sugeridas (Visuales) -->
+        <div class="route-line" style="left: 70px; bottom: 160px; width: 3px; height: 300px;"></div>
+        <div class="route-line" style="left: 70px; top: 140px; width: 250px; height: 3px;"></div>
+        <div class="route-line" style="left: 320px; top: 50px; width: 3px; height: 90px;"></div>
+        <div class="route-line" style="left: 320px; top: 140px; width: 300px; height: 3px;"></div>
+        <div class="route-line" style="left: 620px; top: 140px; width: 3px; height: 60px;"></div>
+    </div>
+
+    <div class="info-panel">
+        <h3>📋 Objetivos de la Misión</h3>
+        <ul>
+            <li><strong>Prioridad 1 (Marrón):</strong> Registrar estanterías y cajas traseras de la Librería BookNook.</li>
+            <li><strong>Prioridad 2 (Morado):</strong> Limpiar el pasillo principal de la Escuela y vaciar la Biblioteca.</li>
+            <li><strong>Secundario (Gris):</strong> Si las tiendas fallan, revisar uno a uno los buzones de la zona residencial de camino a casa.</li>
+        </ul>
+    </div>
+
+</body>
+                                                                              </html>
+                                                                              
